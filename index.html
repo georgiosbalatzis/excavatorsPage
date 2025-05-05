@@ -3,245 +3,586 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Balatzis Katerini - Εκσκαφείς, Φορτωτές & Ανταλλακτικά</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Balatzis Katerini | Εξειδικευμένα Μηχανήματα & Ανταλλακτικά</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Η εταιρεία Balatzis Katerini προσφέρει υψηλής ποιότητας εκσκαφείς, φορτωτές, φορτηγά, ρυμουλκούμενα και ανταλλακτικά">
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container header-content">
-            <div class="logo">
-                <img src="/api/placeholder/50/50" alt="Balatzis Katerini Logo">
-                <div class="logo-text">Balatzis <span>Katerini</span></div>
-            </div>
-            <div class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#home">Αρχική</a></li>
-                    <li><a href="#products">Προϊόντα</a></li>
-                    <li><a href="#about">Σχετικά με εμάς</a></li>
-                    <li><a href="#contact">Επικοινωνία</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<div class="language-selector">
+    <a href="index.html" class="lang-link active">GR</a>
+    <span class="lang-divider">|</span>
+    <a href="index-en.html" class="lang-link">EN</a>
+</div>
+<!-- Theme toggle and accessibility panel -->
+<div class="utility-panel">
+    <button class="theme-toggle" aria-label="Εναλλαγή θέματος">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+    <button class="font-size-up" aria-label="Αύξηση μεγέθους γραμματοσειράς">
+        <i class="fas fa-search-plus"></i>
+    </button>
+    <button class="font-size-down" aria-label="Μείωση μεγέθους γραμματοσειράς">
+        <i class="fas fa-search-minus"></i>
+    </button>
+</div>
 
+<!-- Navigation -->
+<header>
+    <div class="container header-grid">
+        <div class="logo-container">
+            <img src="/api/placeholder/60/60" alt="Balatzis Katerini Logo" class="logo">
+            <span class="logo-text">Balatzis <span>Katerini</span></span>
+        </div>
+
+        <nav class="main-nav">
+            <button class="mobile-menu-toggle" aria-label="Μενού">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="#hero" class="active">Αρχική</a></li>
+                <li><a href="#products">Προϊόντα</a></li>
+                <li><a href="#about">Σχετικά</a></li>
+                <li><a href="#contact">Επικοινωνία</a></li>
+                <li><a href="tel:+302351012345" class="contact-button">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+30 2351 012345</span>
+                </a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section id="hero" class="hero">
+        <div class="hero-background">
+            <div class="overlay"></div>
+            <div class="hero-shape-1"></div>
+            <div class="hero-shape-2"></div>
+        </div>
+
         <div class="container hero-content">
-            <h1>Εξειδικευμένα Μηχανήματα & Ανταλλακτικά</h1>
-            <p>Η εταιρεία Balatzis Katerini προσφέρει υψηλής ποιότητας εκσκαφείς, φορτωτές, φορτηγά, ρυμουλκούμενα και ανταλλακτικά για όλες τις επαγγελματικές σας ανάγκες.</p>
-            <div class="hero-btns">
-                <a href="#products" class="btn">Τα Προϊόντα μας</a>
-                <a href="#contact" class="btn btn-outline">Επικοινωνήστε μαζί μας</a>
+            <div class="hero-text">
+                <h1 class="animated-heading">
+                    <span class="line">Εξειδικευμένα</span>
+                    <span class="line">Μηχανήματα</span>
+                    <span class="line accent">&amp; Ανταλλακτικά</span>
+                </h1>
+                <p class="hero-subtitle">Αξιοπιστία, ποιότητα και υποστήριξη σε κάθε επαγγελματικό σας έργο.</p>
+                <div class="hero-cta">
+                    <a href="#products" class="btn btn-primary">
+                        <span>Τα Προϊόντα μας</span>
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">
+                        <span>Επικοινωνήστε μαζί μας</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/600/400" alt="Εκσκαφέας Balatzis" class="floating">
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div>
+                <span class="scroll-arrow"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-intro">
+                <span class="section-tag">Γιατί Εμάς</span>
+                <h2 class="section-title">Οι <span class="text-accent">Υπηρεσίες</span> μας</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Ποιότητα</h3>
+                    <p>Μηχανήματα υψηλών προδιαγραφών από κορυφαίους κατασκευαστές.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Συντήρηση</h3>
+                    <p>Πλήρης υποστήριξη service και συντήρησης για όλα τα μηχανήματα.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Παράδοση</h3>
+                    <p>Γρήγορη παράδοση ανταλλακτικών και εξοπλισμού σε όλη την Ελλάδα.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Υποστήριξη</h3>
+                    <p>Εξειδικευμένη τεχνική υποστήριξη και συμβουλές από έμπειρους τεχνικούς.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section class="products" id="products">
+    <section id="products" class="products">
         <div class="container">
-            <div class="section-header">
-                <h2>Τα Προϊόντα μας</h2>
+            <div class="section-intro">
+                <span class="section-tag">Προϊόντα</span>
+                <h2 class="section-title">Ο <span class="text-accent">Εξοπλισμός</span> μας</h2>
             </div>
+
+            <div class="product-filter">
+                <button class="filter-btn active" data-filter="all">Όλα</button>
+                <button class="filter-btn" data-filter="excavators">Εκσκαφείς</button>
+                <button class="filter-btn" data-filter="loaders">Φορτωτές</button>
+                <button class="filter-btn" data-filter="trucks">Φορτηγά</button>
+                <button class="filter-btn" data-filter="trailers">Ρυμουλκούμενα</button>
+                <button class="filter-btn" data-filter="parts">Ανταλλακτικά</button>
+            </div>
+
             <div class="products-grid">
-                <div class="product-card">
+                <div class="product-card" data-category="excavators">
                     <div class="product-image">
-                        <img src="/api/placeholder/400/300" alt="Εκσκαφείς">
+                        <img src="/api/placeholder/400/300" alt="Εκσκαφέας μεσαίου μεγέθους">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="product-content">
-                        <h3>Εκσκαφείς</h3>
-                        <p>Υψηλής απόδοσης εκσκαφείς για κάθε είδους έργο και ανάγκη.</p>
-                        <a href="#" class="btn btn-outline">Περισσότερα</a>
+                        <h3>Εκσκαφέας JS-220</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Εκσκαφείς</span>
+                            <span class="product-weight">22 τόνοι</span>
+                        </div>
+                        <p>Ιδανικός για μεσαία έως μεγάλα έργα με εξαιρετική απόδοση.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" data-category="loaders">
                     <div class="product-image">
-                        <img src="/api/placeholder/400/300" alt="Φορτωτές">
+                        <img src="/api/placeholder/400/300" alt="Φορτωτής μεγάλης χωρητικότητας">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="product-content">
-                        <h3>Φορτωτές</h3>
-                        <p>Ανθεκτικοί και αξιόπιστοι φορτωτές για μέγιστη παραγωγικότητα.</p>
-                        <a href="#" class="btn btn-outline">Περισσότερα</a>
+                        <h3>Φορτωτής WL-80</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Φορτωτές</span>
+                            <span class="product-weight">8 τόνοι</span>
+                        </div>
+                        <p>Υψηλή ισχύς και ευελιξία για εύκολη φόρτωση υλικών.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" data-category="trucks">
                     <div class="product-image">
-                        <img src="/api/placeholder/400/300" alt="Φορτηγά">
+                        <img src="/api/placeholder/400/300" alt="Φορτηγό μεταφοράς υλικών">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="product-content">
-                        <h3>Φορτηγά</h3>
-                        <p>Επαγγελματικά φορτηγά οχήματα για κάθε επιχείρηση.</p>
-                        <a href="#" class="btn btn-outline">Περισσότερα</a>
+                        <h3>Φορτηγό HT-350</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Φορτηγά</span>
+                            <span class="product-weight">35 τόνοι</span>
+                        </div>
+                        <p>Ανθεκτικό και αποδοτικό για μεταφορά βαρέων φορτίων.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" data-category="trailers">
                     <div class="product-image">
-                        <img src="/api/placeholder/400/300" alt="Ρυμουλκούμενα">
+                        <img src="/api/placeholder/400/300" alt="Ρυμουλκούμενο πλατφόρμα">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="product-content">
-                        <h3>Ρυμουλκούμενα</h3>
-                        <p>Ποιοτικά ρυμουλκούμενα για ασφαλείς μεταφορές.</p>
-                        <a href="#" class="btn btn-outline">Περισσότερα</a>
+                        <h3>Ρυμουλκούμενο RT-120</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Ρυμουλκούμενα</span>
+                            <span class="product-weight">12 τόνοι</span>
+                        </div>
+                        <p>Στιβαρή κατασκευή για ασφαλή μεταφορά μηχανημάτων.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="product-card">
+
+                <div class="product-card" data-category="parts">
                     <div class="product-image">
-                        <img src="/api/placeholder/400/300" alt="Ανταλλακτικά">
+                        <img src="/api/placeholder/400/300" alt="Ανταλλακτικά εκσκαφέων">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="product-content">
-                        <h3>Ανταλλακτικά</h3>
-                        <p>Γνήσια ανταλλακτικά για όλους τους τύπους μηχανημάτων.</p>
-                        <a href="#" class="btn btn-outline">Περισσότερα</a>
+                        <h3>Ανταλλακτικά Εκσκαφέων</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Ανταλλακτικά</span>
+                            <span class="product-brand">Όλες οι μάρκες</span>
+                        </div>
+                        <p>Γνήσια και συμβατά ανταλλακτικά για όλους τους τύπους εκσκαφέων.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
+                <div class="product-card" data-category="parts">
+                    <div class="product-image">
+                        <img src="/api/placeholder/400/300" alt="Ανταλλακτικά φορτωτών">
+                        <div class="product-overlay">
+                            <a href="#" class="product-link">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h3>Ανταλλακτικά Φορτωτών</h3>
+                        <div class="product-meta">
+                            <span class="product-category">Ανταλλακτικά</span>
+                            <span class="product-brand">Όλες οι μάρκες</span>
+                        </div>
+                        <p>Πλήρης γκάμα ανταλλακτικών για φορτωτές με γρήγορη παράδοση.</p>
+                        <a href="#" class="btn btn-sm">Περισσότερα <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-cta">
+                <a href="#" class="btn btn-primary">Δείτε όλα τα προϊόντα</a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section id="about" class="about">
         <div class="container">
-            <div class="section-header">
-                <h2>Σχετικά με εμάς</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="/api/placeholder/600/400" alt="Balatzis Katerini Company">
+            <div class="about-grid">
+                <div class="about-media">
+                    <div class="about-image main-image">
+                        <img src="/api/placeholder/600/400" alt="Εταιρεία Balatzis Katerini">
+                    </div>
+                    <div class="about-image secondary-image">
+                        <img src="/api/placeholder/400/300" alt="Συνεργείο Balatzis Katerini">
+                    </div>
+                    <div class="experience-badge">
+                        <span class="number">40<sup>+</sup></span>
+                        <span class="text">Χρόνια Εμπειρίας</span>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <h2>Η Ιστορία μας</h2>
-                    <p>Η εταιρεία Balatzis Katerini ιδρύθηκε το 1985 και έχει εξελιχθεί σε έναν από τους κορυφαίους προμηθευτές μηχανημάτων και ανταλλακτικών στην Ελλάδα.</p>
-                    <p>Με έδρα την Κατερίνη, εξυπηρετούμε πελάτες σε ολόκληρη τη χώρα, προσφέροντας άριστη εξυπηρέτηση και υψηλής ποιότητας προϊόντα.</p>
-                    <p>Η δέσμευσή μας για αξιοπιστία, ποιότητα και καινοτομία μας έχει κερδίσει την εμπιστοσύνη των πελατών μας.</p>
-                    <a href="#contact" class="btn">Επικοινωνήστε μαζί μας</a>
+
+                <div class="about-content">
+                    <span class="section-tag">Σχετικά με εμάς</span>
+                    <h2 class="section-title">Η <span class="text-accent">Ιστορία</span> μας</h2>
+
+                    <p>Η εταιρεία Balatzis Katerini ιδρύθηκε το 1985 με όραμα να παρέχει υψηλής ποιότητας μηχανήματα έργων και εξειδικευμένες υπηρεσίες στον κατασκευαστικό τομέα.</p>
+
+                    <p>Με έδρα την Κατερίνη και με περισσότερα από 40 χρόνια εμπειρίας, έχουμε εξελιχθεί σε έναν αξιόπιστο συνεργάτη για επιχειρήσεις και επαγγελματίες σε όλη την Ελλάδα.</p>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">1500+</span>
+                            <span class="stat-label">Ικανοποιημένοι Πελάτες</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3000+</span>
+                            <span class="stat-label">Έργα Ολοκληρωμένα</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Εξειδικευμένοι Τεχνικοί</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Συνεργαστείτε μαζί μας</span>
+                        <i class="fas fa-long-arrow-alt-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-intro">
+                <span class="section-tag">Αξιολογήσεις</span>
+                <h2 class="section-title">Τι λένε οι <span class="text-accent">Πελάτες</span> μας</h2>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Εξαιρετική εξυπηρέτηση και άμεση ανταπόκριση. Τα μηχανήματα που αγοράσαμε λειτουργούν άψογα εδώ και 3 χρόνια χωρίς κανένα πρόβλημα."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Πελάτης" class="author-image">
+                            <div class="author-info">
+                                <h4>Γιώργος Παπαδόπουλος</h4>
+                                <span>Κατασκευαστική Εταιρεία</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Η τεχνική υποστήριξη της Balatzis Katerini είναι κορυφαία. Έχουμε αγοράσει πολλά μηχανήματα και είμαστε απόλυτα ικανοποιημένοι."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Πελάτης" class="author-image">
+                            <div class="author-info">
+                                <h4>Δημήτρης Αντωνίου</h4>
+                                <span>Τεχνική Εταιρεία</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Αγοράσαμε ανταλλακτικά για τα μηχανήματά μας και η εξυπηρέτηση ήταν άμεση. Εξαιρετική ποιότητα και επαγγελματισμός."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/60/60" alt="Πελάτης" class="author-image">
+                            <div class="author-info">
+                                <h4>Μαρία Κωνσταντίνου</h4>
+                                <span>Διευθύντρια Επιχείρησης</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header">
-                <h2>Επικοινωνία</h2>
+            <div class="section-intro">
+                <span class="section-tag">Επικοινωνία</span>
+                <h2 class="section-title">Επικοινωνήστε <span class="text-accent">Μαζί</span> μας</h2>
             </div>
+
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3>Στοιχεία Επικοινωνίας</h3>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Διεύθυνση</h4>
-                            <p>Εθνικής Αντιστάσεως 75, Κατερίνη 60100</p>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
+                        <h3>Διεύθυνση</h3>
+                        <p>Εθνικής Αντιστάσεως 75<br>Κατερίνη 60100</p>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>Τηλέφωνο</h4>
-                            <p>+30 2351 012345</p>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
                         </div>
+                        <h3>Τηλέφωνο</h3>
+                        <p>+30 2351 012345<br>+30 2351 678910</p>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>info@balatzis-katerini.gr</p>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
+                        <h3>Email</h3>
+                        <p>info@balatzis-katerini.gr<br>support@balatzis-katerini.gr</p>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Ώρες Λειτουργίας</h4>
-                            <p>Δευτέρα - Παρασκευή: 09:00 - 17:00</p>
-                            <p>Σάββατο: 09:00 - 14:00</p>
+
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
                         </div>
+                        <h3>Ώρες Λειτουργίας</h3>
+                        <p>Δευτέρα - Παρασκευή: 09:00 - 17:00<br>Σάββατο: 09:00 - 14:00</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Ονοματεπώνυμο</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Τηλέφωνο</label>
-                            <input type="tel" id="phone" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Μήνυμα</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Αποστολή</button>
-                    </form>
+
+                <div class="contact-form-container">
+                    <div class="form-wrapper">
+                        <h3>Στείλτε μας μήνυμα</h3>
+                        <form id="contactForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Ονοματεπώνυμο</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Τηλέφωνο</label>
+                                    <input type="tel" id="phone" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Θέμα</label>
+                                <select id="subject" class="form-control" required>
+                                    <option value="" selected disabled>Επιλέξτε θέμα</option>
+                                    <option value="purchase">Αγορά Μηχανημάτων</option>
+                                    <option value="parts">Ανταλλακτικά</option>
+                                    <option value="service">Τεχνική Υποστήριξη</option>
+                                    <option value="other">Άλλο</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Μήνυμα</label>
+                                <textarea id="message" class="form-control" rows="5" required></textarea>
+                            </div>
+
+                            <div class="form-group privacy-policy">
+                                <input type="checkbox" id="privacy" required>
+                                <label for="privacy">Αποδέχομαι την <a href="#">Πολιτική Απορρήτου</a></label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span>Αποστολή Μηνύματος</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+</main>
 
-    <!-- Footer -->
-    <footer>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-top">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
+            <div class="footer-grid">
+                <div class="footer-info">
                     <div class="footer-logo">
-                        <img src="/api/placeholder/100/50" alt="Balatzis Katerini Logo">
+                        <img src="/api/placeholder/120/60" alt="Balatzis Katerini Logo">
                     </div>
-                    <p>Η εταιρεία Balatzis Katerini είναι ο αξιόπιστος συνεργάτης σας για μηχανήματα έργων και ανταλλακτικά υψηλής ποιότητας.</p>
+                    <p>Η εταιρεία Balatzis Katerini είναι ο αξιόπιστος συνεργάτης σας για μηχανήματα έργων και ανταλλακτικά υψηλής ποιότητας από το 1985.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+
                 <div class="footer-links">
-                    <h4>Γρήγοροι Σύνδεσμοι</h4>
+                    <h4>Σύνδεσμοι</h4>
                     <ul>
-                        <li><a href="#home">Αρχική</a></li>
+                        <li><a href="#hero">Αρχική</a></li>
                         <li><a href="#products">Προϊόντα</a></li>
                         <li><a href="#about">Σχετικά με εμάς</a></li>
+                        <li><a href="#testimonials">Αξιολογήσεις</a></li>
                         <li><a href="#contact">Επικοινωνία</a></li>
-                        <li><a href="#">Όροι Χρήσης</a></li>
-                        <li><a href="#">Πολιτική Απορρήτου</a></li>
                     </ul>
                 </div>
+
+                <div class="footer-products">
+                    <h4>Προϊόντα</h4>
+                    <ul>
+                        <li><a href="#">Εκσκαφείς</a></li>
+                        <li><a href="#">Φορτωτές</a></li>
+                        <li><a href="#">Φορτηγά</a></li>
+                        <li><a href="#">Ρυμουλκούμενα</a></li>
+                        <li><a href="#">Ανταλλακτικά</a></li>
+                    </ul>
+                </div>
+
                 <div class="footer-contact">
                     <h4>Επικοινωνία</h4>
-                    <p>
-                        <i class="fas fa-map-marker-alt"></i>
-                        Εθνικής Αντιστάσεως 75, Κατερίνη 60100
-                    </p>
-                    <p>
-                        <i class="fas fa-phone"></i>
-                        +30 2351 012345
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope"></i>
-                        info@balatzis-katerini.gr
-                    </p>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Εθνικής Αντιστάσεως 75, Κατερίνη 60100</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+30 2351 012345</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@balatzis-katerini.gr</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Balatzis Katerini. Με επιφύλαξη παντός δικαιώματος.</p>
-            </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- Back to Top Button -->
-    <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </a>
+    <div class="footer-bottom">
+        <div class="container">
+            <p>&copy; 2025 Balatzis Katerini. Με επιφύλαξη παντός δικαιώματος.</p>
+            <ul class="footer-bottom-links">
+                <li><a href="#">Όροι Χρήσης</a></li>
+                <li><a href="#">Πολιτική Απορρήτου</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+<!-- Back to top button -->
+<button class="back-to-top" aria-label="Επιστροφή στην κορυφή">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- JavaScript -->
+<script src="script.js"></script>
 </body>
 </html>

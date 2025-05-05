@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balatzis Katerini | Excavators, Loaders & Spare Parts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Balatzis Katerini offers high-quality excavators, loaders, trucks, trailers, and spare parts">
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <a href="index.html" class="lang-link">GR</a>
+        <span class="lang-divider">|</span>
+        <a href="index-en.html" class="lang-link active">EN</a>
+    </div>
+
+    <!-- Theme toggle and accessibility panel -->
+    <div class="utility-panel">
+        <button class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button class="font-size-up" aria-label="Increase font size">
+            <i class="fas fa-search-plus"></i>
+        </button>
+        <button class="font-size-down" aria-label="Decrease font size">
+            <i class="fas fa-search-minus"></i>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container header-grid">
+            <div class="logo-container">
+                <img src="/api/placeholder/60/60" alt="Balatzis Katerini Logo" class="logo">
+                <span class="logo-text">Balatzis <span>Katerini</span></span>
+            </div>
+            
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-links">
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="tel:+302351012345" class="contact-button">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+30 2351 012345</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-background">
+                <div class="overlay"></div>
+                <div class="hero-shape-1"></div>
+                <div class="hero-shape-2"></div>
+            </div>
+            
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1 class="animated-heading">
+                        <span class="line">Specialized</span>
+                        <span class="line">Machinery</span>
+                        <span class="line accent">&amp; Spare Parts</span>
+                    </h1>
+                    <p class="hero-subtitle">Reliability, quality, and support for all your professional projects.</p>
+                    <div class="hero-cta">
+                        <a href="#products" class="btn btn-primary">
+                            <span>Our Products</span>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <span>Contact Us</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="/api/placeholder/600/400" alt="Balatzis Excavator" class="floating">
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div>
+                    <span class="scroll-arrow"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-intro">
+                    <span class="section-tag">Why Choose Us</span>
+                    <h2 class="section-title">Our <span class="text-accent">Services</span></h2>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Quality</h3>
+                        <p>High-specification machinery from top manufacturers.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3>Maintenance</h3>
+                        <p>Full service and maintenance support for all machinery.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Delivery</h3>
+                        <p>Fast delivery of spare parts and equipment throughout Greece.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Support</h3>
+                        <p>Specialized technical support and advice from experienced technicians.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products">
+            <div class="container">
+                <div class="section-intro">
+                    <span class="section-tag">Products</span>
+                    <h2 class="section-title">Our <span class="text-accent">Equipment</span></h2>
+                </div>
+                
+                <div class="product-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="excavators">Excavators</button>
+                    <button class="filter-btn" data-filter="loaders">Loaders</button>
+                    <button class="filter-btn" data-filter="trucks">Trucks</button>
+                    <button class="filter-btn" data-filter="trailers">Trailers</button>
+                    <button class="filter-btn" data-filter="parts">Spare Parts</button>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card" data-category="excavators">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="Medium-sized excavator">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Excavator JS-220</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Excavators</span>
+                                <span class="product-weight">22 tons</span>
+                            </div>
+                            <p>Ideal for medium to large projects with excellent performance.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="loaders">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="High capacity loader">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Loader WL-80</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Loaders</span>
+                                <span class="product-weight">8 tons</span>
+                            </div>
+                            <p>High power and flexibility for easy loading of materials.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="trucks">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="Material transport truck">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Truck HT-350</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Trucks</span>
+                                <span class="product-weight">35 tons</span>
+                            </div>
+                            <p>Durable and efficient for heavy load transportation.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="trailers">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="Platform trailer">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Trailer RT-120</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Trailers</span>
+                                <span class="product-weight">12 tons</span>
+                            </div>
+                            <p>Robust construction for safe transport of machinery.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="parts">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="Excavator spare parts">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Excavator Spare Parts</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Spare Parts</span>
+                                <span class="product-brand">All brands</span>
+                            </div>
+                            <p>Genuine and compatible spare parts for all types of excavators.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="parts">
+                        <div class="product-image">
+                            <img src="/api/placeholder/400/300" alt="Loader spare parts">
+                            <div class="product-overlay">
+                                <a href="#" class="product-link">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h3>Loader Spare Parts</h3>
+                            <div class="product-meta">
+                                <span class="product-category">Spare Parts</span>
+                                <span class="product-brand">All brands</span>
+                            </div>
+                            <p>Complete range of loader parts with quick delivery.</p>
+                            <a href="#" class="btn btn-sm">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="products-cta">
+                    <a href="#" class="btn btn-primary">View all products</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-media">
+                        <div class="about-image main-image">
+                            <img src="/api/placeholder/600/400" alt="Balatzis Katerini Company">
+                        </div>
+                        <div class="about-image secondary-image">
+                            <img src="/api/placeholder/400/300" alt="Balatzis Katerini Workshop">
+                        </div>
+                        <div class="experience-badge">
+                            <span class="number">40<sup>+</sup></span>
+                            <span class="text">Years Experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="about-content">
+                        <span class="section-tag">About Us</span>
+                        <h2 class="section-title">Our <span class="text-accent">Story</span></h2>
+                        
+                        <p>Balatzis Katerini was founded in 1985 with a vision to provide high-quality construction machinery and specialized services to the construction sector.</p>
+                        
+                        <p>Based in Katerini and with more than 40 years of experience, we have evolved into a reliable partner for businesses and professionals throughout Greece.</p>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">1500+</span>
+                                <span class="stat-label">Satisfied Clients</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3000+</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">25+</span>
+                                <span class="stat-label">Specialized Technicians</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Partner with us</span>
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <div class="section-intro">
+                    <span class="section-tag">Testimonials</span>
+                    <h2 class="section-title">What Our <span class="text-accent">Clients</span> Say</h2>
+                </div>
+                
+                <div class="testimonials-slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"Excellent service and prompt response. The machinery we purchased has been working flawlessly for 3 years without any issues."</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/60/60" alt="Client" class="author-image">
+                                <div class="author-info">
+                                    <h4>George Papadopoulos</h4>
+                                    <span>Construction Company</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"The technical support from Balatzis Katerini is outstanding. We've purchased many machines and are completely satisfied."</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/60/60" alt="Client" class="author-image">
+                                <div class="author-info">
+                                    <h4>Dimitris Antoniou</h4>
+                                    <span>Technical Company</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"We purchased spare parts for our machines and the service was immediate. Excellent quality and professionalism."</p>
+                            <div class="testimonial-author">
+                                <img src="/api/placeholder/60/60" alt="Client" class="author-image">
+                                <div class="author-info">
+                                    <h4>Maria Constantinou</h4>
+                                    <span>Business Director</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-intro">
+                    <span class="section-tag">Contact</span>
+                    <h2 class="section-title">Get In <span class="text-accent">Touch</span></h2>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Address</h3>
+                            <p>Ethnikis Antistaseos 75<br>Katerini 60100</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <h3>Phone</h3>
+                            <p>+30 2351 012345<br>+30 2351 678910</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email</h3>
+                            <p>info@balatzis-katerini.gr<br>support@balatzis-katerini.gr</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Working Hours</h3>
+                            <p>Monday - Friday: 09:00 - 17:00<br>Saturday: 09:00 - 14:00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <div class="form-wrapper">
+                            <h3>Send us a message</h3>
+                            <form id="contactForm" class="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" class="form-control" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="phone">Phone</label>
+                                        <input type="tel" id="phone" class="form-control">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <select id="subject" class="form-control" required>
+                                        <option value="" selected disabled>Select a subject</option>
+                                        <option value="purchase">Purchase Machinery</option>
+                                        <option value="parts">Spare Parts</option>
+                                        <option value="service">Technical Support</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" class="form-control" rows="5" required></textarea>
+                                </div>
+                                
+                                <div class="form-group privacy-policy">
+                                    <input type="checkbox" id="privacy" required>
+                                    <label for="privacy">I accept the <a href="#">Privacy Policy</a></label>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    <span>Send Message</span>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-info">
+                        <div class="footer-logo">
+                            <img src="/api/placeholder/120/60" alt="Balatzis Katerini Logo">
+                        </div>
+                        <p>Balatzis Katerini is your reliable partner for construction machinery and high-quality spare parts since 1985.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <h4>Links</h4>
+                        <ul>
+                            <li><a href="#hero">Home</a></li>
+                            <li><a href="#products">Products</a></li>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#testimonials">Testimonials</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-products">
+                        <h4>Products</h4>
+                        <ul>
+                            <li><a href="#">Excavators</a></li>
+                            <li><a href="#">Loaders</a></li>
+                            <li><a href="#">Trucks</a></li>
+                            <li><a href="#">Trailers</a></li>
+                            <li><a href="#">Spare Parts</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-contact">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Ethnikis Antistaseos 75, Katerini 60100</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone-alt"></i>
+                                <span>+30 2351 012345</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <span>info@balatzis-katerini.gr</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Balatzis Katerini. All rights reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
