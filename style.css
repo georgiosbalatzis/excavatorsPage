@@ -1461,3 +1461,53 @@ textarea.form-control {
         right: 10px;
     }
 }
+
+/* Add this code to your existing style.css file to support multiple languages */
+
+/* Language Selector */
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    z-index: var(--z-popover);
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
+}
+
+.lang-link {
+    font-weight: var(--font-medium);
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 2px 4px;
+    transition: all var(--transition-fast);
+}
+
+.lang-link:hover,
+.lang-link.active {
+    color: var(--accent);
+}
+
+.lang-divider {
+    color: var(--text-secondary);
+    margin: 0 5px;
+}
+
+/* Adjust the utility panel position to prevent overlap */
+.utility-panel {
+    top: 60%; /* Changed from 50% to avoid conflict with language selector */
+}
+
+/* Responsive adjustments for the language selector */
+@media (max-width: 768px) {
+    .language-selector {
+        top: 60px;
+        right: 10px;
+    }
+}
