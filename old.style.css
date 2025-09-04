@@ -1,12 +1,12 @@
 /*
  * Balatzis Katerini - Modern Website Stylesheet
- * Colors: Black (#000000), Teal (#007C89), White (#FFFFFF), Gray (#4D4D4D)
+ * Colors: Black (#000000), Orange (#F57E00), White (#FFFFFF), Gray (#4D4D4D)
  */
 
 /* ===== Base Styles & Resets ===== */
 :root {
     --black: #000000;
-    --teal: #007C89;
+    --orange: #F57E00;
     --white: #FFFFFF;
     --gray: #4D4D4D;
     --light-gray: #f4f4f4;
@@ -19,7 +19,7 @@
     --bg-secondary: var(--light-gray);
     --text-primary: var(--black);
     --text-secondary: var(--gray);
-    --accent: var(--teal);
+    --accent: var(--orange);
 
     /* Shadows */
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -871,12 +871,71 @@ section {
     color: var(--text-secondary);
 }
 
+/* ===== Testimonials Section ===== */
+.testimonials-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.testimonial-card {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-normal);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.testimonial-content {
+    padding: var(--spacing-lg);
+}
+
+.testimonial-rating {
+    color: var(--accent);
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-content p {
+    font-style: italic;
+    margin-bottom: var(--spacing-lg);
+    color: var(--text-secondary);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.author-image {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+}
+
+.author-info h4 {
+    font-size: var(--text-md);
+    margin-bottom: var(--spacing-xs);
+}
+
+.author-info span {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+}
+
 /* ===== Contact Section ===== */
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
 }
 
 .contact-info {
@@ -970,7 +1029,7 @@ section {
 
 .form-control:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0, 124, 137, 0.2);
+    box-shadow: 0 0 0 3px rgba(245, 126, 0, 0.2);
 }
 
 .form-control::placeholder {
@@ -1002,55 +1061,6 @@ textarea.form-control {
 .privacy-policy a {
     color: var(--accent);
     text-decoration: underline;
-}
-
-/* ===== Map Section ===== */
-.map-section {
-    margin-top: var(--spacing-xl);
-}
-
-.map-container {
-    background-color: var(--bg-primary);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--glass-border);
-}
-
-.map-container h3 {
-    font-size: var(--text-xl);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-    color: var(--text-primary);
-}
-
-.map-wrapper {
-    margin-bottom: var(--spacing-md);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.map-info {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--spacing-md);
-    padding: var(--spacing-md);
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-md);
-    font-size: var(--text-sm);
-}
-
-.map-info p {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    color: var(--text-secondary);
-}
-
-.map-info i {
-    color: var(--accent);
 }
 
 /* ===== Footer ===== */
@@ -1325,7 +1335,8 @@ textarea.form-control {
     }
 
     .feature-card,
-    .product-card {
+    .product-card,
+    .testimonial-card {
         max-width: 400px;
         margin: 0 auto;
     }
@@ -1350,11 +1361,6 @@ textarea.form-control {
     .footer-bottom .container {
         flex-direction: column;
         gap: var(--spacing-md);
-        text-align: center;
-    }
-
-    .map-info {
-        flex-direction: column;
         text-align: center;
     }
 }
@@ -1406,28 +1412,102 @@ textarea.form-control {
     }
 }
 
-/* Add this code to your existing style.css file to support the updated JavaScript */
+/* Add this code to your existing style.css file to support the language selector */
 
-/* No scroll class */
-.no-scroll {
-    overflow: hidden;
+/* Language Selector */
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    z-index: var(--z-popover);
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
 }
 
-/* Animation styles for sections */
-section:not(.hero) {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+.lang-link {
+    font-weight: var(--font-medium);
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 2px 4px;
+    transition: all var(--transition-fast);
 }
 
-section:not(.hero).in-view {
-    opacity: 1;
-    transform: translateY(0);
+.lang-link:hover,
+.lang-link.active {
+    color: var(--accent);
 }
 
-/* Hero heading animation styles */
-.animated-heading .line {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.lang-divider {
+    color: var(--text-secondary);
+    margin: 0 5px;
+}
+
+/* Adjust the utility panel position to prevent overlap */
+.utility-panel {
+    top: 60%; /* Changed from 50% to avoid conflict with language selector */
+}
+
+/* Responsive adjustments for the language selector */
+@media (max-width: 768px) {
+    .language-selector {
+        top: 60px;
+        right: 10px;
+    }
+}
+
+/* Add this code to your existing style.css file to support multiple languages */
+
+/* Language Selector */
+.language-selector {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    z-index: var(--z-popover);
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
+}
+
+.lang-link {
+    font-weight: var(--font-medium);
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding: 2px 4px;
+    transition: all var(--transition-fast);
+}
+
+.lang-link:hover,
+.lang-link.active {
+    color: var(--accent);
+}
+
+.lang-divider {
+    color: var(--text-secondary);
+    margin: 0 5px;
+}
+
+/* Adjust the utility panel position to prevent overlap */
+.utility-panel {
+    top: 60%; /* Changed from 50% to avoid conflict with language selector */
+}
+
+/* Responsive adjustments for the language selector */
+@media (max-width: 768px) {
+    .language-selector {
+        top: 60px;
+        right: 10px;
+    }
 }
