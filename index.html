@@ -12,8 +12,8 @@
             --color-gray-light: #F5F5F5;
             --color-gray: #B8B8B8;
             --color-gray-dark: #6B6B6B;
-            --color-text: #333333;
-            --color-text-light: #666666;
+            --color-text: #e89157;
+            --color-text-light: #e89157;
         }
 
         * {
@@ -96,7 +96,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--color-gray-light) 0%, var(--color-white) 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/BG1.webp) center/cover no-repeat;
             padding: 80px 20px;
             text-align: center;
         }
@@ -191,7 +191,16 @@
             align-items: center;
             justify-content: center;
             font-size: 60px;
+            overflow: hidden; /* ΝΕΟ: κρύβει ό,τι περισσεύει */
         }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* ΝΕΟ: προσαρμογή χωρίς παραμόρφωση */
+            display: block;
+        }
+
 
         .product-content {
             padding: 25px;
@@ -540,7 +549,9 @@
         <div class="products-grid">
             <!-- ATLAS -->
             <div class="product-card">
-                <div class="product-image">🏗️</div>
+                <div class="product-image">
+                    <img src="images/0-sR3sqj.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div class="product-content">
                     <h3 class="product-title">ATLAS Δομικά Μηχανήματα</h3>
                     <p class="product-description">Αντιπροσωπεία των διακεκριμένων δομικών μηχανημάτων ATLAS</p>
@@ -556,7 +567,9 @@
 
             <!-- GUMA Tech -->
             <div class="product-card">
-                <div class="product-image">🔗</div>
+                <div class="product-image">
+                    <img src="images/UKq4RQS2.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div class="product-content">
                     <h3 class="product-title">GUMA Tech Ερπύστριες</h3>
                     <p class="product-description">Ελαστικές και μεταλλικές ερπύστριες υψηλής αντοχής</p>
@@ -572,7 +585,9 @@
 
             <!-- Ανταλλακτικά -->
             <div class="product-card">
-                <div class="product-image">⚙️</div>
+                <div class="product-image">
+                    <img src="images/4OYj3QuE.jpg" alt="Ανταλλατικα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div class="product-content">
                     <h3 class="product-title">Ανταλλακτικά & Εξαρτήματα</h3>
                     <p class="product-description">Ολοκληρωμένη γκάμα ανταλλακτικών για όλα τα μηχανήματα</p>
@@ -588,7 +603,9 @@
 
             <!-- JAB Hydraulic -->
             <div class="product-card">
-                <div class="product-image">🔨</div>
+                <div class="product-image">
+                    <img src="images/rock-breaker-500x500.jpg" alt="JAB Υδραυλικά Σφυριά" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div class="product-content">
                     <h3 class="product-title">JAB Υδραυλικά Σφυριά</h3>
                     <p class="product-description">Υδραυλικά σφυριά κορεάτικης ποιότητας JAB</p>
@@ -604,10 +621,12 @@
 
             <!-- Φορτηγά -->
             <div class="product-card">
-                <div class="product-image">🚚</div>
+                <div class="product-image">
+                    <img src="images/s_MFDpPn.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
                 <div class="product-content">
-                    <h3 class="product-title">Φορτηγά & Τρακτέρες</h3>
-                    <p class="product-description">Ποιοτικά φορτηγά και τρακτέρες για όλες τις εργασίες</p>
+                    <h3 class="product-title">Φορτηγά & Τρακτορες</h3>
+                    <p class="product-description">Ποιοτικά φορτηγά και τρακτορες για όλες τις εργασίες</p>
                     <ul class="product-features">
                         <li>Διάφορα μοντέλα φορτηγών</li>
                         <li>Τρακτέρες όλων των κλάσεων</li>
