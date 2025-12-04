@@ -430,6 +430,44 @@
             padding-top: 20px;
         }
 
+        /* Brands Section */
+        .brands {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .brands-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 120px;
+        }
+
+        .brand-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo img:hover {
+            transform: scale(1.05);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-container {
@@ -627,6 +665,23 @@
         </div>
     </section>
 
+    <!-- Brands Section -->
+    <section class="brands" id="brands">
+        <div class="brands-container">
+            <div class="brands-grid">
+                <div class="brand-logo">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f27f8c3f-2bc9-4151-ae24-690582aed24d" alt="ATLAS">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e7bb548c-5991-483d-a54e-d1ef5b9a50d0" alt="GUMA Tech">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ecb7f6e9-980b-41dd-a6af-741de6895bac" alt="JAB">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <h2 class="section-title">Επικοινωνήστε <span>Μαζί μας</span></h2>
@@ -638,9 +693,7 @@
                 <div class="contact-item">
                     <div class="contact-item-label">Τηλέφωνο</div>
                     <div class="contact-item-value">
-                        <a href="tel:+306944449610">+30 694 444 9610</a>
-                    </div>
-                    <div class="contact-item-value">
+                        <a href="tel:+306944449610">+30 694 444 9610</a><br>
                         <a href="tel:+306945667853">+30 694 566 7853</a>
                     </div>
                 </div>
@@ -648,9 +701,7 @@
                 <div class="contact-item">
                     <div class="contact-item-label">Email</div>
                     <div class="contact-item-value">
-                        <a href="mailto:balatzis@otenet.gr">balatzis@otenet.gr</a>
-                    </div>
-                    <div class="contact-item-value">
+                        <a href="mailto:balatzis@otenet.gr">balatzis@otenet.gr</a><br>
                         <a href="mailto:vbalatzis@icloud.com">vbalatzis@icloud.com</a>
                     </div>
                 </div>
