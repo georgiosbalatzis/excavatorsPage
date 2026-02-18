@@ -12,6 +12,9 @@
 </head>
 <body>
 
+<!-- Scroll progress bar — JS sets width as percentage of page scrolled -->
+<div class="scroll-progress" id="scroll-progress" role="presentation" aria-hidden="true"></div>
+
 <!-- ================================================================
      TOP BAR — utility strip (hours + quick contacts)
 ================================================================= -->
@@ -45,6 +48,7 @@
         <nav class="main-nav" aria-label="Κύριο μενού">
             <a href="#products">Προϊόντα</a>
             <a href="#why-us">Γιατί Εμείς</a>
+            <a href="#about">Ποιοι Είμαστε</a>
             <a href="#brands">Συνεργάτες</a>
             <a href="#contact">Επικοινωνία</a>
         </nav>
@@ -75,6 +79,7 @@
         <div class="mobile-nav-phone">📞 694 444 9610 &nbsp;|&nbsp; 694 566 7853</div>
         <a href="#products">Προϊόντα</a>
         <a href="#why-us">Γιατί Εμείς</a>
+        <a href="#about">Ποιοι Είμαστε</a>
         <a href="#brands">Συνεργάτες</a>
         <a href="#contact">Επικοινωνία</a>
         <button class="mob-cta" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
@@ -391,7 +396,9 @@
                     alt="ATLAS Μηχανήματα"
                     width="200" height="52"
                     loading="lazy"
+                    onerror="this.closest('.brand-tile').classList.add('img-error')"
                 >
+                <span class="brand-fallback">ATLAS</span>
             </div>
 
             <div class="brand-tile reveal reveal-delay-2">
@@ -400,7 +407,9 @@
                     alt="GUMA Tech"
                     width="200" height="52"
                     loading="lazy"
+                    onerror="this.closest('.brand-tile').classList.add('img-error')"
                 >
+                <span class="brand-fallback">GUMA Tech</span>
             </div>
 
             <div class="brand-tile reveal reveal-delay-3">
@@ -409,7 +418,74 @@
                     alt="JAB Hydraulic"
                     width="200" height="52"
                     loading="lazy"
+                    onerror="this.closest('.brand-tile').classList.add('img-error')"
                 >
+                <span class="brand-fallback">JAB</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     WHO WE ARE — family business, photo + text
+================================================================= -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-grid">
+
+            <!-- Visual side -->
+            <div class="about-visual reveal">
+                <div class="about-img-frame">
+                    <!--
+                        ➡️  Replace with a real photo: your team, workshop,
+                            or a machine in action at a client site.
+                            Ideal size: 800×600px or wider, landscape.
+                            Until then a placeholder gradient is shown.
+                    -->
+                    <img
+                        src="images/about-team.jpg"
+                        alt="Η ομάδα ATLAS — οικογενειακή επιχείρηση δομικών μηχανημάτων"
+                        width="800" height="600"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1C1C1C 0%, #262626 100%)'; this.parentElement.insertAdjacentHTML('beforeend', '<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(232,145,87,0.15);letter-spacing:4px;\'>ATLAS</div>')"
+                    >
+                </div>
+
+                <!-- Floating year badge — update the year to match founding year -->
+                <div class="about-year-badge">
+                    <span class="year-num">2008</span>
+                    <span class="year-label">Ιδρύθηκε</span>
+                </div>
+            </div>
+
+            <!-- Content side -->
+            <div class="about-content reveal reveal-delay-2">
+                <span class="section-label">Ποιοι Είμαστε</span>
+                <h2 class="section-title">Οικογενειακή <em>Επιχείρηση</em><br>με Πάθος</h2>
+
+                <p class="about-lead">
+                    Από το 2008, η οικογένεια Μπαλατζή εξυπηρετεί επαγγελματίες του κατασκευαστικού κλάδου σε ολόκληρη την Ελλάδα.
+                </p>
+
+                <p class="about-body">
+                    Ξεκινήσαμε με ένα απλό στόχο: να φέρνουμε αξιόπιστο εξοπλισμό στους ανθρώπους που χτίζουν αυτή τη χώρα. Σήμερα είμαστε επίσημη αντιπροσωπεία τριών διακεκριμένων κατασκευαστών — ATLAS, GUMA Tech και JAB — και υποστηρίζουμε εκατοντάδες επαγγελματίες με μηχανήματα, ανταλλακτικά και τεχνική βοήθεια.
+                    <br><br>
+                    Δεν είμαστε απλώς έμποροι. Γνωρίζουμε τον εξοπλισμό που πουλάμε, έχουμε δει πώς λειτουργεί στο χωράφι, και είμαστε εδώ μετά την αγορά — όποτε μας χρειαστείτε.
+                </p>
+
+                <div class="about-pills">
+                    <span class="about-pill"><span class="dot"></span>ATLAS Εκσκαφείς</span>
+                    <span class="about-pill"><span class="dot"></span>GUMA Tech Ερπύστριες</span>
+                    <span class="about-pill"><span class="dot"></span>JAB Υδραυλικά Σφυριά</span>
+                    <span class="about-pill"><span class="dot"></span>Ανταλλακτικά & Service</span>
+                    <span class="about-pill"><span class="dot"></span>Πανελλαδική Κάλυψη</span>
+                </div>
+
+                <button class="about-cta" onclick="scrollToContact()">
+                    Μιλήστε μαζί μας →
+                </button>
             </div>
 
         </div>
@@ -605,6 +681,7 @@
             <div class="footer-col">
                 <h4>Εταιρεία</h4>
                 <ul>
+                    <li><a href="#about">Ποιοι Είμαστε</a></li>
                     <li><a href="#why-us">Γιατί Εμείς</a></li>
                     <li><a href="#brands">Συνεργάτες</a></li>
                     <li><a href="#contact">Επικοινωνία</a></li>
