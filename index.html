@@ -3,812 +3,646 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATLAS - Δομικά Μηχανήματα & Εξοπλισμός</title>
-    <style>
-        :root {
-            --color-white: #FFFFFF;
-            --color-orange: #E89157;
-            --color-orange-dark: #D67A3D;
-            --color-gray-light: #F5F5F5;
-            --color-gray: #B8B8B8;
-            --color-gray-dark: #6B6B6B;
-            --color-text: #e89157;
-            --color-text-light: #e89157;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: var(--color-text);
-            background-color: var(--color-white);
-        }
-
-        header {
-            background-color: var(--color-white);
-            border-bottom: 3px solid var(--color-orange);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--color-orange);
-            letter-spacing: -0.5px;
-        }
-
-        .logo-small {
-            display: block;
-            font-size: 12px;
-            color: var(--color-gray-dark);
-            font-weight: 400;
-            margin-top: 2px;
-        }
-
-        nav a {
-            color: var(--color-text);
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            font-size: 14px;
-        }
-
-        nav a:hover {
-            color: var(--color-orange);
-        }
-
-        .contact-btn {
-            background-color: var(--color-orange);
-            color: var(--color-white);
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: background-color 0.3s ease;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .contact-btn:hover {
-            background-color: var(--color-orange-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/BG1.webp) center/cover no-repeat;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--color-text);
-            font-weight: 700;
-        }
-
-        .hero-highlight {
-            color: var(--color-orange);
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--color-text-light);
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--color-orange);
-            color: var(--color-white);
-            padding: 15px 40px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .cta-button:hover {
-            background-color: var(--color-orange-dark);
-            transform: translateY(-2px);
-        }
-
-        /* Products Section */
-        .products {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
-        .section-title {
-            font-size: 36px;
-            color: var(--color-text);
-            margin-bottom: 50px;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .section-title span {
-            color: var(--color-orange);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .product-card {
-            background-color: var(--color-white);
-            border: 2px solid var(--color-gray-light);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            border-color: var(--color-orange);
-            box-shadow: 0 8px 24px rgba(232, 145, 87, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .product-image {
-            background: linear-gradient(135deg, var(--color-gray-light) 0%, #EFEFEF 100%);
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            overflow: hidden; /* ΝΕΟ: κρύβει ό,τι περισσεύει */
-        }
-
-        .product-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* ΝΕΟ: προσαρμογή χωρίς παραμόρφωση */
-            display: block;
-        }
-
-
-        .product-content {
-            padding: 25px;
-        }
-
-        .product-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 12px;
-        }
-
-        .product-description {
-            font-size: 14px;
-            color: var(--color-text-light);
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 15px;
-        }
-
-        .product-features li {
-            font-size: 13px;
-            color: var(--color-gray-dark);
-            padding: 4px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .product-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--color-orange);
-            font-weight: bold;
-        }
-
-        .product-link {
-            display: inline-block;
-            color: var(--color-orange);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .product-link:hover {
-            color: var(--color-orange-dark);
-        }
-
-        /* Why Choose Us */
-        .why-us {
-            background-color: var(--color-gray-light);
-            padding: 80px 20px;
-        }
-
-        .why-us-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .feature {
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .feature-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 10px;
-        }
-
-        .feature-text {
-            font-size: 14px;
-            color: var(--color-text-light);
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        .contact-info h3 {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--color-text);
-            margin-bottom: 25px;
-        }
-
-        .contact-item {
-            margin-bottom: 25px;
-        }
-
-        .contact-item-label {
-            font-size: 12px;
-            color: var(--color-orange);
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .contact-item-value {
-            font-size: 15px;
-            color: var(--color-text);
-        }
-
-        .contact-item a {
-            color: var(--color-orange);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .contact-item a:hover {
-            text-decoration: underline;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--color-text);
-            margin-bottom: 6px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            padding: 12px 15px;
-            border: 1px solid var(--color-gray);
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--color-orange);
-            box-shadow: 0 0 0 3px rgba(232, 145, 87, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-submit {
-            background-color: var(--color-orange);
-            color: var(--color-white);
-            padding: 14px 30px;
-            border-radius: 4px;
-            border: none;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .form-submit:hover {
-            background-color: var(--color-orange-dark);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--color-text);
-            color: var(--color-white);
-            padding: 40px 20px 20px;
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--color-white);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--color-orange);
-        }
-
-        .footer-bottom {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            padding-top: 20px;
-        }
-
-        /* Brands Section */
-        .brands {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .brands-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .brands-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            align-items: center;
-            justify-items: center;
-        }
-
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 120px;
-        }
-
-        .brand-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
-
-        .brand-logo img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-wrap: wrap;
-            }
-
-            nav {
-                display: none;
-            }
-
-            nav a {
-                margin-left: 0;
-                display: block;
-                padding: 10px 0;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-links {
-                gap: 15px;
-            }
-        }
-    </style>
+    <meta name="description" content="ATLAS — Αντιπροσωπεία δομικών μηχανημάτων ATLAS, ερπύστριες GUMA Tech, υδραυλικά σφυριά JAB. 1ο χλμ. Ε.Ο. Κατερίνης - Λάρισας.">
+    <title>ATLAS — Δομικά Μηχανήματα & Εξοπλισμός</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                ATLAS
-                <span class="logo-small">Δομικά Μηχανήματα & Εξοπλισμός</span>
+
+<!-- ================================================================
+     TOP BAR — utility strip (hours + quick contacts)
+================================================================= -->
+<div class="top-bar">
+    <div class="container top-bar-inner">
+        <div class="top-bar-left">
+            <span>🕐 Δε–Πα: 8:00–18:00 &nbsp;|&nbsp; Σα: 9:00–15:00</span>
+            <span>📍 1ο χλμ. Ε.Ο. Κατερίνης – Λάρισας</span>
+        </div>
+        <div class="top-bar-right">
+            <a href="mailto:balatzis@otenet.gr">✉ balatzis@otenet.gr</a>
+            <a href="https://wa.me/306944449610" target="_blank" rel="noopener">💬 WhatsApp</a>
+        </div>
+    </div>
+</div>
+
+<!-- ================================================================
+     HEADER — dark, sticky, with phone + CTA always visible
+================================================================= -->
+<header class="site-header" id="site-header">
+    <div class="header-inner">
+
+        <!-- Logo -->
+        <a href="#" class="logo-wrap" aria-label="ATLAS αρχική">
+            <span class="logo">ATLAS</span>
+            <span class="logo-sub">Δομικά Μηχανήματα & Εξοπλισμός</span>
+            <div class="logo-accent"></div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="main-nav" aria-label="Κύριο μενού">
+            <a href="#products">Προϊόντα</a>
+            <a href="#why-us">Γιατί Εμείς</a>
+            <a href="#brands">Συνεργάτες</a>
+            <a href="#contact">Επικοινωνία</a>
+        </nav>
+
+        <!-- Header right actions -->
+        <div class="header-actions">
+            <a href="tel:+306944449610" class="header-phone">
+                <span class="ph-icon">📞</span>
+                694 444 9610
+            </a>
+            <button class="btn-quote" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
+        </div>
+
+        <!-- Hamburger (mobile only) -->
+        <button
+            class="hamburger"
+            id="hamburger"
+            aria-label="Άνοιγμα μενού"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+        >
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Κινητό μενού">
+        <div class="mobile-nav-phone">📞 694 444 9610 &nbsp;|&nbsp; 694 566 7853</div>
+        <a href="#products">Προϊόντα</a>
+        <a href="#why-us">Γιατί Εμείς</a>
+        <a href="#brands">Συνεργάτες</a>
+        <a href="#contact">Επικοινωνία</a>
+        <button class="mob-cta" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
+    </nav>
+</header>
+
+
+<!-- ================================================================
+     HERO — dark, industrial, diagonal slash accent
+================================================================= -->
+<section class="hero" id="home">
+    <div class="hero-bg" role="presentation"></div>
+    <div class="hero-grid" role="presentation"></div>
+    <div class="hero-slash" role="presentation"></div>
+
+    <div class="hero-content">
+        <span class="hero-eyebrow">Επαγγελματικός Εξοπλισμός</span>
+
+        <h1>
+            Δομικά<br>
+            Μηχανήματα &<br>
+            <em>Εξοπλισμός</em>
+        </h1>
+
+        <p class="hero-sub">
+            Οικογενειακή επιχείρηση με εμπειρία στον κλάδο — αντιπροσωπείες ATLAS, GUMA Tech και JAB για κάθε κατασκευαστική ανάγκη.
+        </p>
+
+        <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToProducts()">
+                Δείτε τα Προϊόντα
+                <span>→</span>
+            </button>
+            <button class="btn-secondary" onclick="scrollToContact()">
+                <span class="arrow">↓</span>
+                Επικοινωνήστε μαζί μας
+            </button>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     STATS BAND — dark slab with animated counters
+================================================================= -->
+<section class="stats-band" aria-label="Στατιστικά εταιρείας">
+    <div class="stats-inner">
+
+        <div class="stat-item">
+            <div class="stat-number">
+                <span data-count="15">0</span><span class="stat-suffix">+</span>
             </div>
-            <nav>
-                <a href="#products">Προϊόντα</a>
-                <a href="#why-us">Γιατί Εμείς</a>
-                <a href="#contact">Επικοινωνία</a>
-                <button class="contact-btn" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
-            </nav>
+            <div class="stat-label">Χρόνια Εμπειρίας</div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Ποιοτικά Δομικά Μηχανήματα & <span class="hero-highlight">Εξοπλισμός</span></h1>
-            <p>Η οικογενειακή μας επιχείρηση σας προσφέρει αξιόπιστες λύσεις για όλες τις ανάγκες σας στον κατασκευαστικό χώρο</p>
-            <button class="cta-button" onclick="scrollToContact()">Δείτε τα Προϊόντα μας</button>
+        <div class="stat-item">
+            <div class="stat-number">
+                <span data-count="500">0</span><span class="stat-suffix">+</span>
+            </div>
+            <div class="stat-label">Μηχανήματα Πωληθέντα</div>
         </div>
-    </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <h2 class="section-title">Τα Προϊόντα <span>μας</span></h2>
-        
+        <div class="stat-item">
+            <div class="stat-number">
+                <span data-count="3">0</span>
+            </div>
+            <div class="stat-label">Αποκλειστικές Αντιπροσωπείες</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">
+                <span data-count="100">0</span><span class="stat-suffix">%</span>
+            </div>
+            <div class="stat-label">Πανελλαδική Κάλυψη</div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================================================================
+     PRODUCTS
+================================================================= -->
+<section class="products-section" id="products">
+    <div class="container">
+
+        <div class="section-header reveal">
+            <span class="section-label">Αντιπροσωπείες & Εξοπλισμός</span>
+            <h2 class="section-title">Τα Προϊόντα <em>μας</em></h2>
+        </div>
+
         <div class="products-grid">
-            <!-- ATLAS -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/0-sR3sqj.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+
+            <!-- Card 1: ATLAS -->
+            <div class="product-card reveal reveal-delay-1">
+                <div class="product-img-wrap">
+                    <span class="product-badge">ATLAS</span>
+                    <img
+                        src="images/0-sR3sqj.jpg"
+                        alt="ATLAS Εκσκαφείς και Δομικά Μηχανήματα"
+                        width="400" height="210"
+                    >
                 </div>
-                <div class="product-content">
-                    <h3 class="product-title">ATLAS Δομικά Μηχανήματα</h3>
-                    <p class="product-description">Αντιπροσωπεία των διακεκριμένων δομικών μηχανημάτων ATLAS</p>
+                <div class="product-body">
+                    <h3 class="product-name">ATLAS Δομικά Μηχανήματα</h3>
+                    <p class="product-desc">Αντιπροσωπεία δομικών μηχανημάτων ATLAS υψηλής ποιότητας</p>
                     <ul class="product-features">
                         <li>Εκσκαφείς και εκσκαφείς τροχών</li>
                         <li>Δομικοί εξοπλισμοί υψηλής ποιότητας</li>
                         <li>Αξιόπιστη τεχνική υποστήριξη</li>
                         <li>Ανταγωνιστικές τιμές</li>
                     </ul>
-                    <a href="#contact" class="product-link">Ζητήστε Πληροφορίες →</a>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link">
+                            Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- GUMA Tech -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/UKq4RQS2.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <!-- Card 2: GUMA Tech -->
+            <div class="product-card reveal reveal-delay-2">
+                <div class="product-img-wrap">
+                    <span class="product-badge">GUMA</span>
+                    <img
+                        src="images/UKq4RQS2.jpg"
+                        alt="GUMA Tech Ελαστικές και Μεταλλικές Ερπύστριες"
+                        width="400" height="210"
+                        loading="lazy"
+                    >
                 </div>
-                <div class="product-content">
-                    <h3 class="product-title">GUMA Tech Ερπύστριες</h3>
-                    <p class="product-description">Ελαστικές και μεταλλικές ερπύστριες υψηλής αντοχής</p>
+                <div class="product-body">
+                    <h3 class="product-name">GUMA Tech Ερπύστριες</h3>
+                    <p class="product-desc">Ελαστικές και μεταλλικές ερπύστριες υψηλής αντοχής</p>
                     <ul class="product-features">
                         <li>Ελαστικές ερπύστριες</li>
                         <li>Μεταλλικές ερπύστριες</li>
                         <li>Μεγάλη διάρκεια ζωής</li>
                         <li>Εναλλακτικά κομμάτια έτοιμα</li>
                     </ul>
-                    <a href="#contact" class="product-link">Ζητήστε Πληροφορίες →</a>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link">
+                            Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Ανταλλακτικά -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/4OYj3QuE.jpg" alt="Ανταλλατικα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <!-- Card 3: Spare Parts -->
+            <div class="product-card reveal reveal-delay-3">
+                <div class="product-img-wrap">
+                    <span class="product-badge">PARTS</span>
+                    <img
+                        src="images/4OYj3QuE.jpg"
+                        alt="Ανταλλακτικά Ράουλα Σπρόκετ"
+                        width="400" height="210"
+                        loading="lazy"
+                    >
                 </div>
-                <div class="product-content">
-                    <h3 class="product-title">Ανταλλακτικά & Εξαρτήματα</h3>
-                    <p class="product-description">Ολοκληρωμένη γκάμα ανταλλακτικών για όλα τα μηχανήματα</p>
+                <div class="product-body">
+                    <h3 class="product-name">Ανταλλακτικά & Εξαρτήματα</h3>
+                    <p class="product-desc">Ολοκληρωμένη γκάμα ανταλλακτικών για όλα τα μηχανήματα</p>
                     <ul class="product-features">
                         <li>Ράουλα (κυλίνδρους)</li>
                         <li>Σπρόκετ</li>
-                        <li>Άλλα εξαρτήματα</li>
+                        <li>Λοιπά εξαρτήματα</li>
                         <li>Αυθεντικά ανταλλακτικά</li>
                     </ul>
-                    <a href="#contact" class="product-link">Ζητήστε Πληροφορίες →</a>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link">
+                            Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- JAB Hydraulic -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/rock-breaker-500x500.jpg" alt="JAB Υδραυλικά Σφυριά" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <!-- Card 4: JAB -->
+            <div class="product-card reveal reveal-delay-1">
+                <div class="product-img-wrap">
+                    <span class="product-badge">JAB</span>
+                    <img
+                        src="images/rock-breaker-500x500.jpg"
+                        alt="JAB Υδραυλικά Σφυριά Rock Breaker"
+                        width="400" height="210"
+                        loading="lazy"
+                    >
                 </div>
-                <div class="product-content">
-                    <h3 class="product-title">JAB Υδραυλικά Σφυριά</h3>
-                    <p class="product-description">Υδραυλικά σφυριά κορεάτικης ποιότητας JAB</p>
+                <div class="product-body">
+                    <h3 class="product-name">JAB Υδραυλικά Σφυριά</h3>
+                    <p class="product-desc">Υδραυλικά σφυριά κορεάτικης ποιότητας — ισχύς και αξιοπιστία</p>
                     <ul class="product-features">
                         <li>Υψηλής δύναμης σφυριά</li>
                         <li>Αξιόπιστη κορεάτικη τεχνολογία</li>
                         <li>Ιδανικά για εξόρυξη</li>
                         <li>Εξαιρετική απόδοση</li>
                     </ul>
-                    <a href="#contact" class="product-link">Ζητήστε Πληροφορίες →</a>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link">
+                            Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Φορτηγά -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="images/s_MFDpPn.jpg" alt="Φορτηγα" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <!-- Card 5: Trucks -->
+            <div class="product-card reveal reveal-delay-2">
+                <div class="product-img-wrap">
+                    <span class="product-badge">ΟΧΗΜΑΤΑ</span>
+                    <img
+                        src="images/s_MFDpPn.jpg"
+                        alt="Φορτηγά και Τρακτέρ"
+                        width="400" height="210"
+                        loading="lazy"
+                    >
                 </div>
-                <div class="product-content">
-                    <h3 class="product-title">Φορτηγά & Τρακτορες</h3>
-                    <p class="product-description">Ποιοτικά φορτηγά και τρακτορες για όλες τις εργασίες</p>
+                <div class="product-body">
+                    <h3 class="product-name">Φορτηγά & Τρακτόρες</h3>
+                    <p class="product-desc">Ποιοτικά φορτηγά και τρακτόρες για κάθε εργασία</p>
                     <ul class="product-features">
                         <li>Διάφορα μοντέλα φορτηγών</li>
                         <li>Τρακτέρες όλων των κλάσεων</li>
-                        <li>Εξαιρετικές συνθήκες χρηματοδότησης</li>
-                        <li>Μετά τις πωλήσεις υπηρεσίες</li>
+                        <li>Ευνοϊκές συνθήκες χρηματοδότησης</li>
+                        <li>After-sales υποστήριξη</li>
                     </ul>
-                    <a href="#contact" class="product-link">Ζητήστε Πληροφορίες →</a>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link">
+                            Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Why Choose Us -->
-    <section class="why-us" id="why-us">
-        <div class="why-us-container">
-            <h2 class="section-title">Γιατί να Εμπιστευθείτε <span>Εμάς</span></h2>
-            
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">✓</div>
-                    <h3 class="feature-title">Εξαιρετική Ποιότητα</h3>
-                    <p class="feature-text">Πωλούμε μόνο προϊόντα από αξιόπιστους κατασκευαστές με πλήρες εγγύηση</p>
-                </div>
 
-                <div class="feature">
-                    <div class="feature-icon">🛠️</div>
-                    <h3 class="feature-title">Τεχνική Υποστήριξη</h3>
-                    <p class="feature-text">Αξιόπιστη υποστήριξη και συντήρηση για όλα τα προϊόντα μας</p>
-                </div>
+<!-- ================================================================
+     WHY CHOOSE US — dark grid section
+================================================================= -->
+<section class="why-section" id="why-us">
+    <div class="container">
 
-                <div class="feature">
-                    <div class="feature-icon">📦</div>
-                    <h3 class="feature-title">Ολοκληρωμένη Γκάμα</h3>
-                    <p class="feature-text">Βρείτε ό,τι χρειάζεστε: μηχανήματα, ανταλλακτικά, εξαρτήματα</p>
-                </div>
+        <div class="section-header reveal">
+            <span class="section-label">Τα Πλεονεκτήματά μας</span>
+            <h2 class="section-title" style="color: var(--white)">
+                Γιατί να Εμπιστευθείτε <em>Εμάς</em>
+            </h2>
+        </div>
 
-                <div class="feature">
-                    <div class="feature-icon">⏱️</div>
-                    <h3 class="feature-title">Γρήγορη Υπηρεσία</h3>
-                    <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα</p>
-                </div>
+        <div class="features-grid">
 
-                <div class="feature">
-                    <div class="feature-icon">💼</div>
-                    <h3 class="feature-title">Επαγγελματική Εμπειρία</h3>
-                    <p class="feature-text">Μια οικογενειακή επιχείρηση με χρόνια εμπειρίας στον κλάδο</p>
-                </div>
-
-                <div class="feature">
-                    <div class="feature-icon">💰</div>
-                    <h3 class="feature-title">Ανταγωνιστικές Τιμές</h3>
-                    <p class="feature-text">Καλή αναλογία ποιότητας και τιμής για όλα τα προϊόντα</p>
-                </div>
+            <div class="feature-item reveal reveal-delay-1">
+                <div class="feature-icon-wrap">🏆</div>
+                <h3 class="feature-title">Εξαιρετική Ποιότητα</h3>
+                <p class="feature-text">Εργαζόμαστε αποκλειστικά με αξιόπιστους κατασκευαστές — κάθε προϊόν συνοδεύεται από πλήρη εγγύηση.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Brands Section -->
-    <section class="brands" id="brands">
-        <div class="brands-container">
-            <div class="brands-grid">
-                <div class="brand-logo">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f27f8c3f-2bc9-4151-ae24-690582aed24d" alt="ATLAS">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e7bb548c-5991-483d-a54e-d1ef5b9a50d0" alt="GUMA Tech">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ecb7f6e9-980b-41dd-a6af-741de6895bac" alt="JAB">
-                </div>
+            <div class="feature-item reveal reveal-delay-2">
+                <div class="feature-icon-wrap">🛠️</div>
+                <h3 class="feature-title">Τεχνική Υποστήριξη</h3>
+                <p class="feature-text">Άμεση τεχνική βοήθεια και συντήρηση για όλα τα μηχανήματα που αντιπροσωπεύουμε.</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Επικοινωνήστε <span>Μαζί μας</span></h2>
-        
-        <div class="contact-content">
-            <div class="contact-info">
+            <div class="feature-item reveal reveal-delay-3">
+                <div class="feature-icon-wrap">📦</div>
+                <h3 class="feature-title">Ολοκληρωμένη Γκάμα</h3>
+                <p class="feature-text">Από μηχανήματα έως ανταλλακτικά και εξαρτήματα — βρείτε τα πάντα σε ένα μέρος.</p>
+            </div>
+
+            <div class="feature-item reveal reveal-delay-1">
+                <div class="feature-icon-wrap">⚡</div>
+                <h3 class="feature-title">Γρήγορη Εξυπηρέτηση</h3>
+                <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα — σεβόμαστε το χρόνο σας.</p>
+            </div>
+
+            <div class="feature-item reveal reveal-delay-2">
+                <div class="feature-icon-wrap">💼</div>
+                <h3 class="feature-title">Οικογενειακή Εμπειρία</h3>
+                <p class="feature-text">Χρόνια εμπειρίας στον κλάδο, με προσωπική προσέγγιση σε κάθε συνεργασία.</p>
+            </div>
+
+            <div class="feature-item reveal reveal-delay-3">
+                <div class="feature-icon-wrap">💰</div>
+                <h3 class="feature-title">Ανταγωνιστικές Τιμές</h3>
+                <p class="feature-text">Βέλτιστη αναλογία ποιότητας / τιμής — επενδύετε σωστά για μακροπρόθεσμη αξία.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     BRANDS — off-white strip
+================================================================= -->
+<section class="brands-section" id="brands">
+    <div class="container">
+        <div class="brands-intro reveal">
+            <span class="section-label">Επίσημες Αντιπροσωπείες</span>
+            <h2 class="section-title">Οι <em>Συνεργάτες μας</em></h2>
+        </div>
+
+        <div class="brands-grid">
+
+            <div class="brand-tile reveal reveal-delay-1">
+                <img
+                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f27f8c3f-2bc9-4151-ae24-690582aed24d"
+                    alt="ATLAS Μηχανήματα"
+                    width="200" height="52"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-2">
+                <img
+                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e7bb548c-5991-483d-a54e-d1ef5b9a50d0"
+                    alt="GUMA Tech"
+                    width="200" height="52"
+                    loading="lazy"
+                >
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-3">
+                <img
+                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ecb7f6e9-980b-41dd-a6af-741de6895bac"
+                    alt="JAB Hydraulic"
+                    width="200" height="52"
+                    loading="lazy"
+                >
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     CONTACT
+================================================================= -->
+<section class="contact-section" id="contact">
+    <div class="container">
+
+        <div class="section-header reveal" style="margin-bottom: 56px;">
+            <span class="section-label">Μιλήστε μαζί μας</span>
+            <h2 class="section-title">Επικοινωνήστε <em>Μαζί μας</em></h2>
+        </div>
+
+        <div class="contact-grid">
+
+            <!-- Left: info + map -->
+            <div class="contact-info-panel reveal">
                 <h3>Πληροφορίες Επικοινωνίας</h3>
-                
-                <div class="contact-item">
-                    <div class="contact-item-label">Τηλέφωνο</div>
-                    <div class="contact-item-value">
+
+                <div class="info-block">
+                    <span class="info-label">Τηλέφωνο</span>
+                    <div class="info-value">
                         <a href="tel:+306944449610">+30 694 444 9610</a><br>
                         <a href="tel:+306945667853">+30 694 566 7853</a>
                     </div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="contact-item-label">Email</div>
-                    <div class="contact-item-value">
+                <div class="info-block">
+                    <span class="info-label">Άμεση Επικοινωνία</span>
+                    <div class="quick-btns">
+                        <a href="https://wa.me/306944449610" class="qbtn qbtn-whatsapp" target="_blank" rel="noopener">
+                            💬 WhatsApp
+                        </a>
+                        <a href="viber://chat?number=+306944449610" class="qbtn qbtn-viber">
+                            📲 Viber
+                        </a>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <span class="info-label">Email</span>
+                    <div class="info-value">
                         <a href="mailto:balatzis@otenet.gr">balatzis@otenet.gr</a><br>
                         <a href="mailto:vbalatzis@icloud.com">vbalatzis@icloud.com</a>
                     </div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="contact-item-label">Διεύθυνση</div>
-                    <div class="contact-item-value">
-                        1ο χλμ. Ε.Ο. Κατερινης - Λαρισας
+                <div class="info-block">
+                    <span class="info-label">Διεύθυνση</span>
+                    <div class="info-value">
+                        1ο χλμ. Ε.Ο. Κατερίνης – Λάρισας<br>
+                        Κατερίνη, 601 00
                     </div>
                 </div>
 
-                <div class="contact-item">
-                    <div class="contact-item-label">Ώρες Λειτουργίας</div>
-                    <div class="contact-item-value">
-                        Δευτέρα - Παρασκευή: 8:00 πμ - 6:00 μμ<br>
-                        Σάββατο: 9:00 πμ - 3:00 μμ<br>
+                <div class="info-block">
+                    <span class="info-label">Ώρες Λειτουργίας</span>
+                    <div class="info-value">
+                        Δευτέρα – Παρασκευή: 8:00 – 18:00<br>
+                        Σάββατο: 9:00 – 15:00<br>
                         Κυριακή: Κλειστά
                     </div>
                 </div>
+
+                <!-- Map
+                     ➡️  Replace the src with your real Google Maps embed URL.
+                     Go to maps.google.com → search your address →
+                     Share → Embed a map → copy the iframe src.
+                -->
+                <div class="map-embed">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d22.4992!3d40.2641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDE1JzUwLjgiTiAyMsKwMjknNTcuMSJF!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr"
+                        title="Τοποθεσία ATLAS Δομικά Μηχανήματα, Κατερίνη"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                </div>
+
             </div>
 
-            <div>
-                <div style="margin-bottom: 30px;">
-                    <h3 style="font-size: 22px; font-weight: 700; color: var(--color-text); margin-bottom: 15px;">Η Τοποθεσία μας</h3>
-                    <iframe width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2949.8242456765127!2d22.527733776646006!3d40.26247157124627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14a2e8e8e8e8e8ed%3A0x0!2zNDDCsDE1JzQ0LjkiTiAyMsKwMzEnNDAuNCJF!5e0!3m2!1sel!2sgr!4v1733309400000"></iframe>
-                </div>
-                <h3 style="font-size: 22px; font-weight: 700; color: var(--color-text); margin-bottom: 20px;">Στείλτε μας Ένα Μήνυμα</h3>
-                <form class="contact-form" onsubmit="handleFormSubmit(event)">
-                    <div class="form-group">
-                        <label for="name">Όνομα</label>
-                        <input type="text" id="name" name="name" placeholder="Το όνομά σας" required>
+            <!-- Right: form -->
+            <div class="contact-form-panel reveal reveal-delay-2">
+                <h3>Στείλτε μας Μήνυμα</h3>
+
+                <!--
+                    ➡️  To enable email delivery, sign up at https://formspree.io (free).
+                        Then in main.js replace 'YOUR_FORM_ID' with your actual form ID.
+                        Until configured, the JS fallback opens the user's email client.
+                -->
+                <form class="contact-form" id="contact-form" novalidate>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Όνομα <span class="req">*</span></label>
+                            <input
+                                type="text" id="name" name="name"
+                                placeholder="Το όνομά σας"
+                                required autocomplete="name"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <span class="req">*</span></label>
+                            <input
+                                type="email" id="email" name="email"
+                                placeholder="Το email σας"
+                                required autocomplete="email"
+                            >
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Τηλέφωνο</label>
+                            <input
+                                type="tel" id="phone" name="phone"
+                                placeholder="π.χ. 694 444 9610"
+                                autocomplete="tel"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Θέμα</label>
+                            <input
+                                type="text" id="subject" name="subject"
+                                placeholder="π.χ. Πληροφορίες για εκσκαφέα"
+                            >
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Το email σας" required>
+                        <label for="message">Μήνυμα <span class="req">*</span></label>
+                        <textarea
+                            id="message" name="message"
+                            placeholder="Περιγράψτε τις ανάγκες σας — μοντέλο, χρήση, ποσότητα…"
+                            required
+                        ></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="phone">Τηλέφωνο</label>
-                        <input type="tel" id="phone" name="phone" placeholder="Ο αριθμός σας">
-                    </div>
+                    <div class="form-feedback" id="form-feedback" role="alert" aria-live="polite"></div>
 
-                    <div class="form-group">
-                        <label for="message">Μήνυμα</label>
-                        <textarea id="message" name="message" placeholder="Το μήνυμά σας..." required></textarea>
-                    </div>
+                    <button type="submit" class="form-submit">
+                        Αποστολή Μηνύματος →
+                    </button>
 
-                    <button type="submit" class="form-submit">Αποστολή Μηνύματος</button>
                 </form>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#products">Προϊόντα</a>
-                <a href="#why-us">Γιατί Εμείς</a>
-                <a href="#contact">Επικοινωνία</a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================================
+     FOOTER — dark with sitemap columns
+================================================================= -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+
+            <!-- Brand column -->
+            <div class="footer-brand">
+                <span class="footer-logo">ATLAS</span>
+                <span class="footer-logo-sub">Δομικά Μηχανήματα</span>
+                <div class="footer-accent"></div>
+                <p class="footer-brand-text">
+                    Οικογενειακή επιχείρηση με εμπειρία στον κλάδο των δομικών μηχανημάτων. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB στην Ελλάδα.
+                </p>
+                <div class="footer-contact-quick">
+                    <a href="tel:+306944449610">📞 694 444 9610</a>
+                    <a href="tel:+306945667853">📞 694 566 7853</a>
+                    <a href="mailto:balatzis@otenet.gr">✉ balatzis@otenet.gr</a>
+                </div>
+            </div>
+
+            <!-- Column: Products -->
+            <div class="footer-col">
+                <h4>Προϊόντα</h4>
+                <ul>
+                    <li><a href="#products">ATLAS Μηχανήματα</a></li>
+                    <li><a href="#products">GUMA Tech Ερπύστριες</a></li>
+                    <li><a href="#products">JAB Υδραυλικά Σφυριά</a></li>
+                    <li><a href="#products">Ανταλλακτικά & Εξαρτήματα</a></li>
+                    <li><a href="#products">Φορτηγά & Τρακτόρες</a></li>
+                </ul>
+            </div>
+
+            <!-- Column: Company -->
+            <div class="footer-col">
+                <h4>Εταιρεία</h4>
+                <ul>
+                    <li><a href="#why-us">Γιατί Εμείς</a></li>
+                    <li><a href="#brands">Συνεργάτες</a></li>
+                    <li><a href="#contact">Επικοινωνία</a></li>
+                    <li><a href="#">Πολιτική Απορρήτου</a></li>
+                </ul>
+            </div>
+
+            <!-- Column: Contact quick -->
+            <div class="footer-col">
+                <h4>Επικοινωνία</h4>
+                <ul>
+                    <li><a href="https://wa.me/306944449610" target="_blank" rel="noopener">💬 WhatsApp</a></li>
+                    <li><a href="viber://chat?number=+306944449610">📲 Viber</a></li>
+                    <li><a href="#contact">📋 Φόρμα Επικοινωνίας</a></li>
+                    <li><a href="#contact">🗺 Βρείτε μας</a></li>
+                </ul>
+                <br>
+                <div style="font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.7;">
+                    Δε–Πα: 8:00 – 18:00<br>
+                    Σάββατο: 9:00 – 15:00<br>
+                    Κυριακή: Κλειστά
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom bar -->
+        <div class="footer-bottom">
+            <span>&copy; 2025 ATLAS Equipment &amp; Supplies. Όλα τα δικαιώματα διατηρούνται.</span>
+            <div class="footer-bottom-links">
                 <a href="#">Πολιτική Απορρήτου</a>
+                <a href="#">Όροι Χρήσης</a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 ATLAS Equipment &amp; Supplies. Όλα τα δικαιώματα διατηρούνται.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
-    <script>
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
 
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const message = document.getElementById('message').value;
-            
-            // Display confirmation
-            alert(`Ευχαριστούμε ${name}! Το μήνυμά σας έχει λήφθει. Θα επικοινωνήσουμε μαζί σας σύντομα.`);
-            
-            // Reset form
-            event.target.reset();
-        }
-    </script>
+<script src="main.js"></script>
 </body>
 </html>
