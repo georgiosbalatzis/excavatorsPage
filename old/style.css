@@ -1,11 +1,9 @@
 /* ============================================================
    ATLAS — Full Redesign
    Aesthetic: Heavy Industry, Refined
-   Fonts: Oswald (display) + Source Sans 3 (body)
+   Fonts: Oswald (display) + Source Sans 3 (body)  — loaded via <link> in HTML
    Palette: #111 base · #E89157 accent · #FFFFFF content
    ============================================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap');
 
 /* ============================================================
    DESIGN TOKENS
@@ -159,6 +157,8 @@ button { font-family: var(--font-body); cursor: pointer; }
     top: 0;
     z-index: 1000;
     box-shadow: 0 1px 0 var(--dark-3), 0 4px 20px rgba(0,0,0,0.4);
+    /* position:sticky already establishes a containing block for absolute children */
+    isolation: isolate;
 }
 
 .header-inner {
@@ -170,6 +170,19 @@ button { font-family: var(--font-body); cursor: pointer; }
     max-width: 1200px;
     margin: 0 auto;
     gap: 32px;
+}
+
+/* Scroll progress bar — sits at very bottom of the sticky header */
+.scroll-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--orange-dark), var(--orange));
+    transition: width 0.1s linear;
+    pointer-events: none;
+    z-index: 10;
 }
 
 /* Logo */
@@ -407,14 +420,27 @@ button { font-family: var(--font-body); cursor: pointer; }
     overflow: hidden;
 }
 
-/* Background image layer */
+/* Background image layer — increased to 0.32 for visible impact */
 .hero-bg {
     position: absolute;
     inset: 0;
     background-image: url(images/BG1.webp);
     background-size: cover;
     background-position: center;
-    opacity: 0.18;
+    opacity: 0.32;
+}
+
+/* Dark gradient overlay — keeps text readable at higher image opacity */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        rgba(20, 20, 20, 0.88) 0%,
+        rgba(20, 20, 20, 0.65) 50%,
+        rgba(20, 20, 20, 0.30) 100%
+    );
+    pointer-events: none;
 }
 
 /* Diagonal orange slash — the unforgettable element */
@@ -944,6 +970,188 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
+   ABOUT SECTION — "Ποιοι Είμαστε"
+   ============================================================ */
+.about-section {
+    background: var(--dark);
+    overflow: hidden;
+}
+
+.about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+}
+
+/* Image panel — left half */
+.about-img-panel {
+    position: relative;
+    background: var(--dark-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 400px;
+}
+
+/* Placeholder until real photo is added */
+.about-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+    padding: 40px;
+}
+
+.about-img-icon {
+    font-size: 72px;
+    opacity: 0.5;
+}
+
+.about-img-caption {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+/* Orange badge overlapping the two panels */
+.about-img-badge {
+    position: absolute;
+    bottom: 32px;
+    right: -1px;
+    background: var(--orange);
+    color: var(--white);
+    padding: 18px 24px;
+    text-align: center;
+    line-height: 1.1;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.about-img-badge-num {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    display: block;
+}
+
+.about-img-badge-num sup {
+    font-size: 0.55em;
+    vertical-align: super;
+}
+
+.about-img-badge-txt {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.88;
+}
+
+/* Copy panel — right half */
+.about-copy {
+    padding: 72px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+}
+
+/* Vertical orange left border on copy panel */
+.about-copy::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--orange), transparent);
+}
+
+.about-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+}
+
+.about-title em {
+    font-style: normal;
+    color: var(--orange);
+}
+
+.about-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.about-points {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 24px 0 32px;
+}
+
+.about-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.5;
+}
+
+.about-point-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--orange-glow);
+    border: 1px solid rgba(232,145,87,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--orange);
+    font-weight: 700;
+    margin-top: 1px;
+}
+
+.about-cta {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    background: none;
+    border: 1.5px solid var(--orange);
+    color: var(--orange);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.about-cta:hover {
+    background: var(--orange);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(232,145,87,0.3);
+}
+
+/* ============================================================
    BRANDS SECTION
    ============================================================ */
 .brands-section {
@@ -1133,7 +1341,8 @@ button { font-family: var(--font-body); cursor: pointer; }
 .form-group label .req { color: var(--orange); }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     padding: 13px 16px;
     border: 1.5px solid var(--light-gray);
     border-radius: var(--radius-sm);
@@ -1144,8 +1353,22 @@ button { font-family: var(--font-body); cursor: pointer; }
     transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
+.form-group select {
+    /* Custom arrow — removes browser default */
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-group select:invalid { color: var(--mid-gray); }
+
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--orange);
     background: var(--white);
@@ -1345,271 +1568,68 @@ button { font-family: var(--font-body); cursor: pointer; }
 .footer-bottom-links a:hover { color: var(--orange); }
 
 /* ============================================================
-   SCROLL PROGRESS BAR — thin orange line top of header
+   FLOATING MOBILE CONTACT BAR
+   Appears after user scrolls past the hero on mobile.
    ============================================================ */
-.scroll-progress {
+.mob-contact-bar {
+    display: none; /* shown only on mobile via media query */
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    height: 3px;
-    width: 0%;
-    background: linear-gradient(90deg, var(--orange-dark), var(--orange), #f0b07a);
-    z-index: 2000;
-    transition: width 0.08s linear;
-    border-radius: 0 2px 2px 0;
-    box-shadow: 0 0 8px rgba(232, 145, 87, 0.6);
-    pointer-events: none;
-}
-
-/* ============================================================
-   ABOUT / WHO WE ARE — dark bg, photo left + text right
-   ============================================================ */
-.about-section {
+    right: 0;
+    z-index: 900;
     background: var(--dark);
-    padding: 100px 0;
-    position: relative;
-    overflow: hidden;
+    border-top: 2px solid var(--orange);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.35);
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
 }
 
-/* Subtle grid texture (matches why-section) */
-.about-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
+.mob-contact-bar.visible {
+    transform: translateY(0);
 }
 
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-}
-
-/* Photo side */
-.about-visual {
-    position: relative;
-}
-
-.about-img-frame {
-    position: relative;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    background: var(--dark-3);
-}
-
-.about-img-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: brightness(0.88) contrast(1.05);
-    transition: transform 0.6s ease, filter 0.4s ease;
-}
-
-.about-img-frame:hover img {
-    transform: scale(1.03);
-    filter: brightness(0.95) contrast(1.02);
-}
-
-/* Orange corner accent */
-.about-img-frame::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    width: 64px;
-    height: 64px;
-    border-top: 3px solid var(--orange);
-    border-left: 3px solid var(--orange);
-    border-radius: var(--radius-sm) 0 0 0;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.about-img-frame::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    right: -4px;
-    width: 64px;
-    height: 64px;
-    border-bottom: 3px solid var(--orange);
-    border-right: 3px solid var(--orange);
-    border-radius: 0 0 var(--radius-sm) 0;
-    z-index: 2;
-    pointer-events: none;
-}
-
-/* Floating year badge */
-.about-year-badge {
-    position: absolute;
-    bottom: -20px;
-    left: -20px;
-    background: var(--orange);
-    color: var(--white);
-    padding: 18px 22px;
-    border-radius: var(--radius-md);
-    box-shadow: 0 8px 28px rgba(232,145,87,0.35);
-    z-index: 3;
-    text-align: center;
-    line-height: 1.1;
-}
-
-.about-year-badge .year-num {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 700;
-    display: block;
-    letter-spacing: -1px;
-}
-
-.about-year-badge .year-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    opacity: 0.88;
-    display: block;
-    margin-top: 2px;
-}
-
-/* Text side */
-.about-content {
-    padding-left: 8px;
-}
-
-.about-content .section-label {
-    margin-bottom: 14px;
-}
-
-.about-content .section-title {
-    color: var(--white);
-    margin-bottom: 24px;
-}
-
-.about-content .section-title em {
-    color: var(--orange);
-}
-
-.about-lead {
-    font-size: 17px;
-    color: rgba(255,255,255,0.75);
-    line-height: 1.8;
-    margin-bottom: 20px;
-    font-weight: 400;
-}
-
-.about-body {
-    font-size: 14px;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.85;
-    margin-bottom: 36px;
-}
-
-/* Value pills row */
-.about-pills {
+.mob-bar-inner {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 36px;
+    align-items: stretch;
+    height: 56px;
 }
 
-.about-pill {
-    display: inline-flex;
+.mob-bar-btn {
+    flex: 1;
+    display: flex;
     align-items: center;
-    gap: 7px;
-    background: var(--dark-3);
-    border: 1px solid var(--dark-4);
-    color: rgba(255,255,255,0.65);
-    font-size: 12px;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    padding: 8px 14px;
-    border-radius: 99px;
-    transition: all var(--transition);
-}
-
-.about-pill:hover {
-    border-color: var(--orange);
-    color: var(--orange);
-    background: var(--orange-faint);
-}
-
-.about-pill .dot {
-    width: 6px;
-    height: 6px;
-    background: var(--orange);
-    border-radius: 50%;
-    flex-shrink: 0;
-}
-
-.about-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--orange);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    text-decoration: none;
     border: none;
-    background: none;
     cursor: pointer;
-    padding: 0;
-    transition: gap var(--transition), color var(--transition);
-    font-family: var(--font-body);
+    transition: opacity var(--transition);
 }
 
-.about-cta:hover {
-    color: #f0a070;
-    gap: 16px;
+.mob-bar-btn:hover { opacity: 0.88; }
+
+.mob-bar-btn:not(:last-child) {
+    border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-/* About responsive */
-@media (max-width: 900px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 56px;
-    }
-
-    .about-year-badge {
-        bottom: -16px;
-        left: 16px;
-    }
-
-    .about-content {
-        padding-left: 0;
-        padding-top: 24px;
-    }
+.mob-bar-call {
+    background: var(--orange);
+    color: var(--white);
 }
 
-/* ============================================================
-   S3 BRAND IMAGE FALLBACK — shown when img fails to load
-   ============================================================ */
-.brand-tile .brand-fallback {
-    display: none;
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--mid-gray);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+.mob-bar-whatsapp {
+    background: #25D366;
+    color: var(--white);
 }
 
-/* JS adds .img-error to the tile when image fails */
-.brand-tile.img-error img {
-    display: none;
-}
-
-.brand-tile.img-error .brand-fallback {
-    display: block;
+.mob-bar-viber {
+    background: #7360F2;
+    color: var(--white);
 }
 
 /* ============================================================
@@ -1644,6 +1664,10 @@ button { font-family: var(--font-body); cursor: pointer; }
     .products-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
+    .about-inner { grid-template-columns: 1fr; }
+    .about-img-panel { min-height: 280px; }
+    .about-copy { padding: 48px 40px; }
+    .about-copy::before { display: none; }
 }
 
 @media (max-width: 900px) {
@@ -1657,6 +1681,12 @@ button { font-family: var(--font-body); cursor: pointer; }
     .header-actions { display: none; }
     .hamburger { display: flex; }
 
+    /* Floating bar only shows on mobile */
+    .mob-contact-bar { display: block; }
+
+    /* Add padding to footer so bar doesn't overlap */
+    .site-footer { padding-bottom: 56px; }
+
     .hero { min-height: 480px; }
     .hero h1 { font-size: 38px; }
     .hero-sub { font-size: 15px; }
@@ -1669,6 +1699,8 @@ button { font-family: var(--font-body); cursor: pointer; }
         grid-template-columns: 1fr;
         gap: 32px;
     }
+
+    .about-copy { padding: 40px 24px; }
 
     .form-row { grid-template-columns: 1fr; }
     .form-submit { align-self: stretch; justify-content: center; }

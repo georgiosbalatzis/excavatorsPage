@@ -12,14 +12,14 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initScrollProgress();
     initHamburger();
     initSmoothScroll();
     initScrollReveal();
     initStatCounters();
     initActiveNav();
     initContactForm();
-    initBrandFallbacks();
+    initMobileBar();
+    initScrollProgress();
 });
 
 /* ============================================================
@@ -171,10 +171,11 @@ function initContactForm() {
         const name    = document.getElementById('name').value.trim();
         const email   = document.getElementById('email').value.trim();
         const phone   = document.getElementById('phone').value.trim();
+        const subject = document.getElementById('subject')?.value || '';
         const message = document.getElementById('message').value.trim();
 
-        if (!name || !email || !message) {
-            show('error', 'Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία (*).');
+        if (!name || !email || !subject || !message) {
+            show('error', 'Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία (*) και επιλέξτε κατηγορία.');
             return;
         }
 
@@ -202,9 +203,9 @@ function initContactForm() {
 
         } catch {
             // Formspree not configured yet — open mail client as fallback
-            const sub  = encodeURIComponent(`Νέο μήνυμα από ${name}`);
+            const sub  = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
             const body = encodeURIComponent(
-                `Όνομα: ${name}\nEmail: ${email}\nΤηλέφωνο: ${phone || '—'}\n\nΜήνυμα:\n${message}`
+                `Όνομα: ${name}\nEmail: ${email}\nΤηλέφωνο: ${phone || '—'}\nΚατηγορία: ${subject}\n\nΜήνυμα:\n${message}`
             );
             window.location.href = `mailto:balatzis@otenet.gr?subject=${sub}&body=${body}`;
             show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο balatzis@otenet.gr');
@@ -223,6 +224,66 @@ function initContactForm() {
             setTimeout(() => { feedback.className = 'form-feedback'; feedback.textContent = ''; }, 8000);
         }
     }
+    // Pre-fill category select when a product card link is clicked
+    document.querySelectorAll('.product-link[data-subject]').forEach(link => {
+        link.addEventListener('click', () => {
+            const subjectEl = document.getElementById('subject');
+            if (subjectEl) {
+                const val = link.dataset.subject;
+                // Works for both <select> and <input>
+                if (subjectEl.tagName === 'SELECT') {
+                    // Find matching option, fall back to first option
+                    const opt = [...subjectEl.options].find(o => o.value === val);
+                    if (opt) subjectEl.value = val;
+                } else {
+                    subjectEl.value = val;
+                }
+                // Brief highlight to confirm pre-fill
+                subjectEl.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
+                subjectEl.style.borderColor = 'var(--orange)';
+                subjectEl.style.boxShadow   = '0 0 0 3px rgba(232,145,87,0.2)';
+                setTimeout(() => {
+                    subjectEl.style.borderColor = '';
+                    subjectEl.style.boxShadow   = '';
+                }, 1800);
+            }
+        });
+    });
+}
+
+/* ============================================================
+   8. MOBILE FLOATING BAR
+   Shows after user scrolls past the hero section.
+   ============================================================ */
+function initMobileBar() {
+    const bar  = document.getElementById('mob-contact-bar');
+    const hero = document.querySelector('.hero');
+    if (!bar || !hero) return;
+
+    const io = new IntersectionObserver(entries => {
+        // When hero is NOT intersecting (scrolled past), show the bar
+        bar.classList.toggle('visible', !entries[0].isIntersecting);
+    }, { threshold: 0.1 });
+
+    io.observe(hero);
+}
+
+/* ============================================================
+   9. SCROLL PROGRESS BAR
+   ============================================================ */
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    const update = () => {
+        const scrollTop    = window.scrollY;
+        const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+        const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width    = `${Math.min(pct, 100)}%`;
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    update(); // set initial state
 }
 
 /* ============================================================
@@ -234,52 +295,4 @@ function scrollToProducts() {
 
 function scrollToContact() {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-/* ============================================================
-   8. SCROLL PROGRESS BAR
-   Updates a CSS width on the #scroll-progress bar as the
-   user scrolls, giving a visual reading-progress indicator.
-   ============================================================ */
-function initScrollProgress() {
-    const bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-
-    // Use requestAnimationFrame to throttle to display refresh rate
-    let ticking = false;
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                const scrollTop    = window.scrollY;
-                const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
-                const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-                bar.style.width    = `${Math.min(pct, 100)}%`;
-                ticking            = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
-}
-
-/* ============================================================
-   9. S3 BRAND IMAGE FALLBACKS
-   If an external brand logo fails to load (S3 outage, broken URL,
-   etc.) we add .img-error to the tile so CSS hides the <img>
-   and shows the .brand-fallback text span instead.
-   The onerror on the <img> tags in HTML also handles this,
-   but this function adds a belt-and-suspenders ResizeObserver
-   catch for late-loading failures.
-   ============================================================ */
-function initBrandFallbacks() {
-    document.querySelectorAll('.brand-tile img').forEach(img => {
-        // If already broken by the time JS runs (e.g. cached error)
-        if (!img.complete || img.naturalWidth === 0) {
-            img.closest('.brand-tile')?.classList.add('img-error');
-        }
-
-        img.addEventListener('error', () => {
-            img.closest('.brand-tile')?.classList.add('img-error');
-        });
-    });
 }

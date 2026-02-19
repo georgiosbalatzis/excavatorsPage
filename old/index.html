@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ATLAS — Αντιπροσωπεία δομικών μηχανημάτων ATLAS, ερπύστριες GUMA Tech, υδραυλικά σφυριά JAB. 1ο χλμ. Ε.Ο. Κατερίνης - Λάρισας.">
+
+    <!-- Open Graph — controls how link previews appear in WhatsApp, Viber, email, social -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="ATLAS — Δομικά Μηχανήματα & Εξοπλισμός">
+    <meta property="og:description" content="Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB. Εκσκαφείς, ερπύστριες, υδραυλικά σφυριά, ανταλλακτικά. Κατερίνη, Ελλάδα.">
+    <meta property="og:image"       content="images/BG1.webp">
+    <meta property="og:url"         content="https://atlas-equipment.gr">
+    <meta property="og:locale"      content="el_GR">
+
+    <!-- Twitter/X card (also used by some messaging apps) -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="ATLAS — Δομικά Μηχανήματα & Εξοπλισμός">
+    <meta name="twitter:description" content="Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB στην Ελλάδα.">
+    <meta name="twitter:image"       content="images/BG1.webp">
+
+    <!-- Favicon — SVG emoji fallback, works in all modern browsers without a .ico file -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%23E89157'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='sans-serif' font-weight='bold' fill='white'>A</text></svg>">
+
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//wa.me">
+    <link rel="dns-prefetch" href="//agi-prod-file-upload-public-main-use1.s3.amazonaws.com">
+
     <title>ATLAS — Δομικά Μηχανήματα & Εξοπλισμός</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonts loaded via <link> (not @import) for parallel loading — better performance -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- Scroll progress bar — JS sets width as percentage of page scrolled -->
-<div class="scroll-progress" id="scroll-progress" role="presentation" aria-hidden="true"></div>
 
 <!-- ================================================================
      TOP BAR — utility strip (hours + quick contacts)
@@ -35,6 +59,8 @@
      HEADER — dark, sticky, with phone + CTA always visible
 ================================================================= -->
 <header class="site-header" id="site-header">
+    <!-- Scroll progress bar — fills as user scrolls down the page -->
+    <div class="scroll-progress" id="scroll-progress" role="presentation"></div>
     <div class="header-inner">
 
         <!-- Logo -->
@@ -48,7 +74,6 @@
         <nav class="main-nav" aria-label="Κύριο μενού">
             <a href="#products">Προϊόντα</a>
             <a href="#why-us">Γιατί Εμείς</a>
-            <a href="#about">Ποιοι Είμαστε</a>
             <a href="#brands">Συνεργάτες</a>
             <a href="#contact">Επικοινωνία</a>
         </nav>
@@ -79,7 +104,6 @@
         <div class="mobile-nav-phone">📞 694 444 9610 &nbsp;|&nbsp; 694 566 7853</div>
         <a href="#products">Προϊόντα</a>
         <a href="#why-us">Γιατί Εμείς</a>
-        <a href="#about">Ποιοι Είμαστε</a>
         <a href="#brands">Συνεργάτες</a>
         <a href="#contact">Επικοινωνία</a>
         <button class="mob-cta" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
@@ -92,6 +116,7 @@
 ================================================================= -->
 <section class="hero" id="home">
     <div class="hero-bg" role="presentation"></div>
+    <div class="hero-overlay" role="presentation"></div>
     <div class="hero-grid" role="presentation"></div>
     <div class="hero-slash" role="presentation"></div>
 
@@ -193,7 +218,7 @@
                         <li>Ανταγωνιστικές τιμές</li>
                     </ul>
                     <div class="product-footer">
-                        <a href="#contact" class="product-link">
+                        <a href="#contact" class="product-link" data-subject="ATLAS Δομικά Μηχανήματα">
                             Ζητήστε Πληροφορίες
                             <span class="product-link-arrow">→</span>
                         </a>
@@ -222,7 +247,7 @@
                         <li>Εναλλακτικά κομμάτια έτοιμα</li>
                     </ul>
                     <div class="product-footer">
-                        <a href="#contact" class="product-link">
+                        <a href="#contact" class="product-link" data-subject="GUMA Tech Ερπύστριες">
                             Ζητήστε Πληροφορίες
                             <span class="product-link-arrow">→</span>
                         </a>
@@ -251,7 +276,7 @@
                         <li>Αυθεντικά ανταλλακτικά</li>
                     </ul>
                     <div class="product-footer">
-                        <a href="#contact" class="product-link">
+                        <a href="#contact" class="product-link" data-subject="Ανταλλακτικά & Εξαρτήματα">
                             Ζητήστε Πληροφορίες
                             <span class="product-link-arrow">→</span>
                         </a>
@@ -280,7 +305,7 @@
                         <li>Εξαιρετική απόδοση</li>
                     </ul>
                     <div class="product-footer">
-                        <a href="#contact" class="product-link">
+                        <a href="#contact" class="product-link" data-subject="JAB Υδραυλικά Σφυριά">
                             Ζητήστε Πληροφορίες
                             <span class="product-link-arrow">→</span>
                         </a>
@@ -309,7 +334,7 @@
                         <li>After-sales υποστήριξη</li>
                     </ul>
                     <div class="product-footer">
-                        <a href="#contact" class="product-link">
+                        <a href="#contact" class="product-link" data-subject="Φορτηγά & Τρακτόρες">
                             Ζητήστε Πληροφορίες
                             <span class="product-link-arrow">→</span>
                         </a>
@@ -379,6 +404,62 @@
 
 
 <!-- ================================================================
+     ABOUT — "Ποιοι Είμαστε" human element strip
+     Dark background photo left, copy right — builds trust for B2B buyers
+================================================================= -->
+<section class="about-section" id="about">
+    <div class="about-inner">
+
+        <!-- Left: full-bleed image panel -->
+        <div class="about-img-panel" role="img" aria-label="Εγκαταστάσεις ATLAS">
+            <!-- Replace with a real team/workshop photo:
+                 <img src="images/team.jpg" alt="Η ομάδα ATLAS" ...>
+                 Until then, a styled placeholder is shown.
+            -->
+            <div class="about-img-placeholder">
+                <span class="about-img-icon">🏗️</span>
+                <span class="about-img-caption">Οι εγκαταστάσεις μας<br>Κατερίνη, Ε.Ο. Κατερίνης–Λάρισας</span>
+            </div>
+            <div class="about-img-badge">
+                <span class="about-img-badge-num">15<sup>+</sup></span>
+                <span class="about-img-badge-txt">Χρόνια<br>Εμπειρίας</span>
+            </div>
+        </div>
+
+        <!-- Right: copy -->
+        <div class="about-copy">
+            <span class="section-label" style="color: var(--orange);">Η Ιστορία μας</span>
+            <h2 class="about-title">Οικογενειακή Επιχείρηση,<br><em>Επαγγελματική Εμπειρία</em></h2>
+            <p class="about-text">
+                Η εταιρεία μας δραστηριοποιείται στον τομέα των δομικών μηχανημάτων και εξοπλισμού εδώ και περισσότερα από 15 χρόνια. Ξεκινήσαμε ως οικογενειακή επιχείρηση με γνώμονα την ποιότητα και την εξυπηρέτηση, και παραμένουμε πιστοί σε αυτές τις αξίες.
+            </p>
+            <p class="about-text">
+                Σήμερα είμαστε επίσημοι αντιπρόσωποι των ATLAS, GUMA Tech και JAB, εξυπηρετώντας κατασκευαστικές εταιρείες, εκμεταλλεύσεις λατομείων και επαγγελματίες του κλάδου σε όλη την Ελλάδα.
+            </p>
+
+            <div class="about-points">
+                <div class="about-point">
+                    <span class="about-point-icon">✓</span>
+                    <span>Άμεση ανταπόκριση — επικοινωνούμε μαζί σας την ίδια μέρα</span>
+                </div>
+                <div class="about-point">
+                    <span class="about-point-icon">✓</span>
+                    <span>Προσωπική συμβουλή — επιλέγουμε μαζί τη σωστή λύση για κάθε έργο</span>
+                </div>
+                <div class="about-point">
+                    <span class="about-point-icon">✓</span>
+                    <span>After-sales υποστήριξη — δεν εξαφανιζόμαστε μετά την πώληση</span>
+                </div>
+            </div>
+
+            <button class="about-cta" onclick="scrollToContact()">Μιλήστε μαζί μας →</button>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ================================================================
      BRANDS — off-white strip
 ================================================================= -->
 <section class="brands-section" id="brands">
@@ -396,9 +477,9 @@
                     alt="ATLAS Μηχανήματα"
                     width="200" height="52"
                     loading="lazy"
-                    onerror="this.closest('.brand-tile').classList.add('img-error')"
+                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback">ATLAS</span>
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">ATLAS</span>
             </div>
 
             <div class="brand-tile reveal reveal-delay-2">
@@ -407,9 +488,9 @@
                     alt="GUMA Tech"
                     width="200" height="52"
                     loading="lazy"
-                    onerror="this.closest('.brand-tile').classList.add('img-error')"
+                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback">GUMA Tech</span>
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">GUMA Tech</span>
             </div>
 
             <div class="brand-tile reveal reveal-delay-3">
@@ -418,74 +499,9 @@
                     alt="JAB Hydraulic"
                     width="200" height="52"
                     loading="lazy"
-                    onerror="this.closest('.brand-tile').classList.add('img-error')"
+                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback">JAB</span>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-<!-- ================================================================
-     WHO WE ARE — family business, photo + text
-================================================================= -->
-<section class="about-section" id="about">
-    <div class="container">
-        <div class="about-grid">
-
-            <!-- Visual side -->
-            <div class="about-visual reveal">
-                <div class="about-img-frame">
-                    <!--
-                        ➡️  Replace with a real photo: your team, workshop,
-                            or a machine in action at a client site.
-                            Ideal size: 800×600px or wider, landscape.
-                            Until then a placeholder gradient is shown.
-                    -->
-                    <img
-                        src="images/about-team.jpg"
-                        alt="Η ομάδα ATLAS — οικογενειακή επιχείρηση δομικών μηχανημάτων"
-                        width="800" height="600"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1C1C1C 0%, #262626 100%)'; this.parentElement.insertAdjacentHTML('beforeend', '<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:48px;font-weight:700;color:rgba(232,145,87,0.15);letter-spacing:4px;\'>ATLAS</div>')"
-                    >
-                </div>
-
-                <!-- Floating year badge — update the year to match founding year -->
-                <div class="about-year-badge">
-                    <span class="year-num">2008</span>
-                    <span class="year-label">Ιδρύθηκε</span>
-                </div>
-            </div>
-
-            <!-- Content side -->
-            <div class="about-content reveal reveal-delay-2">
-                <span class="section-label">Ποιοι Είμαστε</span>
-                <h2 class="section-title">Οικογενειακή <em>Επιχείρηση</em><br>με Πάθος</h2>
-
-                <p class="about-lead">
-                    Από το 2008, η οικογένεια Μπαλατζή εξυπηρετεί επαγγελματίες του κατασκευαστικού κλάδου σε ολόκληρη την Ελλάδα.
-                </p>
-
-                <p class="about-body">
-                    Ξεκινήσαμε με ένα απλό στόχο: να φέρνουμε αξιόπιστο εξοπλισμό στους ανθρώπους που χτίζουν αυτή τη χώρα. Σήμερα είμαστε επίσημη αντιπροσωπεία τριών διακεκριμένων κατασκευαστών — ATLAS, GUMA Tech και JAB — και υποστηρίζουμε εκατοντάδες επαγγελματίες με μηχανήματα, ανταλλακτικά και τεχνική βοήθεια.
-                    <br><br>
-                    Δεν είμαστε απλώς έμποροι. Γνωρίζουμε τον εξοπλισμό που πουλάμε, έχουμε δει πώς λειτουργεί στο χωράφι, και είμαστε εδώ μετά την αγορά — όποτε μας χρειαστείτε.
-                </p>
-
-                <div class="about-pills">
-                    <span class="about-pill"><span class="dot"></span>ATLAS Εκσκαφείς</span>
-                    <span class="about-pill"><span class="dot"></span>GUMA Tech Ερπύστριες</span>
-                    <span class="about-pill"><span class="dot"></span>JAB Υδραυλικά Σφυριά</span>
-                    <span class="about-pill"><span class="dot"></span>Ανταλλακτικά & Service</span>
-                    <span class="about-pill"><span class="dot"></span>Πανελλαδική Κάλυψη</span>
-                </div>
-
-                <button class="about-cta" onclick="scrollToContact()">
-                    Μιλήστε μαζί μας →
-                </button>
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">JAB Hydraulic</span>
             </div>
 
         </div>
@@ -612,11 +628,16 @@
                             >
                         </div>
                         <div class="form-group">
-                            <label for="subject">Θέμα</label>
-                            <input
-                                type="text" id="subject" name="subject"
-                                placeholder="π.χ. Πληροφορίες για εκσκαφέα"
-                            >
+                            <label for="subject">Ενδιαφέρομαι για <span class="req">*</span></label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Επιλέξτε κατηγορία…</option>
+                                <option value="ATLAS Δομικά Μηχανήματα">🔶 ATLAS Δομικά Μηχανήματα</option>
+                                <option value="GUMA Tech Ερπύστριες">🔶 GUMA Tech Ερπύστριες</option>
+                                <option value="JAB Υδραυλικά Σφυριά">🔶 JAB Υδραυλικά Σφυριά</option>
+                                <option value="Ανταλλακτικά & Εξαρτήματα">🔶 Ανταλλακτικά & Εξαρτήματα</option>
+                                <option value="Φορτηγά & Τρακτόρες">🔶 Φορτηγά & Τρακτόρες</option>
+                                <option value="Γενική Πληροφορία">💬 Γενική Πληροφορία</option>
+                            </select>
                         </div>
                     </div>
 
@@ -681,7 +702,6 @@
             <div class="footer-col">
                 <h4>Εταιρεία</h4>
                 <ul>
-                    <li><a href="#about">Ποιοι Είμαστε</a></li>
                     <li><a href="#why-us">Γιατί Εμείς</a></li>
                     <li><a href="#brands">Συνεργάτες</a></li>
                     <li><a href="#contact">Επικοινωνία</a></li>
@@ -719,6 +739,24 @@
     </div>
 </footer>
 
+
+<!-- ================================================================
+     FLOATING MOBILE CONTACT BAR
+     Appears after scrolling past hero — only on mobile (CSS-controlled)
+================================================================= -->
+<div class="mob-contact-bar" id="mob-contact-bar" role="navigation" aria-label="Γρήγορη επικοινωνία">
+    <div class="mob-bar-inner">
+        <a href="tel:+306944449610" class="mob-bar-btn mob-bar-call">
+            📞 Κλήση
+        </a>
+        <a href="https://wa.me/306944449610" class="mob-bar-btn mob-bar-whatsapp" target="_blank" rel="noopener">
+            💬 WhatsApp
+        </a>
+        <a href="viber://chat?number=+306944449610" class="mob-bar-btn mob-bar-viber">
+            📲 Viber
+        </a>
+    </div>
+</div>
 
 <script src="main.js"></script>
 </body>
