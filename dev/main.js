@@ -3,6 +3,7 @@
  * main.js
  *
  * Features:
+ *  - Hero carousel with 5 slides (auto-advance + manual controls)
  *  - Animated stat counters (triggers on scroll into view)
  *  - Scroll reveal for sections/cards
  *  - Mobile hamburger menu
@@ -12,6 +13,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initHeroCarousel();
     initHamburger();
     initSmoothScroll();
     initScrollReveal();
@@ -21,6 +23,140 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileBar();
     initScrollProgress();
 });
+
+/* ============================================================
+   0. HERO CAROUSEL — 5 slides, auto-advancing, with controls
+   ============================================================ */
+function initHeroCarousel() {
+    const bgSlides   = document.querySelectorAll('.hero-slide');
+    const textSlides = document.querySelectorAll('.hero-text-slide');
+    const dots       = document.querySelectorAll('.hero-dot');
+    const prevBtn    = document.getElementById('hero-prev');
+    const nextBtn    = document.getElementById('hero-next');
+
+    if (!bgSlides.length || !textSlides.length) return;
+
+    const TOTAL    = bgSlides.length;
+    const INTERVAL = 6000;   // ms between auto-advances
+    let current    = 0;
+    let timer      = null;
+    let isTransitioning = false;
+
+    function goTo(index, direction) {
+        if (isTransitioning || index === current) return;
+        isTransitioning = true;
+
+        const prev = current;
+        current = ((index % TOTAL) + TOTAL) % TOTAL;
+
+        // Determine slide direction for text animation
+        const dir = direction || (current > prev ? 'next' : 'prev');
+
+        // --- Background slides: crossfade ---
+        bgSlides.forEach((s, i) => {
+            s.classList.remove('active', 'exiting');
+            if (i === prev) {
+                s.classList.add('exiting');
+            } else if (i === current) {
+                s.classList.add('active');
+            }
+        });
+
+        // --- Text slides: slide + fade ---
+        textSlides.forEach((s, i) => {
+            s.classList.remove('active', 'exit-left', 'exit-right', 'enter-left', 'enter-right');
+
+            if (i === prev) {
+                s.classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
+            } else if (i === current) {
+                // Briefly set enter position, then animate to active
+                s.classList.add(dir === 'next' ? 'enter-right' : 'enter-left');
+                // Force reflow so the enter class applies before switching to active
+                void s.offsetWidth;
+                s.classList.remove('enter-right', 'enter-left');
+                s.classList.add('active');
+            }
+        });
+
+        // --- Dots ---
+        dots.forEach((d, i) => {
+            const isActive = i === current;
+            d.classList.toggle('active', isActive);
+            d.setAttribute('aria-selected', isActive);
+        });
+
+        // Allow next transition after animation completes
+        setTimeout(() => {
+            isTransitioning = false;
+            // Clean up exiting classes
+            bgSlides.forEach(s => s.classList.remove('exiting'));
+        }, 800);
+
+        resetTimer();
+    }
+
+    function next() { goTo(current + 1, 'next'); }
+    function prev() { goTo(current - 1, 'prev'); }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(next, INTERVAL);
+    }
+
+    // Arrow buttons
+    if (nextBtn) nextBtn.addEventListener('click', next);
+    if (prevBtn) prevBtn.addEventListener('click', prev);
+
+    // Dot buttons
+    dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            const idx = parseInt(dot.dataset.goto, 10);
+            const dir = idx > current ? 'next' : 'prev';
+            goTo(idx, dir);
+        });
+    });
+
+    // Keyboard navigation when hero is in view
+    document.addEventListener('keydown', e => {
+        const hero = document.getElementById('home');
+        if (!hero) return;
+        const rect = hero.getBoundingClientRect();
+        // Only respond when hero is mostly visible
+        if (rect.bottom < 100) return;
+
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft')  prev();
+    });
+
+    // Pause auto-advance on hover (desktop)
+    const heroEl = document.getElementById('home');
+    if (heroEl) {
+        heroEl.addEventListener('mouseenter', () => clearInterval(timer));
+        heroEl.addEventListener('mouseleave', resetTimer);
+    }
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchEndX   = 0;
+
+    if (heroEl) {
+        heroEl.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        heroEl.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) next();
+                else prev();
+            }
+        }, { passive: true });
+    }
+
+    // Start auto-advance
+    resetTimer();
+}
 
 /* ============================================================
    1. HAMBURGER MENU
@@ -89,7 +225,6 @@ function initScrollReveal() {
 
 /* ============================================================
    4. ANIMATED STAT COUNTERS
-   Triggers once when the stats band scrolls into view.
    ============================================================ */
 function initStatCounters() {
     const band = document.querySelector('.stats-band');
@@ -112,10 +247,9 @@ function initStatCounters() {
 
 function animateCount(el) {
     const target  = parseInt(el.dataset.count, 10);
-    const dur     = 1800;   // ms
+    const dur     = 1800;
     const start   = performance.now();
 
-    // easeOutExpo for punchy feel
     const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 
     function step(now) {
@@ -169,13 +303,12 @@ function initContactForm() {
         e.preventDefault();
 
         const name    = document.getElementById('name').value.trim();
-        const email   = document.getElementById('email').value.trim();
         const phone   = document.getElementById('phone').value.trim();
         const subject = document.getElementById('subject')?.value || '';
-        const message = document.getElementById('message').value.trim();
+        const message = document.getElementById('message')?.value.trim() || '';
 
-        if (!name || !email || !subject || !message) {
-            show('error', 'Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία (*) και επιλέξτε κατηγορία.');
+        if (!name || !phone || !subject) {
+            show('error', 'Παρακαλώ συμπληρώστε Όνομα, Τηλέφωνο και επιλέξτε κατηγορία.');
             return;
         }
 
@@ -183,10 +316,6 @@ function initContactForm() {
         submitBtn.textContent = 'Αποστολή…';
 
         try {
-            /**
-             * ➡️  Replace 'YOUR_FORM_ID' with your Formspree ID.
-             *     Get one free at https://formspree.io
-             */
             const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
                 method:  'POST',
                 headers: { 'Accept': 'application/json' },
@@ -194,7 +323,7 @@ function initContactForm() {
             });
 
             if (res.ok) {
-                show('success', `✓ Ευχαριστούμε, ${name}! Θα επικοινωνήσουμε σύντομα.`);
+                show('success', `✓ Ευχαριστούμε, ${name}! Θα σας καλέσουμε σύντομα.`);
                 form.reset();
             } else {
                 const data = await res.json().catch(() => ({}));
@@ -202,10 +331,9 @@ function initContactForm() {
             }
 
         } catch {
-            // Formspree not configured yet — open mail client as fallback
             const sub  = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
             const body = encodeURIComponent(
-                `Όνομα: ${name}\nEmail: ${email}\nΤηλέφωνο: ${phone || '—'}\nΚατηγορία: ${subject}\n\nΜήνυμα:\n${message}`
+                `Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subject}${message ? '\n\nΜήνυμα:\n' + message : ''}`
             );
             window.location.href = `mailto:balatzis@otenet.gr?subject=${sub}&body=${body}`;
             show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο balatzis@otenet.gr');
@@ -213,7 +341,7 @@ function initContactForm() {
         }
 
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Αποστολή Μηνύματος';
+        submitBtn.textContent = 'Αποστολή — Θα σας καλέσουμε';
     });
 
     function show(type, msg) {
@@ -224,21 +352,19 @@ function initContactForm() {
             setTimeout(() => { feedback.className = 'form-feedback'; feedback.textContent = ''; }, 8000);
         }
     }
+
     // Pre-fill category select when a product card link is clicked
     document.querySelectorAll('.product-link[data-subject]').forEach(link => {
         link.addEventListener('click', () => {
             const subjectEl = document.getElementById('subject');
             if (subjectEl) {
                 const val = link.dataset.subject;
-                // Works for both <select> and <input>
                 if (subjectEl.tagName === 'SELECT') {
-                    // Find matching option, fall back to first option
                     const opt = [...subjectEl.options].find(o => o.value === val);
                     if (opt) subjectEl.value = val;
                 } else {
                     subjectEl.value = val;
                 }
-                // Brief highlight to confirm pre-fill
                 subjectEl.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
                 subjectEl.style.borderColor = 'var(--orange)';
                 subjectEl.style.boxShadow   = '0 0 0 3px rgba(232,145,87,0.2)';
@@ -253,7 +379,6 @@ function initContactForm() {
 
 /* ============================================================
    8. MOBILE FLOATING BAR
-   Shows after user scrolls past the hero section.
    ============================================================ */
 function initMobileBar() {
     const bar  = document.getElementById('mob-contact-bar');
@@ -261,7 +386,6 @@ function initMobileBar() {
     if (!bar || !hero) return;
 
     const io = new IntersectionObserver(entries => {
-        // When hero is NOT intersecting (scrolled past), show the bar
         bar.classList.toggle('visible', !entries[0].isIntersecting);
     }, { threshold: 0.1 });
 
@@ -269,21 +393,30 @@ function initMobileBar() {
 }
 
 /* ============================================================
-   9. SCROLL PROGRESS BAR
+   9. SCROLL PROGRESS BAR — rAF throttled
    ============================================================ */
 function initScrollProgress() {
     const bar = document.getElementById('scroll-progress');
     if (!bar) return;
 
+    let ticking = false;
+
     const update = () => {
-        const scrollTop    = window.scrollY;
-        const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
-        const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        bar.style.width    = `${Math.min(pct, 100)}%`;
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${Math.min(pct, 100)}%`;
+        ticking = false;
     };
 
-    window.addEventListener('scroll', update, { passive: true });
-    update(); // set initial state
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
+    update();
 }
 
 /* ============================================================

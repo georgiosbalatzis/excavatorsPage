@@ -169,13 +169,13 @@ function initContactForm() {
         e.preventDefault();
 
         const name    = document.getElementById('name').value.trim();
-        const email   = document.getElementById('email').value.trim();
         const phone   = document.getElementById('phone').value.trim();
         const subject = document.getElementById('subject')?.value || '';
-        const message = document.getElementById('message').value.trim();
+        const message = document.getElementById('message')?.value.trim() || '';
 
-        if (!name || !email || !subject || !message) {
-            show('error', 'Παρακαλώ συμπληρώστε όλα τα υποχρεωτικά πεδία (*) και επιλέξτε κατηγορία.');
+        // Required: name, phone, subject. Message is optional.
+        if (!name || !phone || !subject) {
+            show('error', 'Παρακαλώ συμπληρώστε Όνομα, Τηλέφωνο και επιλέξτε κατηγορία.');
             return;
         }
 
@@ -194,7 +194,7 @@ function initContactForm() {
             });
 
             if (res.ok) {
-                show('success', `✓ Ευχαριστούμε, ${name}! Θα επικοινωνήσουμε σύντομα.`);
+                show('success', `✓ Ευχαριστούμε, ${name}! Θα σας καλέσουμε σύντομα.`);
                 form.reset();
             } else {
                 const data = await res.json().catch(() => ({}));
@@ -205,7 +205,7 @@ function initContactForm() {
             // Formspree not configured yet — open mail client as fallback
             const sub  = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
             const body = encodeURIComponent(
-                `Όνομα: ${name}\nEmail: ${email}\nΤηλέφωνο: ${phone || '—'}\nΚατηγορία: ${subject}\n\nΜήνυμα:\n${message}`
+                `Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subject}${message ? '\n\nΜήνυμα:\n' + message : ''}`
             );
             window.location.href = `mailto:balatzis@otenet.gr?subject=${sub}&body=${body}`;
             show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο balatzis@otenet.gr');
@@ -213,7 +213,7 @@ function initContactForm() {
         }
 
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Αποστολή Μηνύματος';
+        submitBtn.textContent = 'Αποστολή — Θα σας καλέσουμε';
     });
 
     function show(type, msg) {
@@ -269,20 +269,29 @@ function initMobileBar() {
 }
 
 /* ============================================================
-   9. SCROLL PROGRESS BAR
+   9. SCROLL PROGRESS BAR — rAF throttled
    ============================================================ */
 function initScrollProgress() {
     const bar = document.getElementById('scroll-progress');
     if (!bar) return;
 
+    let ticking = false;
+
     const update = () => {
-        const scrollTop    = window.scrollY;
-        const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
-        const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        bar.style.width    = `${Math.min(pct, 100)}%`;
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${Math.min(pct, 100)}%`;
+        ticking = false;
     };
 
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+        }
+    }, { passive: true });
+
     update(); // set initial state
 }
 

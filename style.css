@@ -44,17 +44,16 @@
     --transition:    0.25s ease;
     --transition-slow: 0.4s ease;
 
-    /* ── Type scale — modular 1.250 ratio ──────────────────── */
-    --fs-xs:     11px;                       /* labels, badges, eyebrows  */
-    --fs-sm:     13px;                       /* captions, features, small */
-    --fs-base:   15px;                       /* body copy, form fields    */
-    --fs-md:     17px;                       /* hero sub, larger body     */
-    --fs-lg:     21px;                       /* product names             */
-    --fs-xl:     28px;                       /* panel h3 headers          */
-    --fs-2xl:    clamp(26px, 3vw, 38px);    /* about title               */
-    --fs-3xl:    clamp(32px, 4vw, 46px);    /* section titles            */
-    --fs-stat:   clamp(36px, 4vw, 52px);    /* stats band numbers        */
-    --fs-hero:   clamp(42px, 6vw, 78px);    /* hero h1                   */
+    --fs-xs:     11px;
+    --fs-sm:     13px;
+    --fs-base:   15px;
+    --fs-md:     17px;
+    --fs-lg:     21px;
+    --fs-xl:     28px;
+    --fs-2xl:    clamp(26px, 3vw, 38px);
+    --fs-3xl:    clamp(32px, 4vw, 46px);
+    --fs-stat:   clamp(36px, 4vw, 52px);
+    --fs-hero:   clamp(42px, 6vw, 78px);
 }
 
 /* ============================================================
@@ -163,7 +162,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .top-bar-right a:hover { color: var(--orange); }
 
-/* Specific top-bar elements */
 .top-bar-hours {
     display: flex;
     align-items: center;
@@ -175,14 +173,14 @@ button { font-family: var(--font-body); cursor: pointer; }
     align-items: center;
     gap: 6px;
     font-weight: 700;
-    color: #4ade80; /* green tint so it reads as WhatsApp */
+    color: #4ade80;
     transition: color var(--transition);
 }
 
 .top-bar-wa:hover { color: #86efac; }
 
 /* ============================================================
-   HEADER — Dark, authoritative
+   HEADER
    ============================================================ */
 .site-header {
     background: var(--dark);
@@ -190,7 +188,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     top: 0;
     z-index: 1000;
     box-shadow: 0 1px 0 var(--dark-3), 0 4px 20px rgba(0,0,0,0.4);
-    /* position:sticky already establishes a containing block for absolute children */
     isolation: isolate;
 }
 
@@ -205,7 +202,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     gap: 32px;
 }
 
-/* Scroll progress bar — sits at very bottom of the sticky header */
 .scroll-progress {
     position: absolute;
     bottom: 0;
@@ -218,7 +214,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     z-index: 10;
 }
 
-/* Logo */
 .logo-wrap { flex-shrink: 0; }
 
 .logo {
@@ -245,7 +240,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     margin-top: 2px;
 }
 
-/* Accent bar under logo */
 .logo-accent {
     width: 32px;
     height: 3px;
@@ -254,7 +248,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     border-radius: 2px;
 }
 
-/* Desktop Nav */
 .main-nav {
     display: flex;
     align-items: center;
@@ -288,20 +281,13 @@ button { font-family: var(--font-body); cursor: pointer; }
     border-radius: 1px;
 }
 
-.main-nav a:hover {
-    color: var(--white);
-}
+.main-nav a:hover { color: var(--white); }
 
 .main-nav a:hover::after,
-.main-nav a.active::after {
-    transform: scaleX(1);
-}
+.main-nav a.active::after { transform: scaleX(1); }
 
-.main-nav a.active {
-    color: var(--white);
-}
+.main-nav a.active { color: var(--white); }
 
-/* Header CTA */
 .header-actions {
     display: flex;
     align-items: center;
@@ -353,7 +339,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     transform: translateY(-1px);
 }
 
-/* Mobile hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -377,7 +362,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile nav */
 .mobile-nav {
     display: none;
     position: absolute;
@@ -442,7 +426,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
-   HERO — Industrial strength with diagonal accent
+   HERO — Base structure (carousel handles backgrounds)
    ============================================================ */
 .hero {
     position: relative;
@@ -453,20 +437,11 @@ button { font-family: var(--font-body); cursor: pointer; }
     overflow: hidden;
 }
 
-/* Background image layer — increased to 0.32 for visible impact */
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url(images/BG1.webp);
-    background-size: cover;
-    background-position: center;
-    opacity: 0.32;
-}
-
-/* Dark gradient overlay — keeps text readable at higher image opacity */
+/* Dark gradient overlay — keeps text readable */
 .hero-overlay {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background: linear-gradient(
         105deg,
         rgba(20, 20, 20, 0.88) 0%,
@@ -476,13 +451,14 @@ button { font-family: var(--font-body); cursor: pointer; }
     pointer-events: none;
 }
 
-/* Diagonal orange slash — the unforgettable element */
+/* Diagonal orange slash */
 .hero-slash {
     position: absolute;
     top: -10%;
     right: -5%;
     width: 55%;
     height: 130%;
+    z-index: 1;
     background: linear-gradient(
         170deg,
         transparent 45%,
@@ -497,6 +473,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 .hero-grid {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background-image:
         linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
@@ -513,6 +490,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     bottom: 0;
     width: 4px;
     background: linear-gradient(to bottom, var(--orange), var(--orange-dark));
+    z-index: 2;
 }
 
 .hero-content {
@@ -522,6 +500,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    min-height: 340px;
 }
 
 .hero-eyebrow {
@@ -535,8 +514,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     text-transform: uppercase;
     color: var(--orange);
     margin-bottom: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.1s forwards;
 }
 
 .hero-eyebrow::before {
@@ -556,8 +533,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     letter-spacing: 1px;
     max-width: 700px;
     margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.25s forwards;
     will-change: opacity, transform;
 }
 
@@ -572,8 +547,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     max-width: 520px;
     line-height: 1.75;
     margin-bottom: 40px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 0.4s forwards;
 }
 
 .hero-actions {
@@ -657,7 +630,230 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
-   STATS BAND — dark slab with animated counters
+   HERO CAROUSEL — Background slides & text transitions
+   ============================================================ */
+
+/* Container for all background slides */
+.hero-carousel {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* Individual background slide */
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 0;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-slide.exiting {
+    opacity: 0;
+    z-index: 0;
+}
+
+.hero-slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.32;
+    transform: scale(1);
+    transition: transform 8s ease;
+}
+
+.hero-slide.active .hero-slide-bg {
+    transform: scale(1.06);
+}
+
+/* --- Text slides --- */
+.hero-text-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    pointer-events: none;
+    will-change: opacity, transform;
+}
+
+.hero-text-slide.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.hero-text-slide.exit-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hero-text-slide.exit-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hero-text-slide.enter-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: none;
+}
+
+.hero-text-slide.enter-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: none;
+}
+
+/* Reset original hero fadeUp — carousel handles its own */
+.hero-text-slide .hero-eyebrow,
+.hero-text-slide h1,
+.hero-text-slide .hero-sub {
+    opacity: 1;
+    animation: none;
+}
+
+/* Stagger child animations when slide becomes active */
+.hero-text-slide.active .hero-eyebrow {
+    animation: carouselFadeUp 0.6s ease 0.05s both;
+}
+
+.hero-text-slide.active h1 {
+    animation: carouselFadeUp 0.7s ease 0.15s both;
+}
+
+.hero-text-slide.active .hero-sub {
+    animation: carouselFadeUp 0.7s ease 0.3s both;
+}
+
+@keyframes carouselFadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Carousel Controls ─── */
+.hero-carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+.hero-dots {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hero-dot {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-dot::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-dot:hover::before {
+    background: rgba(255,255,255,0.6);
+    transform: scale(1.2);
+}
+
+.hero-dot.active::before {
+    background: var(--orange);
+    transform: scale(1.1);
+}
+
+/* SVG progress ring */
+.dot-ring {
+    position: absolute;
+    inset: 0;
+    width: 36px;
+    height: 36px;
+    transform: rotate(-90deg);
+}
+
+.dot-ring circle {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 2;
+    stroke-dasharray: 100.53;
+    stroke-dashoffset: 100.53;
+    stroke-linecap: round;
+    transition: stroke 0.3s ease;
+}
+
+.hero-dot.active .dot-ring circle {
+    stroke: var(--orange);
+    animation: dotProgress 6s linear forwards;
+}
+
+@keyframes dotProgress {
+    from { stroke-dashoffset: 100.53; }
+    to   { stroke-dashoffset: 0; }
+}
+
+/* Arrow buttons */
+.hero-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.hero-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.hero-arrow:hover {
+    border-color: var(--orange);
+    background: rgba(232,145,87,0.15);
+    color: var(--orange);
+    transform: scale(1.08);
+}
+
+.hero-arrow:active {
+    transform: scale(0.96);
+}
+
+/* ============================================================
+   STATS BAND
    ============================================================ */
 .stats-band {
     background: var(--black);
@@ -668,7 +864,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     position: relative;
 }
 
-/* Subtle diagonal stripes */
 .stats-band::before {
     content: '';
     position: absolute;
@@ -734,7 +929,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     color: rgba(255,255,255,0.4);
 }
 
-/* Micro-caption below each stat label */
 .stat-caption {
     font-size: 11px;
     color: rgba(255,255,255,0.22);
@@ -765,7 +959,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     gap: 24px;
 }
 
-/* ─── Product Card ─── */
 .product-card {
     background: var(--white);
     border: 1.5px solid var(--light-gray);
@@ -778,7 +971,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     will-change: transform;
 }
 
-/* The orange left-border slash that slides in */
 .product-card::before {
     content: '';
     position: absolute;
@@ -814,7 +1006,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     position: relative;
 }
 
-/* Category badge */
 .product-badge {
     position: absolute;
     top: 12px;
@@ -919,7 +1110,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     line-height: 1;
 }
 
-/* Service / CTA card variant — dark image panel with wrench SVG */
 .product-img-wrap--dark {
     background: var(--dark-2);
 }
@@ -936,7 +1126,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
-   WHY CHOOSE US — alternating dark + white
+   WHY CHOOSE US
    ============================================================ */
 .why-section {
     background: var(--dark);
@@ -945,7 +1135,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     overflow: hidden;
 }
 
-/* Background grid texture */
 .why-section::before {
     content: '';
     position: absolute;
@@ -1026,10 +1215,9 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
-   ABOUT SECTION — "Ποιοι Είμαστε"
+   ABOUT SECTION
    ============================================================ */
 .about-section {
-    /* Slightly warmer dark — distinguishes from --dark (#141414) used in why-section */
     background: #171310;
     overflow: hidden;
 }
@@ -1040,7 +1228,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     min-height: 560px;
 }
 
-/* Image panel — left half */
 .about-img-panel {
     position: relative;
     background: var(--dark-2);
@@ -1051,7 +1238,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     min-height: 400px;
 }
 
-/* Placeholder until real photo is added */
 .about-img-placeholder {
     display: flex;
     flex-direction: column;
@@ -1074,7 +1260,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     line-height: 1.6;
 }
 
-/* Orange badge overlapping the two panels */
 .about-img-badge {
     position: absolute;
     bottom: 32px;
@@ -1107,7 +1292,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     opacity: 0.88;
 }
 
-/* Copy panel — right half */
 .about-copy {
     padding: 72px 64px;
     display: flex;
@@ -1117,7 +1301,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     position: relative;
 }
 
-/* Vertical orange left border on copy panel */
 .about-copy::before {
     content: '';
     position: absolute;
@@ -1279,7 +1462,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     align-items: start;
 }
 
-/* Info side */
 .contact-info-panel h3 {
     font-family: var(--font-display);
     font-size: var(--fs-xl);
@@ -1321,7 +1503,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .info-value a:hover { color: var(--orange); }
 
-/* Quick contact buttons */
 .quick-btns {
     display: flex;
     gap: 10px;
@@ -1347,7 +1528,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 .qbtn-viber { background: #7360F2; color: var(--white); }
 .qbtn-viber:hover { background: #6350e0; transform: translateY(-1px); }
 
-/* Map */
 .map-embed {
     margin-bottom: 32px;
 }
@@ -1363,7 +1543,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .map-embed iframe:hover { filter: grayscale(0%); }
 
-/* Form side */
 .contact-form-panel h3 {
     font-family: var(--font-display);
     font-size: var(--fs-xl);
@@ -1421,7 +1600,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 .form-group select {
-    /* Custom arrow — removes browser default */
     appearance: none;
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -1487,7 +1665,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     box-shadow: none;
 }
 
-/* Inline feedback */
 .form-feedback {
     display: none;
     padding: 14px 18px;
@@ -1512,10 +1689,10 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* ============================================================
-   FOOTER — Dark with sitemap columns
+   FOOTER
    ============================================================ */
 .site-footer {
-    background: #0E0C0B; /* very slightly warm — distinguishes from --black (#0D0D0D) */
+    background: #0E0C0B;
     border-top: 3px solid var(--orange);
     padding: 72px 0 0;
     color: rgba(255,255,255,0.55);
@@ -1528,9 +1705,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     padding-bottom: 56px;
     border-bottom: 1px solid var(--dark-3);
 }
-
-/* Brand column */
-.footer-brand {}
 
 .footer-logo {
     font-family: var(--font-display);
@@ -1577,7 +1751,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .footer-contact-quick a:hover { color: var(--orange); }
 
-/* Nav columns */
 .footer-col h4 {
     font-family: var(--font-display);
     font-size: 13px;
@@ -1609,7 +1782,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     padding-left: 4px;
 }
 
-/* Footer bottom bar */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -1633,9 +1805,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 .footer-bottom-links a:hover { color: var(--orange); }
-
-/* Footer CTA column */
-.footer-col--cta {}
 
 .footer-cta-text {
     font-size: var(--fs-sm);
@@ -1681,10 +1850,9 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 /* ============================================================
    FLOATING MOBILE CONTACT BAR
-   Appears after user scrolls past the hero on mobile.
    ============================================================ */
 .mob-contact-bar {
-    display: none; /* shown only on mobile via media query */
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -1730,27 +1898,14 @@ button { font-family: var(--font-body); cursor: pointer; }
     border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.mob-bar-call {
-    background: var(--orange);
-    color: var(--white);
-}
-
-.mob-bar-whatsapp {
-    background: #25D366;
-    color: var(--white);
-}
-
-.mob-bar-viber {
-    background: #7360F2;
-    color: var(--white);
-}
+.mob-bar-call { background: var(--orange); color: var(--white); }
+.mob-bar-whatsapp { background: #25D366; color: var(--white); }
+.mob-bar-viber { background: #7360F2; color: var(--white); }
 
 /* ============================================================
-   PREFERS-REDUCED-MOTION — WCAG 2.1 AA compliance
-   Disables non-essential animation for users who request it.
+   PREFERS-REDUCED-MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-    /* Kill all CSS transitions and animations */
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
@@ -1758,14 +1913,12 @@ button { font-family: var(--font-body); cursor: pointer; }
         scroll-behavior: auto !important;
     }
 
-    /* Reveal elements immediately — skip the scroll animation */
     .reveal {
         opacity: 1;
         transform: none;
         transition: none;
     }
 
-    /* Hero content visible on load — no fade-up */
     .hero-eyebrow,
     .hero h1,
     .hero-sub,
@@ -1774,14 +1927,35 @@ button { font-family: var(--font-body); cursor: pointer; }
         animation: none;
     }
 
-    /* Scroll progress bar — instant updates, no easing */
-    .scroll-progress {
-        transition: none;
+    .scroll-progress { transition: none; }
+    .mob-contact-bar { transition: none; }
+
+    /* Carousel reduced motion */
+    .hero-slide {
+        transition: opacity 0.01ms !important;
     }
 
-    /* Mobile bar — no slide animation */
-    .mob-contact-bar {
-        transition: none;
+    .hero-slide-bg {
+        transition: none !important;
+        transform: scale(1) !important;
+    }
+
+    .hero-text-slide,
+    .hero-text-slide.exit-left,
+    .hero-text-slide.exit-right {
+        transition: none !important;
+    }
+
+    .hero-text-slide.active .hero-eyebrow,
+    .hero-text-slide.active h1,
+    .hero-text-slide.active .hero-sub {
+        animation: none !important;
+        opacity: 1;
+    }
+
+    .hero-dot.active .dot-ring circle {
+        animation: none !important;
+        stroke-dashoffset: 0;
     }
 }
 
@@ -1834,15 +2008,56 @@ button { font-family: var(--font-body); cursor: pointer; }
     .header-actions { display: none; }
     .hamburger { display: flex; }
 
-    /* Floating bar only shows on mobile */
     .mob-contact-bar { display: block; }
-
-    /* Add padding to footer so bar doesn't overlap */
     .site-footer { padding-bottom: 56px; }
 
     .hero { min-height: 480px; }
     .hero h1 { font-size: 38px; }
     .hero-sub { font-size: 15px; }
+
+    .hero-content {
+        min-height: 280px;
+        padding: 60px 24px;
+    }
+
+    .hero-carousel-controls {
+        margin-top: 28px;
+    }
+
+    .hero-dot {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dot-ring {
+        width: 28px;
+        height: 28px;
+    }
+
+    .dot-ring circle {
+        stroke-dasharray: 75.4;
+        stroke-dashoffset: 75.4;
+    }
+
+    .hero-dot.active .dot-ring circle {
+        animation: dotProgressMobile 6s linear forwards;
+    }
+
+    @keyframes dotProgressMobile {
+        from { stroke-dashoffset: 75.4; }
+        to   { stroke-dashoffset: 0; }
+    }
+
+    .hero-dots { gap: 6px; }
+
+    .hero-arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    .hero-text-slide h1 {
+        font-size: 32px;
+    }
 
     .products-grid { grid-template-columns: 1fr; }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1854,7 +2069,6 @@ button { font-family: var(--font-body); cursor: pointer; }
     }
 
     .about-copy { padding: 40px 24px; }
-
     .form-row { grid-template-columns: 1fr; }
     .form-submit { align-self: stretch; justify-content: center; }
 }
@@ -1865,4 +2079,10 @@ button { font-family: var(--font-body); cursor: pointer; }
     .brands-grid { grid-template-columns: 1fr; max-width: 260px; margin: 0 auto; }
     .quick-btns { flex-direction: column; }
     .hero-actions { flex-direction: column; align-items: flex-start; }
+
+    .hero-carousel-controls {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 16px;
+    }
 }

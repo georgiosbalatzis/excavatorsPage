@@ -22,6 +22,12 @@
     <!-- Favicon — SVG emoji fallback, works in all modern browsers without a .ico file -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='8' fill='%23E89157'/><text y='72' x='50' text-anchor='middle' font-size='58' font-family='sans-serif' font-weight='bold' fill='white'>A</text></svg>">
 
+    <!-- Mobile browser chrome color — matches dark header -->
+    <meta name="theme-color" content="#141414">
+
+    <!-- Preload LCP hero image with high fetch priority -->
+    <link rel="preload" as="image" href="images/BG1.webp" fetchpriority="high">
+
     <!-- DNS prefetch for external domains -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -45,12 +51,16 @@
 <div class="top-bar">
     <div class="container top-bar-inner">
         <div class="top-bar-left">
-            <span>🕐 Δε–Πα: 8:00–18:00 &nbsp;|&nbsp; Σα: 9:00–15:00</span>
-            <span>📍 1ο χλμ. Ε.Ο. Κατερίνης – Λάρισας</span>
+            <span class="top-bar-hours">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Δε–Πα: 8:00–18:00 &nbsp;|&nbsp; Σα: 9:00–15:00
+            </span>
         </div>
         <div class="top-bar-right">
-            <a href="mailto:balatzis@otenet.gr">✉ balatzis@otenet.gr</a>
-            <a href="https://wa.me/306944449610" target="_blank" rel="noopener">💬 WhatsApp</a>
+            <a href="https://wa.me/306944449610" target="_blank" rel="noopener" class="top-bar-wa">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.874L.057 23.998l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.667-.513-5.188-1.41l-.372-.222-3.862 1.013 1.033-3.772-.242-.389A9.951 9.951 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                WhatsApp
+            </a>
         </div>
     </div>
 </div>
@@ -124,13 +134,12 @@
         <span class="hero-eyebrow">Επαγγελματικός Εξοπλισμός</span>
 
         <h1>
-            Δομικά<br>
-            Μηχανήματα &<br>
-            <em>Εξοπλισμός</em>
+            Η Σωστή Μηχανή<br>
+            για Κάθε <em>Έργο</em>
         </h1>
 
         <p class="hero-sub">
-            Οικογενειακή επιχείρηση με εμπειρία στον κλάδο — αντιπροσωπείες ATLAS, GUMA Tech και JAB για κάθε κατασκευαστική ανάγκη.
+            Από τον εκσκαφέα ως το ανταλλακτικό — μια πηγή. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB με πάνω από 15 χρόνια εμπειρίας.
         </p>
 
         <div class="hero-actions">
@@ -158,6 +167,7 @@
                 <span data-count="15">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Χρόνια Εμπειρίας</div>
+            <div class="stat-caption">Από το 2008 στον κλάδο</div>
         </div>
 
         <div class="stat-item">
@@ -165,6 +175,7 @@
                 <span data-count="500">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Μηχανήματα Πωληθέντα</div>
+            <div class="stat-caption">Σε Ελλάδα και Βαλκάνια</div>
         </div>
 
         <div class="stat-item">
@@ -172,6 +183,7 @@
                 <span data-count="3">0</span>
             </div>
             <div class="stat-label">Αποκλειστικές Αντιπροσωπείες</div>
+            <div class="stat-caption">ATLAS · GUMA Tech · JAB</div>
         </div>
 
         <div class="stat-item">
@@ -179,6 +191,7 @@
                 <span data-count="100">0</span><span class="stat-suffix">%</span>
             </div>
             <div class="stat-label">Πανελλαδική Κάλυψη</div>
+            <div class="stat-caption">Παράδοση σε όλη τη χώρα</div>
         </div>
 
     </div>
@@ -206,16 +219,16 @@
                         src="images/0-sR3sqj.jpg"
                         alt="ATLAS Εκσκαφείς και Δομικά Μηχανήματα"
                         width="400" height="210"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">ATLAS Δομικά Μηχανήματα</h3>
                     <p class="product-desc">Αντιπροσωπεία δομικών μηχανημάτων ATLAS υψηλής ποιότητας</p>
                     <ul class="product-features">
-                        <li>Εκσκαφείς και εκσκαφείς τροχών</li>
-                        <li>Δομικοί εξοπλισμοί υψηλής ποιότητας</li>
-                        <li>Αξιόπιστη τεχνική υποστήριξη</li>
-                        <li>Ανταγωνιστικές τιμές</li>
+                        <li>Εκσκαφείς ερπύστριας και τροχών</li>
+                        <li>Πλήρης γκάμα δομικών μηχανημάτων</li>
+                        <li>Εγγύηση κατασκευαστή σε κάθε μηχάνημα</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="ATLAS Δομικά Μηχανήματα">
@@ -235,16 +248,16 @@
                         alt="GUMA Tech Ελαστικές και Μεταλλικές Ερπύστριες"
                         width="400" height="210"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">GUMA Tech Ερπύστριες</h3>
                     <p class="product-desc">Ελαστικές και μεταλλικές ερπύστριες υψηλής αντοχής</p>
                     <ul class="product-features">
-                        <li>Ελαστικές ερπύστριες</li>
-                        <li>Μεταλλικές ερπύστριες</li>
-                        <li>Μεγάλη διάρκεια ζωής</li>
-                        <li>Εναλλακτικά κομμάτια έτοιμα</li>
+                        <li>Ελαστικές και μεταλλικές ερπύστριες</li>
+                        <li>Εξαιρετική αντοχή σε σκληρό έδαφος</li>
+                        <li>Άμεση διαθεσιμότητα από stock</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="GUMA Tech Ερπύστριες">
@@ -264,16 +277,16 @@
                         alt="Ανταλλακτικά Ράουλα Σπρόκετ"
                         width="400" height="210"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">Ανταλλακτικά & Εξαρτήματα</h3>
                     <p class="product-desc">Ολοκληρωμένη γκάμα ανταλλακτικών για όλα τα μηχανήματα</p>
                     <ul class="product-features">
-                        <li>Ράουλα (κυλίνδρους)</li>
-                        <li>Σπρόκετ</li>
-                        <li>Λοιπά εξαρτήματα</li>
-                        <li>Αυθεντικά ανταλλακτικά</li>
+                        <li>Ράουλα, σπρόκετ, οδηγοί</li>
+                        <li>Αυθεντικά ανταλλακτικά κατασκευαστή</li>
+                        <li>Συμβατότητα με όλα τα μοντέλα</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="Ανταλλακτικά & Εξαρτήματα">
@@ -293,16 +306,16 @@
                         alt="JAB Υδραυλικά Σφυριά Rock Breaker"
                         width="400" height="210"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">JAB Υδραυλικά Σφυριά</h3>
                     <p class="product-desc">Υδραυλικά σφυριά κορεάτικης ποιότητας — ισχύς και αξιοπιστία</p>
                     <ul class="product-features">
-                        <li>Υψηλής δύναμης σφυριά</li>
-                        <li>Αξιόπιστη κορεάτικη τεχνολογία</li>
-                        <li>Ιδανικά για εξόρυξη</li>
-                        <li>Εξαιρετική απόδοση</li>
+                        <li>Υψηλής ισχύος, κορεάτικη τεχνολογία</li>
+                        <li>Ιδανικά για λατομεία και κατεδαφίσεις</li>
+                        <li>Χαμηλό κόστος συντήρησης</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="JAB Υδραυλικά Σφυριά">
@@ -322,20 +335,45 @@
                         alt="Φορτηγά και Τρακτέρ"
                         width="400" height="210"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">Φορτηγά & Τρακτόρες</h3>
                     <p class="product-desc">Ποιοτικά φορτηγά και τρακτόρες για κάθε εργασία</p>
                     <ul class="product-features">
-                        <li>Διάφορα μοντέλα φορτηγών</li>
-                        <li>Τρακτέρες όλων των κλάσεων</li>
+                        <li>Φορτηγά και τρακτόρες όλων των κλάσεων</li>
                         <li>Ευνοϊκές συνθήκες χρηματοδότησης</li>
                         <li>After-sales υποστήριξη</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="Φορτηγά & Τρακτόρες">
                             Ζητήστε Πληροφορίες
+                            <span class="product-link-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Service CTA -->
+            <div class="product-card product-card--cta reveal reveal-delay-3">
+                <div class="product-img-wrap product-img-wrap--dark">
+                    <span class="product-badge">SERVICE</span>
+                    <div class="product-cta-icon" aria-hidden="true">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name">Service & Συντήρηση</h3>
+                    <p class="product-desc">Τεχνική υποστήριξη και συντήρηση για όλα τα μηχανήματα που αντιπροσωπεύουμε</p>
+                    <ul class="product-features">
+                        <li>Προληπτική συντήρηση επί τόπου</li>
+                        <li>Διάγνωση και επισκευή</li>
+                        <li>Γνήσια ανταλλακτικά έτοιμα</li>
+                    </ul>
+                    <div class="product-footer">
+                        <a href="#contact" class="product-link" data-subject="Service & Συντήρηση">
+                            Κλείστε Ραντεβού
                             <span class="product-link-arrow">→</span>
                         </a>
                     </div>
@@ -363,37 +401,49 @@
         <div class="features-grid">
 
             <div class="feature-item reveal reveal-delay-1">
-                <div class="feature-icon-wrap">🏆</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
                 <h3 class="feature-title">Εξαιρετική Ποιότητα</h3>
                 <p class="feature-text">Εργαζόμαστε αποκλειστικά με αξιόπιστους κατασκευαστές — κάθε προϊόν συνοδεύεται από πλήρη εγγύηση.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-2">
-                <div class="feature-icon-wrap">🛠️</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
                 <h3 class="feature-title">Τεχνική Υποστήριξη</h3>
                 <p class="feature-text">Άμεση τεχνική βοήθεια και συντήρηση για όλα τα μηχανήματα που αντιπροσωπεύουμε.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-3">
-                <div class="feature-icon-wrap">📦</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
                 <h3 class="feature-title">Ολοκληρωμένη Γκάμα</h3>
                 <p class="feature-text">Από μηχανήματα έως ανταλλακτικά και εξαρτήματα — βρείτε τα πάντα σε ένα μέρος.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-1">
-                <div class="feature-icon-wrap">⚡</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
                 <h3 class="feature-title">Γρήγορη Εξυπηρέτηση</h3>
                 <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα — σεβόμαστε το χρόνο σας.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-2">
-                <div class="feature-icon-wrap">💼</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
                 <h3 class="feature-title">Οικογενειακή Εμπειρία</h3>
                 <p class="feature-text">Χρόνια εμπειρίας στον κλάδο, με προσωπική προσέγγιση σε κάθε συνεργασία.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-3">
-                <div class="feature-icon-wrap">💰</div>
+                <div class="feature-icon-wrap">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
                 <h3 class="feature-title">Ανταγωνιστικές Τιμές</h3>
                 <p class="feature-text">Βέλτιστη αναλογία ποιότητας / τιμής — επενδύετε σωστά για μακροπρόθεσμη αξία.</p>
             </div>
@@ -538,10 +588,12 @@
                     <span class="info-label">Άμεση Επικοινωνία</span>
                     <div class="quick-btns">
                         <a href="https://wa.me/306944449610" class="qbtn qbtn-whatsapp" target="_blank" rel="noopener">
-                            💬 WhatsApp
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.874L.057 23.998l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.667-.513-5.188-1.41l-.372-.222-3.862 1.013 1.033-3.772-.242-.389A9.951 9.951 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                            WhatsApp
                         </a>
                         <a href="viber://chat?number=+306944449610" class="qbtn qbtn-viber">
-                            📲 Viber
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.398.002C8.717-.049 3.247.779 1.044 5.874c-1.031 2.3-1.023 5.307-.911 7.042 0 0 .248 3.758 3.97 4.965v2.272s-.025.7.432.84c.549.17.876-.354 1.404-1.038.29-.369.694-.906.994-1.293 2.742.234 4.85-.3 5.09-.378.555-.176 3.695-.58 4.209-4.726.528-4.289-.261-6.995-1.834-8.222zM12 19.5c-.322 0-.64-.011-.956-.031l-2.104 2.345-.003-2.409C5.798 18.29 4.5 15.955 4.5 13.5c0-3.59 2.91-6.5 7.5-6.5s7.5 2.91 7.5 6.5-2.91 6.5-7.5 6.5zm-3.5-8a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm3.5 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm3.5 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg>
+                            Viber
                         </a>
                     </div>
                 </div>
@@ -609,51 +661,41 @@
                             >
                         </div>
                         <div class="form-group">
-                            <label for="email">Email <span class="req">*</span></label>
-                            <input
-                                type="email" id="email" name="email"
-                                placeholder="Το email σας"
-                                required autocomplete="email"
-                            >
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Τηλέφωνο</label>
+                            <label for="phone">Τηλέφωνο <span class="req">*</span></label>
                             <input
                                 type="tel" id="phone" name="phone"
                                 placeholder="π.χ. 694 444 9610"
-                                autocomplete="tel"
+                                required autocomplete="tel"
                             >
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Ενδιαφέρομαι για <span class="req">*</span></label>
-                            <select id="subject" name="subject" required>
-                                <option value="" disabled selected>Επιλέξτε κατηγορία…</option>
-                                <option value="ATLAS Δομικά Μηχανήματα">🔶 ATLAS Δομικά Μηχανήματα</option>
-                                <option value="GUMA Tech Ερπύστριες">🔶 GUMA Tech Ερπύστριες</option>
-                                <option value="JAB Υδραυλικά Σφυριά">🔶 JAB Υδραυλικά Σφυριά</option>
-                                <option value="Ανταλλακτικά & Εξαρτήματα">🔶 Ανταλλακτικά & Εξαρτήματα</option>
-                                <option value="Φορτηγά & Τρακτόρες">🔶 Φορτηγά & Τρακτόρες</option>
-                                <option value="Γενική Πληροφορία">💬 Γενική Πληροφορία</option>
-                            </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Μήνυμα <span class="req">*</span></label>
+                        <label for="subject">Ενδιαφέρομαι για <span class="req">*</span></label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Επιλέξτε κατηγορία…</option>
+                            <option value="ATLAS Δομικά Μηχανήματα">🔶 ATLAS Δομικά Μηχανήματα</option>
+                            <option value="GUMA Tech Ερπύστριες">🔶 GUMA Tech Ερπύστριες</option>
+                            <option value="JAB Υδραυλικά Σφυριά">🔶 JAB Υδραυλικά Σφυριά</option>
+                            <option value="Ανταλλακτικά & Εξαρτήματα">🔶 Ανταλλακτικά & Εξαρτήματα</option>
+                            <option value="Φορτηγά & Τρακτόρες">🔶 Φορτηγά & Τρακτόρες</option>
+                            <option value="Service & Συντήρηση">🔧 Service & Συντήρηση</option>
+                            <option value="Γενική Πληροφορία">💬 Γενική Πληροφορία</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Μήνυμα <span class="form-optional">(προαιρετικό)</span></label>
                         <textarea
                             id="message" name="message"
-                            placeholder="Περιγράψτε τις ανάγκες σας — μοντέλο, χρήση, ποσότητα…"
-                            required
+                            placeholder="Περιγράψτε τις ανάγκες σας — μοντέλο, χρήση, ποσότητα… ή θα σας καλέσουμε εμείς."
                         ></textarea>
                     </div>
 
                     <div class="form-feedback" id="form-feedback" role="alert" aria-live="polite"></div>
 
                     <button type="submit" class="form-submit">
-                        Αποστολή Μηνύματος →
+                        Αποστολή — Θα σας καλέσουμε →
                     </button>
 
                 </form>
@@ -709,20 +751,20 @@
                 </ul>
             </div>
 
-            <!-- Column: Contact quick -->
-            <div class="footer-col">
-                <h4>Επικοινωνία</h4>
-                <ul>
-                    <li><a href="https://wa.me/306944449610" target="_blank" rel="noopener">💬 WhatsApp</a></li>
-                    <li><a href="viber://chat?number=+306944449610">📲 Viber</a></li>
-                    <li><a href="#contact">📋 Φόρμα Επικοινωνίας</a></li>
-                    <li><a href="#contact">🗺 Βρείτε μας</a></li>
-                </ul>
-                <br>
-                <div style="font-size: 12px; color: rgba(255,255,255,0.3); line-height: 1.7;">
-                    Δε–Πα: 8:00 – 18:00<br>
-                    Σάββατο: 9:00 – 15:00<br>
-                    Κυριακή: Κλειστά
+            <!-- Column: Contact CTA -->
+            <div class="footer-col footer-col--cta">
+                <h4>Άμεση Επικοινωνία</h4>
+                <p class="footer-cta-text">
+                    Ο ταχύτερος τρόπος να μας φτάσετε — απαντάμε την ίδια μέρα.
+                </p>
+                <a href="https://wa.me/306944449610" class="footer-cta-btn" target="_blank" rel="noopener">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.874L.057 23.998l6.305-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.667-.513-5.188-1.41l-.372-.222-3.862 1.013 1.033-3.772-.242-.389A9.951 9.951 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                    Στείλτε στο WhatsApp
+                </a>
+                <div class="footer-hours">
+                    <span>Δε–Πα: 8:00–18:00</span>
+                    <span>Σάββατο: 9:00–15:00</span>
+                    <span class="footer-hours-closed">Κυριακή: Κλειστά</span>
                 </div>
             </div>
 

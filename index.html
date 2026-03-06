@@ -122,26 +122,98 @@
 
 
 <!-- ================================================================
-     HERO — dark, industrial, diagonal slash accent
+     HERO CAROUSEL — 5 slides, auto-advancing with manual controls
 ================================================================= -->
-<section class="hero" id="home">
-    <div class="hero-bg" role="presentation"></div>
+<section class="hero" id="home" aria-label="Hero carousel">
+
+    <!-- Carousel background slides -->
+    <div class="hero-carousel" id="hero-carousel">
+        <div class="hero-slide active" data-slide="0">
+            <div class="hero-slide-bg" style="background-image: url('images/BG1.webp')"></div>
+        </div>
+        <div class="hero-slide" data-slide="1">
+            <div class="hero-slide-bg" style="background-image: url('images/0-sR3sqj.jpg')"></div>
+        </div>
+        <div class="hero-slide" data-slide="2">
+            <div class="hero-slide-bg" style="background-image: url('images/UKq4RQS2.jpg')"></div>
+        </div>
+        <div class="hero-slide" data-slide="3">
+            <div class="hero-slide-bg" style="background-image: url('images/rock-breaker-500x500.jpg')"></div>
+        </div>
+        <div class="hero-slide" data-slide="4">
+            <div class="hero-slide-bg" style="background-image: url('images/s_MFDpPn.jpg')"></div>
+        </div>
+    </div>
+
+    <!-- Shared overlays (on top of all slides) -->
     <div class="hero-overlay" role="presentation"></div>
     <div class="hero-grid" role="presentation"></div>
     <div class="hero-slash" role="presentation"></div>
 
+    <!-- Content slides (text changes per slide) -->
     <div class="hero-content">
-        <span class="hero-eyebrow">Επαγγελματικός Εξοπλισμός</span>
 
-        <h1>
-            Η Σωστή Μηχανή<br>
-            για Κάθε <em>Έργο</em>
-        </h1>
+        <!-- Slide 1 text -->
+        <div class="hero-text-slide active" data-text="0">
+            <span class="hero-eyebrow">Επαγγελματικός Εξοπλισμός</span>
+            <h1>
+                Η Σωστή Μηχανή<br>
+                για Κάθε <em>Έργο</em>
+            </h1>
+            <p class="hero-sub">
+                Από τον εκσκαφέα ως το ανταλλακτικό — μια πηγή. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB με πάνω από 15 χρόνια εμπειρίας.
+            </p>
+        </div>
 
-        <p class="hero-sub">
-            Από τον εκσκαφέα ως το ανταλλακτικό — μια πηγή. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB με πάνω από 15 χρόνια εμπειρίας.
-        </p>
+        <!-- Slide 2 text -->
+        <div class="hero-text-slide" data-text="1">
+            <span class="hero-eyebrow">ATLAS Μηχανήματα</span>
+            <h1>
+                Εκσκαφείς<br>
+                Υψηλής <em>Ποιότητας</em>
+            </h1>
+            <p class="hero-sub">
+                Αντιπροσωπεία δομικών μηχανημάτων ATLAS — εκσκαφείς ερπύστριας και τροχών με πλήρη εγγύηση κατασκευαστή.
+            </p>
+        </div>
 
+        <!-- Slide 3 text -->
+        <div class="hero-text-slide" data-text="2">
+            <span class="hero-eyebrow">GUMA Tech</span>
+            <h1>
+                Ερπύστριες<br>
+                Ανθεκτικές σε <em>Κάθε Έδαφος</em>
+            </h1>
+            <p class="hero-sub">
+                Ελαστικές και μεταλλικές ερπύστριες υψηλής αντοχής — άμεση διαθεσιμότητα από stock για κάθε μοντέλο μηχανήματος.
+            </p>
+        </div>
+
+        <!-- Slide 4 text -->
+        <div class="hero-text-slide" data-text="3">
+            <span class="hero-eyebrow">JAB Hydraulic</span>
+            <h1>
+                Υδραυλικά Σφυριά<br>
+                Ισχύς & <em>Αξιοπιστία</em>
+            </h1>
+            <p class="hero-sub">
+                Κορεάτικη τεχνολογία — ιδανικά για λατομεία και κατεδαφίσεις με χαμηλό κόστος συντήρησης.
+            </p>
+        </div>
+
+        <!-- Slide 5 text -->
+        <div class="hero-text-slide" data-text="4">
+            <span class="hero-eyebrow">Μεταφορές & Οχήματα</span>
+            <h1>
+                Φορτηγά &<br>
+                <em>Τρακτόρες</em>
+            </h1>
+            <p class="hero-sub">
+                Ποιοτικά φορτηγά και τρακτόρες όλων των κλάσεων με ευνοϊκές συνθήκες χρηματοδότησης και after-sales υποστήριξη.
+            </p>
+        </div>
+
+        <!-- Shared CTA buttons (always visible) -->
         <div class="hero-actions">
             <button class="btn-primary" onclick="scrollToProducts()">
                 Δείτε τα Προϊόντα
@@ -151,6 +223,38 @@
                 <span class="arrow">↓</span>
                 Επικοινωνήστε μαζί μας
             </button>
+        </div>
+
+        <!-- Carousel controls -->
+        <div class="hero-carousel-controls">
+            <!-- Progress dots -->
+            <div class="hero-dots" role="tablist" aria-label="Επιλογή slide">
+                <button class="hero-dot active" data-goto="0" role="tab" aria-selected="true" aria-label="Slide 1">
+                    <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
+                </button>
+                <button class="hero-dot" data-goto="1" role="tab" aria-selected="false" aria-label="Slide 2">
+                    <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
+                </button>
+                <button class="hero-dot" data-goto="2" role="tab" aria-selected="false" aria-label="Slide 3">
+                    <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
+                </button>
+                <button class="hero-dot" data-goto="3" role="tab" aria-selected="false" aria-label="Slide 4">
+                    <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
+                </button>
+                <button class="hero-dot" data-goto="4" role="tab" aria-selected="false" aria-label="Slide 5">
+                    <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
+                </button>
+            </div>
+
+            <!-- Prev / Next arrows -->
+            <div class="hero-arrows">
+                <button class="hero-arrow hero-arrow-prev" id="hero-prev" aria-label="Προηγούμενο slide">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="hero-arrow hero-arrow-next" id="hero-next" aria-label="Επόμενο slide">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
         </div>
     </div>
 </section>
@@ -455,17 +559,12 @@
 
 <!-- ================================================================
      ABOUT — "Ποιοι Είμαστε" human element strip
-     Dark background photo left, copy right — builds trust for B2B buyers
 ================================================================= -->
 <section class="about-section" id="about">
     <div class="about-inner">
 
         <!-- Left: full-bleed image panel -->
         <div class="about-img-panel" role="img" aria-label="Εγκαταστάσεις ATLAS">
-            <!-- Replace with a real team/workshop photo:
-                 <img src="images/team.jpg" alt="Η ομάδα ATLAS" ...>
-                 Until then, a styled placeholder is shown.
-            -->
             <div class="about-img-placeholder">
                 <span class="about-img-icon">🏗️</span>
                 <span class="about-img-caption">Οι εγκαταστάσεις μας<br>Κατερίνη, Ε.Ο. Κατερίνης–Λάρισας</span>
@@ -623,11 +722,6 @@
                     </div>
                 </div>
 
-                <!-- Map
-                     ➡️  Replace the src with your real Google Maps embed URL.
-                     Go to maps.google.com → search your address →
-                     Share → Embed a map → copy the iframe src.
-                -->
                 <div class="map-embed">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d22.4992!3d40.2641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDE1JzUwLjgiTiAyMsKwMjknNTcuMSJF!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr"
@@ -644,11 +738,6 @@
             <div class="contact-form-panel reveal reveal-delay-2">
                 <h3>Στείλτε μας Μήνυμα</h3>
 
-                <!--
-                    ➡️  To enable email delivery, sign up at https://formspree.io (free).
-                        Then in main.js replace 'YOUR_FORM_ID' with your actual form ID.
-                        Until configured, the JS fallback opens the user's email client.
-                -->
                 <form class="contact-form" id="contact-form" novalidate>
 
                     <div class="form-row">
@@ -784,7 +873,6 @@
 
 <!-- ================================================================
      FLOATING MOBILE CONTACT BAR
-     Appears after scrolling past hero — only on mobile (CSS-controlled)
 ================================================================= -->
 <div class="mob-contact-bar" id="mob-contact-bar" role="navigation" aria-label="Γρήγορη επικοινωνία">
     <div class="mob-bar-inner">
