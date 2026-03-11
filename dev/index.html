@@ -53,7 +53,7 @@
         <div class="top-bar-left">
             <span class="top-bar-hours">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Δε–Πα: 8:00–18:00 &nbsp;|&nbsp; Σα: 9:00–15:00
+                Δε–Πα: 9:00–17:00 &nbsp;|&nbsp; Σα: 9:00–13:00
             </span>
         </div>
         <div class="top-bar-right">
@@ -75,24 +75,23 @@
 
         <!-- Logo -->
         <a href="#" class="logo-wrap" aria-label="ATLAS αρχική">
-            <span class="logo">ATLAS</span>
+            <span class="logo">BALATZIS</span>
             <span class="logo-sub">Δομικά Μηχανήματα & Εξοπλισμός</span>
-            <div class="logo-accent"></div>
         </a>
 
         <!-- Desktop Nav -->
         <nav class="main-nav" aria-label="Κύριο μενού">
             <a href="#products">Προϊόντα</a>
-            <a href="#why-us">Γιατί Εμείς</a>
+            <a href="#why-us">Υπηρεσίες</a>
             <a href="#brands">Συνεργάτες</a>
             <a href="#contact">Επικοινωνία</a>
         </nav>
 
         <!-- Header right actions -->
         <div class="header-actions">
-            <a href="tel:+306944449610" class="header-phone">
+            <a href="tel:+302351064083" class="header-phone">
                 <span class="ph-icon">📞</span>
-                694 444 9610
+                +30-23510-64083
             </a>
             <button class="btn-quote" onclick="scrollToContact()">Ζητήστε Προσφορά</button>
         </div>
@@ -126,26 +125,14 @@
 ================================================================= -->
 <section class="hero" id="home" aria-label="Hero carousel">
 
-    <!-- Carousel background slides -->
-    <div class="hero-carousel" id="hero-carousel">
-        <div class="hero-slide active" data-slide="0">
-            <div class="hero-slide-bg" style="background-image: url('images/BG1.webp')"></div>
-        </div>
-        <div class="hero-slide" data-slide="1">
-            <div class="hero-slide-bg" style="background-image: url('images/0-sR3sqj.jpg')"></div>
-        </div>
-        <div class="hero-slide" data-slide="2">
-            <div class="hero-slide-bg" style="background-image: url('images/UKq4RQS2.jpg')"></div>
-        </div>
-        <div class="hero-slide" data-slide="3">
-            <div class="hero-slide-bg" style="background-image: url('images/rock-breaker-500x500.jpg')"></div>
-        </div>
-        <div class="hero-slide" data-slide="4">
-            <div class="hero-slide-bg" style="background-image: url('images/s_MFDpPn.jpg')"></div>
-        </div>
+    <!-- Video background (always playing) -->
+    <div class="hero-video-bg">
+        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0;">
+            <source src="images/drone.mp4" type="video/mp4">
+        </video>
     </div>
 
-    <!-- Shared overlays (on top of all slides) -->
+    <!-- Shared overlays (on top of video) -->
     <div class="hero-overlay" role="presentation"></div>
     <div class="hero-grid" role="presentation"></div>
     <div class="hero-slash" role="presentation"></div>
@@ -157,11 +144,11 @@
         <div class="hero-text-slide active" data-text="0">
             <span class="hero-eyebrow">Επαγγελματικός Εξοπλισμός</span>
             <h1>
-                Η Σωστή Μηχανή<br>
+                Το Σωστό Μηχάνημα<br>
                 για Κάθε <em>Έργο</em>
             </h1>
             <p class="hero-sub">
-                Από τον εκσκαφέα ως το ανταλλακτικό — μια πηγή. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB με πάνω από 15 χρόνια εμπειρίας.
+                Από τον εκσκαφέα ως το ανταλλακτικό — μια πηγή. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB με πάνω από 30 χρόνια εμπειρίας.
             </p>
         </div>
 
@@ -173,7 +160,7 @@
                 Υψηλής <em>Ποιότητας</em>
             </h1>
             <p class="hero-sub">
-                Αντιπροσωπεία δομικών μηχανημάτων ATLAS — εκσκαφείς ερπύστριας και τροχών με πλήρη εγγύηση κατασκευαστή.
+                Αντιπροσωπεία δομικών μηχανημάτων ATLAS / WECO — εκσκαφείς ερπύστριας και τροχών με πλήρη εγγύηση κατασκευαστή.
             </p>
         </div>
 
@@ -227,7 +214,6 @@
 
         <!-- Carousel controls -->
         <div class="hero-carousel-controls">
-            <!-- Progress dots -->
             <div class="hero-dots" role="tablist" aria-label="Επιλογή slide">
                 <button class="hero-dot active" data-goto="0" role="tab" aria-selected="true" aria-label="Slide 1">
                     <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
@@ -246,7 +232,6 @@
                 </button>
             </div>
 
-            <!-- Prev / Next arrows -->
             <div class="hero-arrows">
                 <button class="hero-arrow hero-arrow-prev" id="hero-prev" aria-label="Προηγούμενο slide">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -268,15 +253,15 @@
 
         <div class="stat-item">
             <div class="stat-number">
-                <span data-count="15">0</span><span class="stat-suffix">+</span>
+                <span data-count="30">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Χρόνια Εμπειρίας</div>
-            <div class="stat-caption">Από το 2008 στον κλάδο</div>
+            <div class="stat-caption">Από το 1995 στον κλάδο</div>
         </div>
 
         <div class="stat-item">
             <div class="stat-number">
-                <span data-count="500">0</span><span class="stat-suffix">+</span>
+                <span data-count="750">0</span><span class="stat-suffix">+</span>
             </div>
             <div class="stat-label">Μηχανήματα Πωληθέντα</div>
             <div class="stat-caption">Σε Ελλάδα και Βαλκάνια</div>
@@ -284,7 +269,7 @@
 
         <div class="stat-item">
             <div class="stat-number">
-                <span data-count="3">0</span>
+                <span data-count="10">0</span>
             </div>
             <div class="stat-label">Αποκλειστικές Αντιπροσωπείες</div>
             <div class="stat-caption">ATLAS · GUMA Tech · JAB</div>
@@ -294,13 +279,212 @@
             <div class="stat-number">
                 <span data-count="100">0</span><span class="stat-suffix">%</span>
             </div>
-            <div class="stat-label">Πανελλαδική Κάλυψη</div>
+            <div class="stat-label">Πανελλαδική Κάλυψη και Κύπρος</div>
             <div class="stat-caption">Παράδοση σε όλη τη χώρα</div>
         </div>
 
     </div>
 </section>
 
+<!-- ================================================================
+     BRANDS — off-white strip
+================================================================= -->
+<section class="brands-section" id="brands">
+    <div class="container">
+        <div class="brands-intro reveal">
+            <span class="section-label">Επίσημες Αντιπροσωπείες</span>
+            <h2 class="section-title">Οι <em>Συνεργάτες μας</em></h2>
+        </div>
+
+        <!--<div class="brands-grid">
+
+            <div class="brand-tile reveal reveal-delay-1">
+
+                <img
+                        src="images/atlaslogo.webp"
+                        alt="ATLAS Μηχανήματα"
+                        width=200 height=100
+                        loading="lazy"
+                        onclick
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">ATLAS</span>
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/weycor.png"
+                        alt="JAB Hydraulic"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-2">
+                <img
+                        src="images/gumalogo.png"
+                        alt="GUMA Tech"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">GUMA Tech</span>
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/jab.png"
+                        alt="JAB Hydraulic"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/m3.png"
+                        alt="JAB Hydraulic"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+            </div>
+
+            <div class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/bonfigioli.png"
+                        alt="PLACEHOLDER"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+            </div>
+
+
+        </div>-->
+
+        <div class="brands-grid">
+
+            <a href="https://atlasgmbh.com/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-1">
+                <img
+                        src="images/atlaslogo.webp"
+                        alt="ATLAS Μηχανήματα"
+                        width=200 height=100
+                        loading="lazy"
+                        onclick
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">ATLAS</span>
+            </a>
+
+            <a href="https://weycor.de/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2">
+            <img
+                    src="images/weycor.png"
+                    alt="JAB Hydraulic"
+                    width="200" height="52"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+            >
+            <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">WEYCOR</span>
+            </a>
+
+            <a href="https://guma-tech.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2">
+                <img
+                        src="images/gumalogo.png"
+                        alt="GUMA Tech"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">GUMA Tech</span>
+            </a>
+
+            <a href="https://www.jabkor.co.kr/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/jab.Jpg"
+                        alt="JAB Hydraulic"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+            </a>
+
+            <a href="https://www.m3srl.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/m3.png"
+                        alt="M3SRL"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">M3SRL</span>
+            </a>
+
+            <a href="https://ghedini.com/en/home/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <img
+                    src="images/ghedini.webp"
+                    alt="Ghedini"
+                    width="200" height="52"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+            >
+            <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Ghedini</span>
+            </a>
+
+            <a href="https://www.definitiveclm.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/defclm.jpeg"
+                        alt="DEFCL"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">DefCL</span>
+            </a>
+
+            <a href="https://www.lehnhoff.de/de/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/lehnhof.png"
+                        alt="Lehnhof"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Lehnhof</span>
+            </a>
+
+            <a href="https://omefgroup.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/omef.png"
+                        alt="omef"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Omef</span>
+            </a>
+
+            <a href="https://idrobenne.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+                <img
+                        src="images/logidrobenne.png"
+                        alt="idrobene"
+                        width="200" height="52"
+                        loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
+                >
+                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">idrobene</span>
+            </a>
+
+        </div>
+    </div>
+</section>
 
 <!-- ================================================================
      PRODUCTS
@@ -385,7 +569,7 @@
                     >
                 </div>
                 <div class="product-body">
-                    <h3 class="product-name">Ανταλλακτικά & Εξαρτήματα</h3>
+                    <h3 class="product-name">Ανταλλακτικά , Εξαρτήματα , Service</h3>
                     <p class="product-desc">Ολοκληρωμένη γκάμα ανταλλακτικών για όλα τα μηχανήματα</p>
                     <ul class="product-features">
                         <li>Ράουλα, σπρόκετ, οδηγοί</li>
@@ -435,7 +619,7 @@
                 <div class="product-img-wrap">
                     <span class="product-badge">ΟΧΗΜΑΤΑ</span>
                     <img
-                        src="images/s_MFDpPn.jpg"
+                        src="images/trucks.jpg"
                         alt="Φορτηγά και Τρακτέρ"
                         width="400" height="210"
                         loading="lazy"
@@ -462,18 +646,22 @@
             <!-- Card 6: Service CTA -->
             <div class="product-card product-card--cta reveal reveal-delay-3">
                 <div class="product-img-wrap product-img-wrap--dark">
-                    <span class="product-badge">SERVICE</span>
-                    <div class="product-cta-icon" aria-hidden="true">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                    </div>
+                    <span class="product-badge">ACCESSORIES</span>
+                    <img
+                            src="images/parelkomena.jpg"
+                            alt="Φορτηγά και Τρακτέρ"
+                            width="400" height="210"
+                            loading="lazy"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                    >
                 </div>
                 <div class="product-body">
-                    <h3 class="product-name">Service & Συντήρηση</h3>
-                    <p class="product-desc">Τεχνική υποστήριξη και συντήρηση για όλα τα μηχανήματα που αντιπροσωπεύουμε</p>
+                    <h3 class="product-name">Παρελκομενα δομικων μηχανηματων</h3>
+                    <p class="product-desc">ΠΕΟΣ</p>
                     <ul class="product-features">
-                        <li>Προληπτική συντήρηση επί τόπου</li>
-                        <li>Διάγνωση και επισκευή</li>
-                        <li>Γνήσια ανταλλακτικά έτοιμα</li>
+                        <li>Μιξερ μπετου, Ανοιγοκλεινομενοι κουβαδες</li>
+                        <li>Καταστροφεις, υδραυλικα τρυπάνια</li>
+                        <li>Σκούπες, αυλακωτήρες</li>
                     </ul>
                     <div class="product-footer">
                         <a href="#contact" class="product-link" data-subject="Service & Συντήρηση">
@@ -498,7 +686,7 @@
         <div class="section-header reveal">
             <span class="section-label">Τα Πλεονεκτήματά μας</span>
             <h2 class="section-title" style="color: var(--white)">
-                Γιατί να Εμπιστευθείτε <em>Εμάς</em>
+                Γιατί να <em>εμπιστευθείτε εμάς</em>
             </h2>
         </div>
 
@@ -517,7 +705,7 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
                 <h3 class="feature-title">Τεχνική Υποστήριξη</h3>
-                <p class="feature-text">Άμεση τεχνική βοήθεια και συντήρηση για όλα τα μηχανήματα που αντιπροσωπεύουμε.</p>
+                <p class="feature-text">Άμεση τεχνική βοήθεια και ανταλλακτικά για όλα τα μηχανήματα που αντιπροσωπεύουμε.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-3">
@@ -525,7 +713,7 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                 </div>
                 <h3 class="feature-title">Ολοκληρωμένη Γκάμα</h3>
-                <p class="feature-text">Από μηχανήματα έως ανταλλακτικά και εξαρτήματα — βρείτε τα πάντα σε ένα μέρος.</p>
+                <p class="feature-text">Από μηχανήματα έως ανταλλακτικά, εξαρτήματα και παρελκόμενα — βρείτε τα πάντα σε ένα μέρος.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-1">
@@ -533,7 +721,7 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </div>
                 <h3 class="feature-title">Γρήγορη Εξυπηρέτηση</h3>
-                <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα — σεβόμαστε το χρόνο σας.</p>
+                <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα και Κύπρο.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-2">
@@ -541,15 +729,15 @@
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
                 <h3 class="feature-title">Οικογενειακή Εμπειρία</h3>
-                <p class="feature-text">Χρόνια εμπειρίας στον κλάδο, με προσωπική προσέγγιση σε κάθε συνεργασία.</p>
+                <p class="feature-text">30+ Χρόνια εμπειρίας στον κλάδο, με προσωπική προσέγγιση σε κάθε συνεργασία.</p>
             </div>
 
             <div class="feature-item reveal reveal-delay-3">
                 <div class="feature-icon-wrap">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M4 14h12M6 6c4-4 10-4 12 0M6 18c4 4 10 4 12 0"/></svg>
                 </div>
                 <h3 class="feature-title">Ανταγωνιστικές Τιμές</h3>
-                <p class="feature-text">Βέλτιστη αναλογία ποιότητας / τιμής — επενδύετε σωστά για μακροπρόθεσμη αξία.</p>
+                <p class="feature-text">Βέλτιστη αναλογία ποιότητας / τιμής.</p>
             </div>
 
         </div>
@@ -563,99 +751,70 @@
 <section class="about-section" id="about">
     <div class="about-inner">
 
-        <!-- Left: full-bleed image panel -->
-        <div class="about-img-panel" role="img" aria-label="Εγκαταστάσεις ATLAS">
-            <div class="about-img-placeholder">
-                <span class="about-img-icon">🏗️</span>
-                <span class="about-img-caption">Οι εγκαταστάσεις μας<br>Κατερίνη, Ε.Ο. Κατερίνης–Λάρισας</span>
-            </div>
+        <!-- Left: full-bleed image carousel -->
+        <div class="about-img-panel" role="img" aria-label="Εγκαταστάσεις ATLAS" style="position: relative; overflow: hidden;">
+            <img src="images/c0.png" alt="Εγκαταστάσεις ATLAS" class="carousel-img active" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 1s ease;">
+            <img src="images/c1.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c2.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c3.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c4.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c5.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c6.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c7.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c8.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c9.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
             <div class="about-img-badge">
-                <span class="about-img-badge-num">15<sup>+</sup></span>
+                <span class="about-img-badge-num">30<sup>+</sup></span>
                 <span class="about-img-badge-txt">Χρόνια<br>Εμπειρίας</span>
             </div>
         </div>
+
+        <script>
+            (function() {
+                const imgs = document.querySelectorAll('.about-img-panel .carousel-img');
+                let current = 0;
+                setInterval(() => {
+                    imgs[current].style.opacity = '0';
+                    current = (current + 1) % imgs.length;
+                    imgs[current].style.opacity = '1';
+                }, 4000);
+            })();
+        </script>
 
         <!-- Right: copy -->
         <div class="about-copy">
             <span class="section-label" style="color: var(--orange);">Η Ιστορία μας</span>
             <h2 class="about-title">Οικογενειακή Επιχείρηση,<br><em>Επαγγελματική Εμπειρία</em></h2>
             <p class="about-text">
-                Η εταιρεία μας δραστηριοποιείται στον τομέα των δομικών μηχανημάτων και εξοπλισμού εδώ και περισσότερα από 15 χρόνια. Ξεκινήσαμε ως οικογενειακή επιχείρηση με γνώμονα την ποιότητα και την εξυπηρέτηση, και παραμένουμε πιστοί σε αυτές τις αξίες.
+                Η εταιρεία μας δραστηριοποιείται στον τομέα των δομικών μηχανημάτων και εξοπλισμού εδώ και περισσότερα από 30 χρόνια. Ξεκινήσαμε ως οικογενειακή επιχείρηση με γνώμονα την ποιότητα και την εξυπηρέτηση, και παραμένουμε πιστοί σε αυτές τις αξίες.
             </p>
             <p class="about-text">
-                Σήμερα είμαστε επίσημοι αντιπρόσωποι των ATLAS, GUMA Tech και JAB, εξυπηρετώντας κατασκευαστικές εταιρείες, εκμεταλλεύσεις λατομείων και επαγγελματίες του κλάδου σε όλη την Ελλάδα.
+                Σήμερα είμαστε επίσημοι αντιπρόσωποι σε 10+ ομίλους που δραστηριοποιούνται στον κλάδο των χωματουργικών εργασιών, εξυπηρετώντας κατασκευαστικές εταιρείες, εκμεταλλεύσεις λατομείων και επαγγελματίες του κλάδου σε όλη την Ελλάδα.
             </p>
 
             <div class="about-points">
                 <div class="about-point">
                     <span class="about-point-icon">✓</span>
-                    <span>Άμεση ανταπόκριση — επικοινωνούμε μαζί σας την ίδια μέρα</span>
+                    <span>Άμεση ανταπόκριση.</span>
                 </div>
                 <div class="about-point">
                     <span class="about-point-icon">✓</span>
-                    <span>Προσωπική συμβουλή — επιλέγουμε μαζί τη σωστή λύση για κάθε έργο</span>
+                    <span>Προσωπική συμβουλή — σας κατευθήνουμε στη σωστή λύση για κάθε έργο.</span>
                 </div>
                 <div class="about-point">
                     <span class="about-point-icon">✓</span>
-                    <span>After-sales υποστήριξη — δεν εξαφανιζόμαστε μετά την πώληση</span>
+                    <span>After-sales υποστήριξη.</span>
                 </div>
             </div>
 
-            <button class="about-cta" onclick="scrollToContact()">Μιλήστε μαζί μας →</button>
+            <button class="about-cta" onclick="scrollToContact()">Επικοινωνήστε μαζί μας →</button>
         </div>
 
     </div>
 </section>
 
 
-<!-- ================================================================
-     BRANDS — off-white strip
-================================================================= -->
-<section class="brands-section" id="brands">
-    <div class="container">
-        <div class="brands-intro reveal">
-            <span class="section-label">Επίσημες Αντιπροσωπείες</span>
-            <h2 class="section-title">Οι <em>Συνεργάτες μας</em></h2>
-        </div>
 
-        <div class="brands-grid">
-
-            <div class="brand-tile reveal reveal-delay-1">
-                <img
-                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/f27f8c3f-2bc9-4151-ae24-690582aed24d"
-                    alt="ATLAS Μηχανήματα"
-                    width="200" height="52"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
-                >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">ATLAS</span>
-            </div>
-
-            <div class="brand-tile reveal reveal-delay-2">
-                <img
-                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/e7bb548c-5991-483d-a54e-d1ef5b9a50d0"
-                    alt="GUMA Tech"
-                    width="200" height="52"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
-                >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">GUMA Tech</span>
-            </div>
-
-            <div class="brand-tile reveal reveal-delay-3">
-                <img
-                    src="https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/ecb7f6e9-980b-41dd-a6af-741de6895bac"
-                    alt="JAB Hydraulic"
-                    width="200" height="52"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
-                >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">JAB Hydraulic</span>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 
 <!-- ================================================================
@@ -678,6 +837,7 @@
                 <div class="info-block">
                     <span class="info-label">Τηλέφωνο</span>
                     <div class="info-value">
+                        <a href="tel:+302351064083">+30 23510 64083</a><br>
                         <a href="tel:+306944449610">+30 694 444 9610</a><br>
                         <a href="tel:+306945667853">+30 694 566 7853</a>
                     </div>
@@ -716,16 +876,15 @@
                 <div class="info-block">
                     <span class="info-label">Ώρες Λειτουργίας</span>
                     <div class="info-value">
-                        Δευτέρα – Παρασκευή: 8:00 – 18:00<br>
-                        Σάββατο: 9:00 – 15:00<br>
+                        Δευτέρα – Παρασκευή: 9:00 – 17:00<br>
+                        Σάββατο: 9:00 – 13:00<br>
                         Κυριακή: Κλειστά
                     </div>
                 </div>
 
                 <div class="map-embed">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5!2d22.4992!3d40.2641!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDE1JzUwLjgiTiAyMsKwMjknNTcuMSJF!5e0!3m2!1sel!2sgr!4v1700000000000!5m2!1sel!2sgr"
-                        title="Τοποθεσία ATLAS Δομικά Μηχανήματα, Κατερίνη"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d190.28749894536506!2d22.52769164180078!3d40.262420468778565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sel!2sgr!4v1773220860920!5m2!1sel!2sgr"                        title="Τοποθεσία ATLAS Δομικά Μηχανήματα, Κατερίνη"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"
@@ -736,7 +895,7 @@
 
             <!-- Right: form -->
             <div class="contact-form-panel reveal reveal-delay-2">
-                <h3>Στείλτε μας Μήνυμα</h3>
+                <h3>Επικοινωνήστε μαζί μας</h3>
 
                 <form class="contact-form" id="contact-form" novalidate>
 
@@ -753,7 +912,7 @@
                             <label for="phone">Τηλέφωνο <span class="req">*</span></label>
                             <input
                                 type="tel" id="phone" name="phone"
-                                placeholder="π.χ. 694 444 9610"
+                                placeholder="π.χ. 691 234 578"
                                 required autocomplete="tel"
                             >
                         </div>
@@ -763,13 +922,15 @@
                         <label for="subject">Ενδιαφέρομαι για <span class="req">*</span></label>
                         <select id="subject" name="subject" required>
                             <option value="" disabled selected>Επιλέξτε κατηγορία…</option>
-                            <option value="ATLAS Δομικά Μηχανήματα">🔶 ATLAS Δομικά Μηχανήματα</option>
-                            <option value="GUMA Tech Ερπύστριες">🔶 GUMA Tech Ερπύστριες</option>
-                            <option value="JAB Υδραυλικά Σφυριά">🔶 JAB Υδραυλικά Σφυριά</option>
-                            <option value="Ανταλλακτικά & Εξαρτήματα">🔶 Ανταλλακτικά & Εξαρτήματα</option>
-                            <option value="Φορτηγά & Τρακτόρες">🔶 Φορτηγά & Τρακτόρες</option>
-                            <option value="Service & Συντήρηση">🔧 Service & Συντήρηση</option>
-                            <option value="Γενική Πληροφορία">💬 Γενική Πληροφορία</option>
+                            <option value="Γενική Πληροφορία">Γενικές Πληροφορίες</option>
+                            <option value="Service & Συντήρηση">Service & Συντήρηση</option>
+                            <option value="Δομικά Μηχανήματα">Δομικά Μηχανήματα</option>
+                            <option value="Tech Ερπύστριες">Ερπύστριες, Μοτέρ πορείας </option>
+                            <option value="Υδραυλικά Σφυριά">Υδραυλικά Σφυριά</option>
+                            <option value="Ανταλλακτικά & Εξαρτήματα">Παρελκόμενα, Ανταλλακτικά & Εξαρτήματα</option>
+                            <option value="Φορτηγά ">Φορτηγά</option>
+
+
                         </select>
                     </div>
 
@@ -784,7 +945,7 @@
                     <div class="form-feedback" id="form-feedback" role="alert" aria-live="polite"></div>
 
                     <button type="submit" class="form-submit">
-                        Αποστολή — Θα σας καλέσουμε →
+                        Αποστολή — Θα επικοινωνήσουμε →
                     </button>
 
                 </form>
@@ -804,11 +965,10 @@
 
             <!-- Brand column -->
             <div class="footer-brand">
-                <span class="footer-logo">ATLAS</span>
+                <span class="footer-logo">BALATZIS</span>
                 <span class="footer-logo-sub">Δομικά Μηχανήματα</span>
-                <div class="footer-accent"></div>
                 <p class="footer-brand-text">
-                    Οικογενειακή επιχείρηση με εμπειρία στον κλάδο των δομικών μηχανημάτων. Επίσημη αντιπροσωπεία ATLAS, GUMA Tech και JAB στην Ελλάδα.
+                    Οικογενειακή επιχείρηση με εμπειρία στον κλάδο των δομικών μηχανημάτων. Επίσημες αντιπροσωπείες στην Ελλάδα.
                 </p>
                 <div class="footer-contact-quick">
                     <a href="tel:+306944449610">📞 694 444 9610</a>
@@ -821,9 +981,9 @@
             <div class="footer-col">
                 <h4>Προϊόντα</h4>
                 <ul>
-                    <li><a href="#products">ATLAS Μηχανήματα</a></li>
-                    <li><a href="#products">GUMA Tech Ερπύστριες</a></li>
-                    <li><a href="#products">JAB Υδραυλικά Σφυριά</a></li>
+                    <li><a href="#products">Δομικά Μηχανήματα ATLAS</a></li>
+                    <li><a href="#products">Ελαστικές Ερπύστριες GUMA Tech </a></li>
+                    <li><a href="#products">Υδραυλικά Σφυριά JAB </a></li>
                     <li><a href="#products">Ανταλλακτικά & Εξαρτήματα</a></li>
                     <li><a href="#products">Φορτηγά & Τρακτόρες</a></li>
                 </ul>
@@ -833,7 +993,7 @@
             <div class="footer-col">
                 <h4>Εταιρεία</h4>
                 <ul>
-                    <li><a href="#why-us">Γιατί Εμείς</a></li>
+                    <li><a href="#why-us">Η εταιρία μας</a></li>
                     <li><a href="#brands">Συνεργάτες</a></li>
                     <li><a href="#contact">Επικοινωνία</a></li>
                     <li><a href="#">Πολιτική Απορρήτου</a></li>
@@ -851,8 +1011,8 @@
                     Στείλτε στο WhatsApp
                 </a>
                 <div class="footer-hours">
-                    <span>Δε–Πα: 8:00–18:00</span>
-                    <span>Σάββατο: 9:00–15:00</span>
+                    <span>Δε–Πα: 9:00–17:00</span>
+                    <span>Σάββατο: 9:00–13:00</span>
                     <span class="footer-hours-closed">Κυριακή: Κλειστά</span>
                 </div>
             </div>

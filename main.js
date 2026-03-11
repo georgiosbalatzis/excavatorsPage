@@ -28,15 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
    0. HERO CAROUSEL — 5 slides, auto-advancing, with controls
    ============================================================ */
 function initHeroCarousel() {
-    const bgSlides   = document.querySelectorAll('.hero-slide');
     const textSlides = document.querySelectorAll('.hero-text-slide');
     const dots       = document.querySelectorAll('.hero-dot');
     const prevBtn    = document.getElementById('hero-prev');
     const nextBtn    = document.getElementById('hero-next');
 
-    if (!bgSlides.length || !textSlides.length) return;
+    if (!textSlides.length) return;
 
-    const TOTAL    = bgSlides.length;
+    const TOTAL    = textSlides.length;
     const INTERVAL = 6000;   // ms between auto-advances
     let current    = 0;
     let timer      = null;
@@ -51,16 +50,6 @@ function initHeroCarousel() {
 
         // Determine slide direction for text animation
         const dir = direction || (current > prev ? 'next' : 'prev');
-
-        // --- Background slides: crossfade ---
-        bgSlides.forEach((s, i) => {
-            s.classList.remove('active', 'exiting');
-            if (i === prev) {
-                s.classList.add('exiting');
-            } else if (i === current) {
-                s.classList.add('active');
-            }
-        });
 
         // --- Text slides: slide + fade ---
         textSlides.forEach((s, i) => {
@@ -88,8 +77,6 @@ function initHeroCarousel() {
         // Allow next transition after animation completes
         setTimeout(() => {
             isTransitioning = false;
-            // Clean up exiting classes
-            bgSlides.forEach(s => s.classList.remove('exiting'));
         }, 800);
 
         resetTimer();
