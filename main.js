@@ -3,12 +3,12 @@
  * main.js
  *
  * Features:
- *  - Hero carousel with 5 slides (auto-advance + manual controls)
+ *  - Hero carousel with 6 slides (auto-advance + manual controls)
  *  - Animated stat counters (triggers on scroll into view)
  *  - Scroll reveal for sections/cards
  *  - Mobile hamburger menu
  *  - Active nav link tracking
- *  - Contact form with inline feedback + Formspree / mailto fallback
+ *  - Contact form with inline feedback + mailto fallback
  *  - Smooth scroll for all anchor links
  */
 
@@ -16,16 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroCarousel();
     initHamburger();
     initSmoothScroll();
-    initScrollReveal();
-    initStatCounters();
-    initActiveNav();
+    initPageObserver();
     initContactForm();
-    initMobileBar();
     initScrollProgress();
+    initAboutCarousel();
 });
 
 /* ============================================================
-   0. HERO CAROUSEL — 5 slides, auto-advancing, with controls
+   0. HERO CAROUSEL — 6 slides, auto-advancing, with controls
    ============================================================ */
 function initHeroCarousel() {
     const textSlides = document.querySelectorAll('.hero-text-slide');
@@ -185,51 +183,82 @@ function initSmoothScroll() {
             const target = document.getElementById(id);
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                scrollToElement(target);
             }
         });
     });
 }
 
-/* ============================================================
-   3. SCROLL REVEAL
-   ============================================================ */
-function initScrollReveal() {
-    const els = document.querySelectorAll('.reveal');
-    if (!els.length) return;
-
-    const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                io.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    els.forEach(el => io.observe(el));
+function scrollToElement(target, block = 'start') {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block });
 }
 
 /* ============================================================
-   4. ANIMATED STAT COUNTERS
+   3. PAGE OBSERVER — reveal, counters, nav, mobile bar
    ============================================================ */
-function initStatCounters() {
-    const band = document.querySelector('.stats-band');
-    if (!band) return;
+function initPageObserver() {
+    const targets = document.querySelectorAll('[data-observe]');
+    const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+    const mobileBar = document.getElementById('mob-contact-bar');
+    let countersFired = false;
 
-    let fired = false;
+    if (!targets.length) return;
 
-    const io = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && !fired) {
-            fired = true;
-            band.querySelectorAll('[data-count]').forEach(el => {
-                animateCount(el);
-            });
-            io.disconnect();
-        }
-    }, { threshold: 0.4 });
+    if (!('IntersectionObserver' in window)) {
+        targets.forEach(target => {
+            const types = getObserveTypes(target);
+            if (types.includes('reveal')) target.classList.add('visible');
+            if (types.includes('counter') && !countersFired) {
+                countersFired = true;
+                target.querySelectorAll('[data-count]').forEach(animateCount);
+            }
+        });
+        return;
+    }
 
-    io.observe(band);
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const types = getObserveTypes(entry.target);
+
+            if (types.includes('reveal') && entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                if (types.length === 1) observer.unobserve(entry.target);
+            }
+
+            if (types.includes('counter') && entry.isIntersecting && entry.intersectionRatio >= 0.35 && !countersFired) {
+                countersFired = true;
+                entry.target.querySelectorAll('[data-count]').forEach(animateCount);
+                if (types.length === 1) observer.unobserve(entry.target);
+            }
+
+            if (types.includes('active-nav')) {
+                updateActiveNav(entry, navLinks);
+            }
+
+            if (types.includes('mobile-bar') && mobileBar) {
+                mobileBar.classList.toggle('visible', !entry.isIntersecting);
+            }
+        });
+    }, {
+        threshold: [0, 0.1, 0.35, 0.6, 1],
+        rootMargin: '0px 0px -40px 0px',
+    });
+
+    targets.forEach(target => observer.observe(target));
+}
+
+function getObserveTypes(target) {
+    return (target.dataset.observe || '').split(/\s+/).filter(Boolean);
+}
+
+function updateActiveNav(entry, links) {
+    if (!entry.isIntersecting || !links.length || !entry.target.id) return;
+
+    const id = entry.target.id;
+    links.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+    });
 }
 
 function animateCount(el) {
@@ -256,29 +285,7 @@ function animateCount(el) {
 }
 
 /* ============================================================
-   5. ACTIVE NAV HIGHLIGHT
-   ============================================================ */
-function initActiveNav() {
-    const sections = document.querySelectorAll('section[id]');
-    const links    = document.querySelectorAll('.main-nav a[href^="#"]');
-    if (!sections.length || !links.length) return;
-
-    const io = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const id = entry.target.id;
-                links.forEach(a => {
-                    a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-                });
-            }
-        });
-    }, { rootMargin: '-35% 0px -55% 0px' });
-
-    sections.forEach(s => io.observe(s));
-}
-
-/* ============================================================
-   6. CONTACT FORM — Formspree + mailto fallback
+   4. CONTACT FORM — mailto fallback
    ============================================================ */
 function initContactForm() {
     const form     = document.getElementById('contact-form');
@@ -286,7 +293,9 @@ function initContactForm() {
     const submitBtn = form?.querySelector('.form-submit');
     if (!form || !feedback || !submitBtn) return;
 
-    form.addEventListener('submit', async e => {
+    const submitLabel = submitBtn.textContent;
+
+    form.addEventListener('submit', e => {
         e.preventDefault();
 
         const name    = document.getElementById('name').value.trim();
@@ -302,39 +311,23 @@ function initContactForm() {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Αποστολή…';
 
-        try {
-            const res = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-                method:  'POST',
-                headers: { 'Accept': 'application/json' },
-                body:    new FormData(form),
-            });
-
-            if (res.ok) {
-                show('success', `✓ Ευχαριστούμε, ${name}! Θα σας καλέσουμε σύντομα.`);
-                form.reset();
-            } else {
-                const data = await res.json().catch(() => ({}));
-                show('error', data?.errors?.[0]?.message || 'Σφάλμα αποστολής. Δοκιμάστε ξανά.');
-            }
-
-        } catch {
-            const sub  = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
-            const body = encodeURIComponent(
-                `Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subject}${message ? '\n\nΜήνυμα:\n' + message : ''}`
-            );
-            window.location.href = `mailto:balatzis@otenet.gr?subject=${sub}&body=${body}`;
-            show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο balatzis@otenet.gr');
-            form.reset();
-        }
+        // TODO: replace with real Formspree endpoint — https://formspree.io/f/<ID>
+        const sub = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
+        const body = encodeURIComponent(
+            `Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subject}${message ? '\n\nΜήνυμα:\n' + message : ''}`
+        );
+        window.location.href = `mailto:info@atlas-equipment.gr?subject=${sub}&body=${body}`;
+        show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο info@atlas-equipment.gr');
+        form.reset();
 
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Αποστολή — Θα σας καλέσουμε';
+        submitBtn.textContent = submitLabel;
     });
 
     function show(type, msg) {
         feedback.className = `form-feedback ${type}`;
         feedback.textContent = msg;
-        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        scrollToElement(feedback, 'nearest');
         if (type === 'success') {
             setTimeout(() => { feedback.className = 'form-feedback'; feedback.textContent = ''; }, 8000);
         }
@@ -352,12 +345,9 @@ function initContactForm() {
                 } else {
                     subjectEl.value = val;
                 }
-                subjectEl.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
-                subjectEl.style.borderColor = 'var(--orange)';
-                subjectEl.style.boxShadow   = '0 0 0 3px rgba(232,145,87,0.2)';
+                subjectEl.classList.add('form-field--focused');
                 setTimeout(() => {
-                    subjectEl.style.borderColor = '';
-                    subjectEl.style.boxShadow   = '';
+                    subjectEl.classList.remove('form-field--focused');
                 }, 1800);
             }
         });
@@ -365,22 +355,7 @@ function initContactForm() {
 }
 
 /* ============================================================
-   8. MOBILE FLOATING BAR
-   ============================================================ */
-function initMobileBar() {
-    const bar  = document.getElementById('mob-contact-bar');
-    const hero = document.querySelector('.hero');
-    if (!bar || !hero) return;
-
-    const io = new IntersectionObserver(entries => {
-        bar.classList.toggle('visible', !entries[0].isIntersecting);
-    }, { threshold: 0.1 });
-
-    io.observe(hero);
-}
-
-/* ============================================================
-   9. SCROLL PROGRESS BAR — rAF throttled
+   5. SCROLL PROGRESS BAR — rAF throttled
    ============================================================ */
 function initScrollProgress() {
     const bar = document.getElementById('scroll-progress');
@@ -407,12 +382,38 @@ function initScrollProgress() {
 }
 
 /* ============================================================
+   6. ABOUT CAROUSEL
+   ============================================================ */
+let aboutCarouselInterval = null;
+
+function initAboutCarousel() {
+    const imgs = document.querySelectorAll('.about-img-panel .carousel-img');
+    if (imgs.length <= 1) return;
+
+    let current = [...imgs].findIndex(img => img.classList.contains('active'));
+    if (current < 0) current = 0;
+
+    clearInterval(aboutCarouselInterval);
+    aboutCarouselInterval = setInterval(() => {
+        imgs[current].style.opacity = '0';
+        imgs[current].classList.remove('active');
+        current = (current + 1) % imgs.length;
+        imgs[current].style.opacity = '1';
+        imgs[current].classList.add('active');
+    }, 4000);
+
+    window.addEventListener('pagehide', () => clearInterval(aboutCarouselInterval), { once: true });
+}
+
+/* ============================================================
    7. EXPOSED SCROLL HELPERS (called from HTML buttons)
    ============================================================ */
 function scrollToProducts() {
-    document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = document.getElementById('products');
+    if (target) scrollToElement(target);
 }
 
 function scrollToContact() {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = document.getElementById('contact');
+    if (target) scrollToElement(target);
 }

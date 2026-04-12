@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a href="#main-content" class="skip-link">Μετάβαση στο περιεχόμενο</a>
 
 <!-- ================================================================
      TOP BAR — utility strip (hours + quick contacts)
@@ -119,15 +120,17 @@
     </nav>
 </header>
 
+<main id="main-content">
 
 <!-- ================================================================
-     HERO CAROUSEL — 5 slides, auto-advancing with manual controls
+     HERO CAROUSEL — 6 slides, auto-advancing with manual controls
 ================================================================= -->
-<section class="hero" id="home" aria-label="Hero carousel">
+<section class="hero" id="home" aria-label="Hero carousel" data-observe="active-nav mobile-bar">
 
     <!-- Video background (always playing) -->
     <div class="hero-video-bg">
-        <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0;">
+        <video autoplay muted loop playsinline poster="images/BG1.webp" style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; top: 0; left: 0;">
+            <source src="images/drone.webm" type="video/webm">
             <source src="images/drone.mp4" type="video/mp4">
         </video>
     </div>
@@ -240,7 +243,7 @@
                 <button class="hero-dot" data-goto="4" role="tab" aria-selected="false" aria-label="Slide 5">
                     <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
                 </button>
-                <button class="hero-dot" data-goto="4" role="tab" aria-selected="false" aria-label="Slide 6">
+                <button class="hero-dot" data-goto="5" role="tab" aria-selected="false" aria-label="Slide 6">
                     <svg class="dot-ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="16" /></svg>
                 </button>
             </div>
@@ -261,7 +264,7 @@
 <!-- ================================================================
      STATS BAND — dark slab with animated counters
 ================================================================= -->
-<section class="stats-band" aria-label="Στατιστικά εταιρείας">
+<section class="stats-band" aria-label="Στατιστικά εταιρείας" data-observe="counter">
     <div class="stats-inner">
 
         <div class="stat-item">
@@ -302,50 +305,49 @@
 <!-- ================================================================
      BRANDS — off-white strip
 ================================================================= -->
-<section class="brands-section" id="brands">
+<section class="brands-section" id="brands" data-observe="active-nav">
     <div class="container">
-        <div class="brands-intro reveal">
+        <div class="brands-intro reveal" data-observe="reveal">
             <span class="section-label">Επίσημες Αντιπροσωπείες</span>
             <h2 class="section-title">Οι <em>Συνεργάτες μας</em></h2>
         </div>
 
         <div class="brands-grid">
 
-            <a href="https://atlasgmbh.com/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-1">
+            <a href="https://atlasgmbh.com/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-1" data-observe="reveal">
                 <img
                         src="images/atlaslogo.webp"
                         alt="ATLAS Μηχανήματα"
                         width=200 height=100
                         loading="lazy"
-                        onclick
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">ATLAS</span>
+                <span class="brand-fallback" style="display:none;">ATLAS</span>
             </a>
 
-            <a href="https://weycor.de/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2">
+            <a href="https://weycor.de/en/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2" data-observe="reveal">
             <img
                     src="images/weycor.png"
-                    alt="JAB Hydraulic"
+                    alt="WEYCOR"
                     width="200" height="52"
                     loading="lazy"
                     onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
             >
-            <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">WEYCOR</span>
+            <span class="brand-fallback" style="display:none;">WEYCOR</span>
             </a>
 
-            <a href="https://guma-tech.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2">
+            <a href="https://guma-tech.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-2" data-observe="reveal">
                 <img
-                        src="images/gumalogo.png"
+                        src="images/gumalogo.webp"
                         alt="GUMA Tech"
                         width="200" height="52"
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">GUMA Tech</span>
+                <span class="brand-fallback" style="display:none;">GUMA Tech</span>
             </a>
 
-            <a href="https://www.jabkor.co.kr/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://www.jabkor.co.kr/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/jab.jpg"
                         alt="JAB Hydraulic"
@@ -353,10 +355,10 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-body); letter-spacing: 1px;">JAB Hydraulic</span>
+                <span class="brand-fallback" style="display:none;">JAB Hydraulic</span>
             </a>
 
-            <a href="https://www.m3srl.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://www.m3srl.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/m3.png"
                         alt="M3SRL"
@@ -364,10 +366,10 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">M3SRL</span>
+                <span class="brand-fallback" style="display:none;">M3SRL</span>
             </a>
 
-            <a href="https://ghedini.com/en/home/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://ghedini.com/en/home/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
             <img
                     src="images/ghedini.webp"
                     alt="Ghedini"
@@ -375,10 +377,10 @@
                     loading="lazy"
                     onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
             >
-            <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Ghedini</span>
+            <span class="brand-fallback" style="display:none;">Ghedini</span>
             </a>
 
-            <a href="https://www.definitiveclm.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://www.definitiveclm.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/defclm.jpeg"
                         alt="DEFCL"
@@ -386,10 +388,10 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">DefCL</span>
+                <span class="brand-fallback" style="display:none;">DefCL</span>
             </a>
 
-            <a href="https://www.lehnhoff.de/de/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://www.lehnhoff.de/de/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/lehnhof.png"
                         alt="Lehnhof"
@@ -397,10 +399,10 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Lehnhof</span>
+                <span class="brand-fallback" style="display:none;">Lehnhof</span>
             </a>
 
-            <a href="https://omefgroup.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://omefgroup.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/omef.png"
                         alt="omef"
@@ -408,10 +410,10 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">Omef</span>
+                <span class="brand-fallback" style="display:none;">Omef</span>
             </a>
 
-            <a href="https://idrobenne.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3">
+            <a href="https://idrobenne.com/" target="_blank" rel="noopener noreferrer" class="brand-tile reveal reveal-delay-3" data-observe="reveal">
                 <img
                         src="images/logidrobenne.png"
                         alt="idrobene"
@@ -419,7 +421,7 @@
                         loading="lazy"
                         onerror="this.style.display='none'; this.parentElement.querySelector('.brand-fallback').style.display='block';"
                 >
-                <span class="brand-fallback" style="display:none; font-family: var(&#45;&#45;font-display); font-size: 22px; font-weight: 700; color: var(&#45;&#45;text-body); letter-spacing: 1px;">idrobene</span>
+                <span class="brand-fallback" style="display:none;">idrobene</span>
             </a>
 
         </div>
@@ -429,10 +431,10 @@
 <!-- ================================================================
      PRODUCTS
 ================================================================= -->
-<section class="products-section" id="products">
+<section class="products-section" id="products" data-observe="active-nav">
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-header reveal" data-observe="reveal">
             <span class="section-label">Αντιπροσωπείες & Εξοπλισμός</span>
             <h2 class="section-title">Τα Προϊόντα <em>μας</em></h2>
         </div>
@@ -440,14 +442,15 @@
         <div class="products-grid">
 
             <!-- Card 1: ATLAS -->
-            <div class="product-card reveal reveal-delay-1">
+            <div class="product-card reveal reveal-delay-1" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">ATLAS</span>
                     <img
                         src="images/product1.jpg"
                         alt=" Εκσκαφείς και Δομικά Μηχανήματα"
                         width="400" height="210"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        loading="lazy"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
@@ -468,7 +471,7 @@
             </div>
 
             <!-- Card 2: GUMA Tech -->
-            <div class="product-card reveal reveal-delay-2">
+            <div class="product-card reveal reveal-delay-2" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">GUMA</span>
                     <img
@@ -476,7 +479,7 @@
                         alt="GUMA Tech Ελαστικές και Μεταλλικές Ερπύστριες"
                         width="400" height="210"
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
@@ -497,7 +500,7 @@
             </div>
 
             <!-- Card 3: Spare Parts -->
-            <div class="product-card reveal reveal-delay-3">
+            <div class="product-card reveal reveal-delay-3" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">ΠΑΡΕΛΚΟΜΕΝΑ</span>
                     <img
@@ -505,12 +508,12 @@
                         alt="Ανταλλακτικά Ράουλα Σπρόκετ"
                         width="400" height="210"
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
                     <h3 class="product-name">Παρελκομενα δομικων μηχανηματων</h3>
-                    <p class="product-desc"></p>
+                    <p class="product-desc">Γνήσια ανταλλακτικά για εκσκαφείς ATLAS, ερπύστριες GUMA και σφυριά JAB.</p>
                     <ul class="product-features">
                         <li>Μιξερ μπετου, Ανοιγοκλεινομενοι κουβαδες</li>
                         <li>Καταστροφεις, υδραυλικα τρυπάνια</li>
@@ -526,7 +529,7 @@
             </div>
 
             <!-- Card 4: JAB -->
-            <div class="product-card reveal reveal-delay-1">
+            <div class="product-card reveal reveal-delay-1" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">JAB</span>
                     <img
@@ -534,7 +537,7 @@
                         alt="JAB Υδραυλικά Σφυριά Rock Breaker"
                         width="400" height="210"
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
@@ -555,7 +558,7 @@
             </div>
 
             <!-- Card 5: Trucks -->
-            <div class="product-card reveal reveal-delay-2">
+            <div class="product-card reveal reveal-delay-2" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">ΟΧΗΜΑΤΑ</span>
                     <img
@@ -563,7 +566,7 @@
                         alt="Φορτηγά και Τρακτέρ"
                         width="400" height="210"
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
@@ -584,7 +587,7 @@
             </div>
 
             <!-- Card 5: Trucks -->
-            <div class="product-card reveal reveal-delay-2">
+            <div class="product-card reveal reveal-delay-2" data-observe="reveal">
                 <div class="product-img-wrap">
                     <span class="product-badge">΄Εκθεση</span>
                     <img
@@ -592,7 +595,7 @@
                             alt="Φορτηγά και Τρακτέρ"
                             width="400" height="210"
                             loading="lazy"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
                     >
                 </div>
                 <div class="product-body">
@@ -620,10 +623,10 @@
 <!-- ================================================================
      WHY CHOOSE US — dark grid section
 ================================================================= -->
-<section class="why-section" id="why-us">
+<section class="why-section" id="why-us" data-observe="active-nav">
     <div class="container">
 
-        <div class="section-header reveal">
+        <div class="section-header reveal" data-observe="reveal">
             <span class="section-label">Τα Πλεονεκτήματά μας</span>
             <h2 class="section-title" style="color: var(--white)">
                 Γιατί να <em>εμπιστευθείτε εμάς</em>
@@ -632,7 +635,7 @@
 
         <div class="features-grid">
 
-            <div class="feature-item reveal reveal-delay-1">
+            <div class="feature-item reveal reveal-delay-1" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                 </div>
@@ -640,7 +643,7 @@
                 <p class="feature-text">Εργαζόμαστε αποκλειστικά με αξιόπιστους κατασκευαστές — κάθε προϊόν συνοδεύεται από πλήρη εγγύηση.</p>
             </div>
 
-            <div class="feature-item reveal reveal-delay-2">
+            <div class="feature-item reveal reveal-delay-2" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
@@ -648,7 +651,7 @@
                 <p class="feature-text">Άμεση τεχνική βοήθεια και ανταλλακτικά για όλα τα μηχανήματα που αντιπροσωπεύουμε.</p>
             </div>
 
-            <div class="feature-item reveal reveal-delay-3">
+            <div class="feature-item reveal reveal-delay-3" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
                 </div>
@@ -656,7 +659,7 @@
                 <p class="feature-text">Από μηχανήματα έως ανταλλακτικά, εξαρτήματα και παρελκόμενα — βρείτε τα πάντα σε ένα μέρος.</p>
             </div>
 
-            <div class="feature-item reveal reveal-delay-1">
+            <div class="feature-item reveal reveal-delay-1" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
                 </div>
@@ -664,7 +667,7 @@
                 <p class="feature-text">Έγκαιρη παράδοση και εγκατάσταση σε όλη την Ελλάδα και Κύπρο.</p>
             </div>
 
-            <div class="feature-item reveal reveal-delay-2">
+            <div class="feature-item reveal reveal-delay-2" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                 </div>
@@ -672,7 +675,7 @@
                 <p class="feature-text">30+ Χρόνια εμπειρίας στον κλάδο, με προσωπική προσέγγιση σε κάθε συνεργασία.</p>
             </div>
 
-            <div class="feature-item reveal reveal-delay-3">
+            <div class="feature-item reveal reveal-delay-3" data-observe="reveal">
                 <div class="feature-icon-wrap">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M4 14h12M6 6c4-4 10-4 12 0M6 18c4 4 10 4 12 0"/></svg>
                 </div>
@@ -688,38 +691,26 @@
 <!-- ================================================================
      ABOUT — "Ποιοι Είμαστε" human element strip
 ================================================================= -->
-<section class="about-section" id="about">
+<section class="about-section" id="about" data-observe="active-nav">
     <div class="about-inner">
 
         <!-- Left: full-bleed image carousel -->
         <div class="about-img-panel" role="img" aria-label="Εγκαταστάσεις ATLAS" style="position: relative; overflow: hidden;">
-            <img src="images/c0.png" alt="Εγκαταστάσεις ATLAS" class="carousel-img active" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 1s ease;">
-            <img src="images/c1.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c2.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c3.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c4.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c5.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c6.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c7.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c8.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
-            <img src="images/c9.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c0.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img active" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 1s ease;">
+            <img src="images/c1.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c2.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c3.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c4.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c5.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c6.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c7.webp" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c8.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
+            <img src="images/c9.jpg" alt="Εγκαταστάσεις ATLAS" class="carousel-img" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease;">
             <div class="about-img-badge">
                 <span class="about-img-badge-num">30<sup>+</sup></span>
                 <span class="about-img-badge-txt">Χρόνια<br>Εμπειρίας</span>
             </div>
         </div>
-
-        <script>
-            (function() {
-                const imgs = document.querySelectorAll('.about-img-panel .carousel-img');
-                let current = 0;
-                setInterval(() => {
-                    imgs[current].style.opacity = '0';
-                    current = (current + 1) % imgs.length;
-                    imgs[current].style.opacity = '1';
-                }, 4000);
-            })();
-        </script>
 
         <!-- Right: copy -->
         <div class="about-copy">
@@ -760,10 +751,10 @@
 <!-- ================================================================
      CONTACT
 ================================================================= -->
-<section class="contact-section" id="contact">
+<section class="contact-section" id="contact" data-observe="active-nav">
     <div class="container">
 
-        <div class="section-header reveal" style="margin-bottom: 56px;">
+        <div class="section-header reveal" data-observe="reveal" style="margin-bottom: 56px;">
             <span class="section-label">Μιλήστε μαζί μας</span>
             <h2 class="section-title">Επικοινωνήστε <em>Μαζί μας</em></h2>
         </div>
@@ -771,7 +762,7 @@
         <div class="contact-grid">
 
             <!-- Left: info + map -->
-            <div class="contact-info-panel reveal">
+            <div class="contact-info-panel reveal" data-observe="reveal">
                 <h3>Πληροφορίες Επικοινωνίας</h3>
 
                 <div class="info-block">
@@ -834,7 +825,7 @@
             </div>
 
             <!-- Right: form -->
-            <div class="contact-form-panel reveal reveal-delay-2">
+            <div class="contact-form-panel reveal reveal-delay-2" data-observe="reveal">
                 <h3>Επικοινωνήστε μαζί μας</h3>
 
                 <form class="contact-form" id="contact-form" novalidate>
@@ -853,6 +844,8 @@
                             <input
                                 type="tel" id="phone" name="phone"
                                 placeholder="π.χ. 691 234 578"
+                                pattern="[\d\s\+\-\(\)]+"
+                                title="Επιτρεπόμενοι χαρακτήρες: αριθμοί, κενά, +, -, (, )"
                                 required autocomplete="tel"
                             >
                         </div>
@@ -894,6 +887,8 @@
         </div>
     </div>
 </section>
+
+</main>
 
 
 <!-- ================================================================

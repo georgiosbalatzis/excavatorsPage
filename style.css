@@ -64,7 +64,9 @@
     box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+}
 
 body {
     font-family: var(--font-body);
@@ -112,6 +114,25 @@ button { font-family: var(--font-body); cursor: pointer; }
 .section-title em {
     font-style: normal;
     color: var(--orange);
+}
+
+.skip-link {
+    position: absolute;
+    top: -44px;
+    left: 0;
+    z-index: 1100;
+    background: var(--orange);
+    color: var(--white);
+    padding: 10px 16px;
+    border-radius: 0 0 var(--radius-sm) 0;
+    font-weight: 700;
+    transition: top var(--transition);
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--white);
+    outline-offset: 2px;
 }
 
 /* ============================================================
@@ -1444,6 +1465,14 @@ button { font-family: var(--font-body); cursor: pointer; }
     transform: scale(1.04);
 }
 
+.brand-fallback {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-body);
+    letter-spacing: 1px;
+}
+
 /* ============================================================
    CONTACT SECTION
    ============================================================ */
@@ -1616,6 +1645,11 @@ button { font-family: var(--font-body); cursor: pointer; }
     border-color: var(--orange);
     background: var(--white);
     box-shadow: 0 0 0 3px rgba(232,145,87,0.1);
+}
+
+.form-field--focused {
+    border-color: var(--orange) !important;
+    box-shadow: 0 0 0 3px rgba(232,145,87,0.2) !important;
 }
 
 .form-group input::placeholder,
@@ -1855,7 +1889,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 900;
+    z-index: 1001;
     background: var(--dark);
     border-top: 2px solid var(--orange);
     box-shadow: 0 -4px 20px rgba(0,0,0,0.35);
@@ -2023,18 +2057,18 @@ button { font-family: var(--font-body); cursor: pointer; }
     }
 
     .hero-dot {
-        width: 28px;
-        height: 28px;
+        width: 36px;
+        height: 36px;
     }
 
     .dot-ring {
-        width: 28px;
-        height: 28px;
+        width: 36px;
+        height: 36px;
     }
 
     .dot-ring circle {
-        stroke-dasharray: 75.4;
-        stroke-dashoffset: 75.4;
+        stroke-dasharray: 100.53;
+        stroke-dashoffset: 100.53;
     }
 
     .hero-dot.active .dot-ring circle {
@@ -2042,15 +2076,15 @@ button { font-family: var(--font-body); cursor: pointer; }
     }
 
     @keyframes dotProgressMobile {
-        from { stroke-dashoffset: 75.4; }
+        from { stroke-dashoffset: 100.53; }
         to   { stroke-dashoffset: 0; }
     }
 
     .hero-dots { gap: 6px; }
 
     .hero-arrow {
-        width: 38px;
-        height: 38px;
+        width: 48px;
+        height: 48px;
     }
 
     .hero-text-slide h1 {
