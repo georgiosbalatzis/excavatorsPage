@@ -1,0 +1,248 @@
+CODEX PROMPT — excavatorsPage: Bug Fixes, Performance & Mobile UX Pass
+=======================================================================
+You are working on a vanilla HTML/CSS/JS website for ATLAS, a Greek heavy-equipment
+dealership. The project lives at the repo root (index.html, style.css, main.js,
+images/). Apply all changes below in a single, focused pass. Do not add features
+outside this scope.
+
+════════════════════════════════════════════════════════════════════════
+SECTION 1 — CRITICAL BUGS (fix these first)
+════════════════════════════════════════════════════════════════════════
+
+BUG-1  Missing LCP / OG image — images/BG1.webp is referenced in three places
+       (index.html lines 12, 20, 29) but does not exist.
+       ACTION: Create a 1200×630 WebP social-preview image from the first hero
+       background that IS present (drone.mp4 poster frame or the first slide
+       background). Name it images/BG1.webp. Add a `poster="images/BG1.webp"`
+       attribute to the <video> tag (line ~129) at the same time.
+
+BUG-2  Formspree ID placeholder — main.js line 306 contains the literal string
+       "YOUR_FORM_ID" in the fetch URL.
+       ACTION: Replace the entire fetch block with a mailto fallback that opens
+         `mailto:info@atlas-equipment.gr?subject=...&body=...`
+       until the real Formspree ID is known. Add a TODO comment:
+         // TODO: replace with real Formspree endpoint — https://formspree.io/f/<ID>
+       This prevents silently broken form submissions in production.
+
+BUG-3  Hero carousel dot data-goto mismatch — index.html line 243: the 6th dot
+       button reads `data-goto="4"` (duplicate), so slide index 5 is unreachable
+       via dots.
+       ACTION: Change line 243 to `data-goto="5"` and update its aria-label to
+       "Slide 6".
+
+BUG-4  HTML-encoded CSS variable names — index.html lines ~334, 367, 378, 389,
+       400, 411, 422: brand fallback <span> elements contain
+       `var(&#45;&#45;font-display)` (double-hyphen encoded as HTML entities),
+       which the browser renders as literal text, not a CSS variable.
+       ACTION: Decode all occurrences to `var(--font-display)`.
+
+BUG-5  Empty onclick attribute — index.html line ~320: first ATLAS brand logo
+       <img> has a bare `onclick` attribute with no value.
+       ACTION: Remove the attribute entirely.
+
+BUG-6  Wrong alt text on WEYCOR logo — index.html line ~328: `alt="JAB Hydraulic"`
+       ACTION: Change to `alt="WEYCOR"`.
+
+BUG-7  Empty product description — index.html line ~513: Spare Parts product card
+       has `<p class="product-desc"></p>` with no text.
+       ACTION: Add meaningful Greek copy, e.g.:
+         "Γνήσια ανταλλακτικά για εκσκαφείς ATLAS, ερπύστριες GUMA και σφυριά JAB."
+
+════════════════════════════════════════════════════════════════════════
+SECTION 2 — PERFORMANCE (images & video)
+════════════════════════════════════════════════════════════════════════
+
+PERF-1  Bulk image compression — the following files are bloated; convert/compress
+        each using `sharp` CLI or `squoosh` CLI (do not change filenames unless
+        noted so existing HTML src attributes keep working):
+          images/c0.png  (2.5 MB) → convert to c0.webp, update all <img src>
+                                     references in index.html to c0.webp
+          images/c2.jpg  (933 KB) → re-export as progressive JPEG at quality 75;
+                                     target < 200 KB
+          images/c6.jpg  (277 KB) → re-export at quality 75; target < 80 KB
+          images/c7.webp (277 KB) → re-export WebP at quality 75; target < 80 KB
+          images/gumalogo.png (186 KB) → convert to gumalogo.webp; update <img src>
+          images/bonfigioli.png (160 KB) → convert to bonfigioli.webp; update src
+        Use <picture> + <source type="image/webp"> where a JPEG fallback is
+        necessary for maximum compatibility.
+
+PERF-2  Lazy-load about-section carousel images — index.html lines ~696–705: all
+        10 about-carousel images (c0–c9) load eagerly. Only the first should be
+        eager; the rest must have loading="lazy".
+        ACTION: Add `loading="lazy"` to c1.webp through c9.jpg in that block.
+        The first image (c0) intentionally stays eager for smooth initial render.
+
+PERF-3  First product card missing lazy — index.html line ~449: product1.jpg has
+        no loading="lazy" attribute (all other product images do).
+        ACTION: Add `loading="lazy"` to product1.jpg's <img> tag.
+
+PERF-4  Video background — images/drone.mp4 (833 KB) has no WebM alternative and
+        no poster frame.
+        ACTION:
+          a. Add `poster="images/BG1.webp"` to the <video> element (also fixes
+             the visual flash before video loads).
+          b. Add a <source type="video/webm" src="images/drone.webm"> as the
+             first source child (leave the .mp4 as fallback). Mark this as a TODO
+             if ffmpeg is not available in the current environment.
+
+PERF-5  Inline carousel script — index.html lines ~712–722 contain an inline
+        <script> block with a `setInterval` that auto-cycles about images. This
+        interval is never cleared (memory leak) and is untraceable from main.js.
+        ACTION: Move the entire inline script block into main.js (at the bottom,
+        after DOMContentLoaded). Wrap it in a function `initAboutCarousel()` called
+        from the DOMContentLoaded handler. Store the interval ID in a variable so
+        it can be cleared if needed.
+
+PERF-6  Consolidate IntersectionObservers — main.js creates 4 separate observers
+        (lines ~201, 222, 266, 375). Consolidate into a single observer using a
+        `data-observe` attribute pattern:
+          - Assign `data-observe="reveal"`, `data-observe="counter"`, etc. to
+            target elements in HTML.
+          - In main.js, create ONE IntersectionObserver that reads the data
+            attribute and dispatches to the appropriate handler function.
+        This reduces memory overhead and simplifies future additions.
+
+PERF-7  Remove form inline styles — main.js lines ~355–361 apply `element.style`
+        for focus border/shadow effects. Move these to CSS classes:
+          .form-field--focused { border-color: var(--accent); box-shadow: 0 0 0 3px ... }
+        Then toggle the class in JS instead of mutating inline styles.
+
+PERF-8  Delete unused image files to reduce repo/deploy size:
+          images/CL2.png           (1.4 MB — not referenced in HTML)
+          images/MainLogo.png      (1.3 MB — not referenced)
+          images/cplogo1.png       (583 KB — not referenced)
+          images/old.gumalogo.png  (275 KB — superseded by gumalogo.png)
+          images/4OYj3QuE.jpg      (55 KB — random filename, not referenced)
+          images/UKq4RQS2.jpg      (55 KB — random filename, not referenced)
+          images/s_MFDpPn.jpg      (92 KB — random filename, not referenced)
+          images/6nQVuSPT.jpg      (127 KB — random filename, not referenced)
+          images/Image 4 Απρ 2025, 11_15_12 π.μ..png (608 KB — not referenced)
+        Verify each file is truly not referenced (grep for filename) before deleting.
+
+PERF-9  Font weight audit — index.html line 42 loads weight 400, 600, and 700 for
+        both Oswald and Source Sans 3. Audit style.css for actual usage:
+          - If font-weight: 400 appears only in resets (inherited), remove it from
+            the Google Fonts URL.
+          - Resulting URL should load only the weights actually used.
+
+════════════════════════════════════════════════════════════════════════
+SECTION 3 — MOBILE UI / UX
+════════════════════════════════════════════════════════════════════════
+
+MOB-1  Touch target sizes — style.css ~lines 2025–2086: carousel dot buttons are
+       28px at 768px breakpoint; arrow buttons are 38px. WCAG 2.5.5 requires
+       minimum 44×44px.
+       ACTION: In the ≤768px media query, set:
+         .hero-dot  { width: 36px; height: 36px; }      /* ring visible + tap area */
+         .hero-arrow { width: 48px; height: 48px; }
+       Wrap the visible icon in a smaller inner <span> if needed to keep aesthetics.
+
+MOB-2  Add a ≤480px breakpoint for product grid images — index.html product cards
+       use `sizes="(max-width: 768px) 100vw, ..."`. Add a narrower entry:
+         sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
+       This helps the browser select smaller srcset candidates on portrait phones.
+
+MOB-3  Mobile floating bar z-index — index.html line ~982: the fixed bottom bar
+       uses z-index: 900 while the sticky header uses z-index: 1000. At small
+       viewports, if the bar ever overlaps the header, it will be hidden behind it.
+       ACTION: Audit the stacking context. If overlap is impossible by design,
+       add a comment explaining this. If overlap can occur, raise the bar to
+       z-index: 1001 or restructure its position.
+
+MOB-4  Smooth scroll respects reduced-motion — style.css line 66 sets
+       `html { scroll-behavior: smooth }` globally.
+       ACTION: Move it inside the existing media query so it only applies when
+       the user has NOT requested reduced motion:
+         @media (prefers-reduced-motion: no-preference) {
+           html { scroll-behavior: smooth; }
+         }
+
+MOB-5  Brand fallback spans inline style — 10 brand logo spans use `style="display:none;…"`
+       with full font/size rules inline.
+       ACTION: Extract to a CSS class `.brand-fallback` in style.css. The
+       `display:none` initial state can stay inline (it's structural), but all
+       font/color rules should be in the class.
+
+════════════════════════════════════════════════════════════════════════
+SECTION 4 — ACCESSIBILITY
+════════════════════════════════════════════════════════════════════════
+
+A11Y-1  Add a skip-to-content link — insert as the very first child of <body>:
+          <a href="#main-content" class="skip-link">Μετάβαση στο περιεχόμενο</a>
+        Add the id `main-content` to the first <main> or <section> element.
+        In style.css, style it visually hidden until focused:
+          .skip-link { position:absolute; top:-40px; left:0; ... }
+          .skip-link:focus { top:0; }
+
+A11Y-2  Phone field validation pattern — index.html line ~854: `<input type="tel">`
+        has no pattern attribute.
+        ACTION: Add `pattern="[\d\s\+\-\(\)]+"` and a Greek-language title:
+          title="Επιτρεπόμενοι χαρακτήρες: αριθμοί, κενά, +, -, (, )"
+
+════════════════════════════════════════════════════════════════════════
+SECTION 5 — CODE QUALITY
+════════════════════════════════════════════════════════════════════════
+
+QUAL-1  Move the inline <script> block from index.html (about carousel) to main.js
+        (see PERF-5 above). After this, index.html should have zero inline <script>
+        blocks outside the body-end deferred <script src="main.js">.
+
+QUAL-2  Validate that after all image updates the <link rel="preload"> at line 29
+        still points to a file that exists (images/BG1.webp — created in BUG-1).
+
+════════════════════════════════════════════════════════════════════════
+ACCEPTANCE CRITERIA
+════════════════════════════════════════════════════════════════════════
+After applying all changes:
+
+1. `grep -r "YOUR_FORM_ID" .` returns nothing.
+2. `grep -r 'data-goto="4".*Slide 6' index.html` returns nothing (dot fixed).
+3. `grep -r '&#45;&#45;' index.html` returns nothing.
+4. `ls images/BG1.webp` exits 0.
+5. All 10 about-carousel images except c0 have loading="lazy" in the HTML.
+6. No <script> block inside index.html body except the final `<script src="main.js">`.
+7. Lighthouse mobile Performance score ≥ 80 (run in Chrome DevTools).
+8. No WCAG 2.1 AA failures in axe DevTools for keyboard navigation.
+
+
+════════════════════════════════════════════════════════════════════════
+SUGGESTED COMMIT MESSAGE (for the full fix-pass PR)
+════════════════════════════════════════════════════════════════════════
+
+fix(site): resolve carousel bug, broken form endpoint, and perf/a11y issues
+
+## Bugs fixed
+- fix: hero carousel 6th dot had duplicate data-goto="4"; changed to data-goto="5"
+  so slide 6 is reachable via dot navigation
+- fix: Formspree URL placeholder "YOUR_FORM_ID" replaced with mailto fallback +
+  TODO comment; contact form no longer silently fails in production
+- fix: OG/Twitter meta and <link rel="preload"> referenced images/BG1.webp which
+  did not exist; created the file from hero poster frame
+- fix: brand fallback spans had HTML-entity-encoded CSS variable names
+  (&#45;&#45; → --); decoded to valid var(--font-display) syntax
+- fix: WEYCOR logo alt text was "JAB Hydraulic"; corrected to "WEYCOR"
+- fix: empty onclick attribute removed from first ATLAS brand logo img
+- fix: Spare Parts product description was empty; added Greek copy
+
+## Performance
+- perf: compress c0.png (2.5 MB) → c0.webp; c2.jpg, c6.jpg, c7.webp re-exported
+  at quality 75; gumalogo + bonfigioli converted to WebP — saves ~4 MB total
+- perf: add loading="lazy" to about-carousel images c1–c9 (only c0 is eager)
+- perf: add loading="lazy" to first product card image (was the only eager one)
+- perf: add poster="images/BG1.webp" to hero <video>; add WebM <source> sibling
+- perf: move inline about-carousel setInterval script from index.html into main.js
+  (initAboutCarousel()); eliminates unclearable interval and inline script block
+- perf: consolidate 4 IntersectionObserver instances into 1 using data-observe attr
+- perf: replace JS inline style mutations on form focus with CSS class toggling
+- perf: delete 9 unreferenced image files totalling ~4.5 MB from images/
+- perf: remove font-weight:400 from Google Fonts URL if confirmed unused in CSS
+
+## Mobile / UX
+- style(mobile): raise hero arrow touch targets to 48×48 px at ≤768 px breakpoint
+- style(mobile): add ≤480 px sizes hint to product card <img> for portrait phones
+- style: move scroll-behavior:smooth inside prefers-reduced-motion:no-preference
+- style: extract brand fallback span font rules to .brand-fallback CSS class
+
+## Accessibility
+- a11y: add .skip-link "Μετάβαση στο περιεχόμενο" as first <body> child
+- a11y: add pattern + title attributes to <input type="tel"> for format validation

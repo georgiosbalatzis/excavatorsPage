@@ -30,6 +30,10 @@ function initHeroCarousel() {
     const dots       = document.querySelectorAll('.hero-dot');
     const prevBtn    = document.getElementById('hero-prev');
     const nextBtn    = document.getElementById('hero-next');
+    const pauseBtn   = document.getElementById('hero-pause');
+    const heroEl     = document.getElementById('home');
+    const video      = heroEl?.querySelector('video');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!textSlides.length) return;
 
@@ -38,6 +42,8 @@ function initHeroCarousel() {
     let current    = 0;
     let timer      = null;
     let isTransitioning = false;
+    let manuallyPaused = reducedMotion;
+    let focusPaused = false;
 
     function goTo(index, direction) {
         if (isTransitioning || index === current) return;
@@ -85,7 +91,30 @@ function initHeroCarousel() {
 
     function resetTimer() {
         clearInterval(timer);
-        timer = setInterval(next, INTERVAL);
+        timer = manuallyPaused || focusPaused || reducedMotion ? null : setInterval(next, INTERVAL);
+    }
+
+    function updatePauseButton() {
+        if (!pauseBtn) return;
+        const paused = manuallyPaused;
+        pauseBtn.setAttribute('aria-pressed', String(paused));
+        pauseBtn.setAttribute('aria-label', paused ? 'Έναρξη εναλλαγής slide' : 'Παύση εναλλαγής slide');
+        pauseBtn.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
+    }
+
+    function setVideoPaused(paused) {
+        if (!video) return;
+        if (paused) video.pause();
+        else video.play().catch(() => {});
+    }
+
+    if (pauseBtn) {
+        pauseBtn.addEventListener('click', () => {
+            manuallyPaused = !manuallyPaused;
+            setVideoPaused(manuallyPaused);
+            updatePauseButton();
+            resetTimer();
+        });
     }
 
     // Arrow buttons
@@ -114,10 +143,23 @@ function initHeroCarousel() {
     });
 
     // Pause auto-advance on hover (desktop)
-    const heroEl = document.getElementById('home');
     if (heroEl) {
-        heroEl.addEventListener('mouseenter', () => clearInterval(timer));
-        heroEl.addEventListener('mouseleave', resetTimer);
+        heroEl.addEventListener('mouseenter', () => {
+            if (!manuallyPaused && !focusPaused) clearInterval(timer);
+        });
+        heroEl.addEventListener('mouseleave', () => {
+            if (!manuallyPaused && !focusPaused) resetTimer();
+        });
+        heroEl.addEventListener('focusin', () => {
+            focusPaused = true;
+            clearInterval(timer);
+        });
+        heroEl.addEventListener('focusout', e => {
+            if (!heroEl.contains(e.relatedTarget)) {
+                focusPaused = false;
+                resetTimer();
+            }
+        });
     }
 
     // Touch swipe support
@@ -139,6 +181,9 @@ function initHeroCarousel() {
         }, { passive: true });
     }
 
+    if (reducedMotion) setVideoPaused(true);
+    updatePauseButton();
+
     // Start auto-advance
     resetTimer();
 }
@@ -151,25 +196,67 @@ function initHamburger() {
     const nav = document.getElementById('mobile-nav');
     if (!btn || !nav) return;
 
-    btn.addEventListener('click', () => {
-        const open = nav.classList.toggle('open');
+    const getFocusable = () => [...nav.querySelectorAll('a, button')]
+        .filter(el => !el.hasAttribute('disabled'));
+
+    const setOpen = open => {
+        nav.classList.toggle('open', open);
         btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού');
         document.body.style.overflow = open ? 'hidden' : '';
+    };
+
+    btn.addEventListener('click', () => {
+        const open = !nav.classList.contains('open');
+        setOpen(open);
+        if (open) getFocusable()[0]?.focus();
     });
 
     // Close on link click or outside click
-    const close = () => {
-        nav.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', false);
-        document.body.style.overflow = '';
+    const close = (restoreFocus = false) => {
+        const wasOpen = nav.classList.contains('open');
+        setOpen(false);
+        if (restoreFocus && wasOpen) {
+            if (window.innerWidth <= 1100) btn.focus();
+            else document.querySelector('.logo-wrap')?.focus();
+        }
     };
 
-    nav.querySelectorAll('a, button').forEach(el => el.addEventListener('click', close));
+    nav.querySelectorAll('a, button').forEach(el => el.addEventListener('click', () => close()));
 
     document.addEventListener('click', e => {
-        if (!btn.contains(e.target) && !nav.contains(e.target)) close();
+        if (!btn.contains(e.target) && !nav.contains(e.target)) close(true);
+    });
+
+    document.addEventListener('keydown', e => {
+        if (!nav.classList.contains('open')) return;
+
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            close(true);
+            return;
+        }
+
+        if (e.key !== 'Tab') return;
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1100) {
+            close(true);
+            window.setTimeout(() => document.querySelector('.logo-wrap')?.focus(), 0);
+        }
     });
 }
 
@@ -246,16 +333,27 @@ function initPageObserver() {
     });
 
     targets.forEach(target => observer.observe(target));
+
+    const updateNavigation = () => updateActiveNav(null, navLinks);
+    window.addEventListener('scroll', updateNavigation, { passive: true });
+    window.addEventListener('resize', updateNavigation);
+    updateNavigation();
 }
 
 function getObserveTypes(target) {
     return (target.dataset.observe || '').split(/\s+/).filter(Boolean);
 }
 
-function updateActiveNav(entry, links) {
-    if (!entry.isIntersecting || !links.length || !entry.target.id) return;
+function updateActiveNav(_entry, links) {
+    if (!links.length) return;
 
-    const id = entry.target.id;
+    const marker = 84;
+    const sections = [...document.querySelectorAll('[data-observe~="active-nav"][id]')];
+    const current = sections.findLast(section => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom > marker;
+    });
+    const id = current?.id || '';
     links.forEach(a => {
         a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
     });
@@ -294,6 +392,18 @@ function initContactForm() {
     if (!form || !feedback || !submitBtn) return;
 
     const submitLabel = submitBtn.textContent;
+    const requiredFields = [
+        document.getElementById('name'),
+        document.getElementById('phone'),
+        document.getElementById('subject'),
+    ].filter(Boolean);
+
+    requiredFields.forEach(field => {
+        field.setAttribute('aria-describedby', feedback.id);
+        field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => {
+            if (field.value.trim()) field.removeAttribute('aria-invalid');
+        });
+    });
 
     form.addEventListener('submit', e => {
         e.preventDefault();
@@ -302,9 +412,15 @@ function initContactForm() {
         const phone   = document.getElementById('phone').value.trim();
         const subject = document.getElementById('subject')?.value || '';
         const message = document.getElementById('message')?.value.trim() || '';
+        const values = [name, phone, subject];
+        requiredFields.forEach((field, index) => {
+            if (values[index]) field.removeAttribute('aria-invalid');
+            else field.setAttribute('aria-invalid', 'true');
+        });
 
         if (!name || !phone || !subject) {
             show('error', 'Παρακαλώ συμπληρώστε Όνομα, Τηλέφωνο και επιλέξτε κατηγορία.');
+            requiredFields[values.findIndex(value => !value)]?.focus();
             return;
         }
 
@@ -389,18 +505,41 @@ let aboutCarouselInterval = null;
 function initAboutCarousel() {
     const imgs = document.querySelectorAll('.about-img-panel .carousel-img');
     if (imgs.length <= 1) return;
+    const toggle = document.getElementById('about-carousel-toggle');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let current = [...imgs].findIndex(img => img.classList.contains('active'));
     if (current < 0) current = 0;
 
-    clearInterval(aboutCarouselInterval);
-    aboutCarouselInterval = setInterval(() => {
-        imgs[current].style.opacity = '0';
-        imgs[current].classList.remove('active');
-        current = (current + 1) % imgs.length;
-        imgs[current].style.opacity = '1';
-        imgs[current].classList.add('active');
-    }, 4000);
+    let paused = reducedMotion;
+
+    const updateToggle = () => {
+        if (!toggle) return;
+        toggle.setAttribute('aria-pressed', String(paused));
+        toggle.setAttribute('aria-label', paused ? 'Έναρξη εναλλαγής εικόνων' : 'Παύση εικόνων');
+        toggle.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
+    };
+
+    const start = () => {
+        clearInterval(aboutCarouselInterval);
+        if (paused) return;
+        aboutCarouselInterval = setInterval(() => {
+            imgs[current].style.opacity = '0';
+            imgs[current].classList.remove('active');
+            current = (current + 1) % imgs.length;
+            imgs[current].style.opacity = '1';
+            imgs[current].classList.add('active');
+        }, 4000);
+    };
+
+    toggle?.addEventListener('click', () => {
+        paused = !paused;
+        updateToggle();
+        start();
+    });
+
+    updateToggle();
+    start();
 
     window.addEventListener('pagehide', () => clearInterval(aboutCarouselInterval), { once: true });
 }
@@ -416,4 +555,9 @@ function scrollToProducts() {
 function scrollToContact() {
     const target = document.getElementById('contact');
     if (target) scrollToElement(target);
+}
+
+function scrollToInquiry() {
+    const target = document.getElementById('contact-inquiry');
+    if (target) scrollToElement(target, 'center');
 }

@@ -14,6 +14,7 @@
 :root {
     --orange:        #E89157;
     --orange-dark:   #C8712F;
+    --orange-ink:    #A04E1E;
     --orange-glow:   rgba(232, 145, 87, 0.18);
     --orange-faint:  rgba(232, 145, 87, 0.07);
 
@@ -27,6 +28,7 @@
     --off-white:     #F8F7F5;
     --light-gray:    #EDECEB;
     --mid-gray:      #999999;
+    --dark-secondary-text: #999999;
     --text-body:     #2C2C2C;
     --text-muted:    #666666;
 
@@ -114,6 +116,16 @@ button { font-family: var(--font-body); cursor: pointer; }
 .section-title em {
     font-style: normal;
     color: var(--orange);
+}
+
+.brands-section .section-label,
+.products-section .section-label,
+.contact-section .section-label,
+.brands-section .section-title em,
+.products-section .section-title em,
+.contact-section .section-title em,
+.contact-section .info-label {
+    color: var(--orange-ink);
 }
 
 .skip-link {
@@ -254,7 +266,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     font-family: var(--font-body);
     font-size: 10px;
     font-weight: 400;
-    color: rgba(255,255,255,0.4);
+    color: var(--dark-secondary-text);
     letter-spacing: 1.5px;
     text-transform: uppercase;
     display: block;
@@ -342,7 +354,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .btn-quote {
     background: var(--orange);
-    color: var(--white);
+    color: var(--black);
     font-family: var(--font-display);
     font-size: 14px;
     font-weight: 600;
@@ -357,6 +369,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .btn-quote:hover {
     background: var(--orange-dark);
+    color: var(--black);
     transform: translateY(-1px);
 }
 
@@ -423,7 +436,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .mobile-nav .mob-cta {
     background: var(--orange);
-    color: var(--white) !important;
+    color: var(--black) !important;
     font-family: var(--font-display);
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -433,6 +446,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .mobile-nav .mob-cta:hover {
     background: var(--orange-dark) !important;
+    color: var(--black) !important;
 }
 
 .mobile-nav-phone {
@@ -441,7 +455,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     gap: 8px;
     padding: 10px 16px;
     font-size: 13px;
-    color: rgba(255,255,255,0.4);
+    color: var(--dark-secondary-text);
     border-bottom: 1px solid var(--dark-3);
     margin-bottom: 6px;
 }
@@ -584,7 +598,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     align-items: center;
     gap: 10px;
     background: var(--orange);
-    color: var(--white);
+    color: var(--black);
     font-family: var(--font-display);
     font-size: 15px;
     font-weight: 600;
@@ -612,6 +626,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .btn-primary:hover {
     background: var(--orange-dark);
+    color: var(--black);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(232,145,87,0.35);
 }
@@ -695,10 +710,13 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 /* --- Text slides --- */
+.hero-text-stack {
+    display: grid;
+    align-items: start;
+}
+
 .hero-text-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-area: 1 / 1;
     width: 100%;
     opacity: 0;
     transform: translateY(20px);
@@ -708,7 +726,6 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 .hero-text-slide.active {
-    position: relative;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -947,12 +964,12 @@ button { font-family: var(--font-body); cursor: pointer; }
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: var(--dark-secondary-text);
 }
 
 .stat-caption {
     font-size: 11px;
-    color: rgba(255,255,255,0.22);
+    color: var(--dark-secondary-text);
     letter-spacing: 0.5px;
     margin-top: 5px;
     line-height: 1.4;
@@ -1044,12 +1061,8 @@ button { font-family: var(--font-body); cursor: pointer; }
 .product-img-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.product-card:hover .product-img-wrap img {
-    transform: scale(1.06);
+    object-fit: contain;
+    object-position: center;
 }
 
 .product-body {
@@ -1116,7 +1129,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 .product-link {
     font-size: 13px;
     font-weight: 700;
-    color: var(--orange);
+    color: var(--orange-ink);
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
@@ -1124,7 +1137,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     transition: gap var(--transition), color var(--transition);
 }
 
-.product-link:hover { color: var(--orange-dark); gap: 10px; }
+.product-link:hover { color: var(--orange-ink); gap: 10px; }
 
 .product-link-arrow {
     font-size: 16px;
@@ -1257,6 +1270,33 @@ button { font-family: var(--font-body); cursor: pointer; }
     justify-content: center;
     overflow: hidden;
     min-height: 400px;
+}
+
+.about-carousel-toggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.about-carousel-toggle:hover {
+    border-color: var(--orange);
+    background: rgba(232,145,87,0.15);
+    color: var(--orange);
+    transform: scale(1.08);
 }
 
 .about-img-placeholder {
@@ -1484,9 +1524,15 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 420px 1fr;
+    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
     gap: 72px;
     align-items: start;
+}
+
+.contact-info-panel,
+.contact-form-panel {
+    min-width: 0;
+    scroll-margin-top: 84px;
 }
 
 .contact-info-panel h3 {
@@ -1549,8 +1595,8 @@ button { font-family: var(--font-body); cursor: pointer; }
     border: 2px solid transparent;
 }
 
-.qbtn-whatsapp { background: #25D366; color: var(--white); }
-.qbtn-whatsapp:hover { background: #1dba59; transform: translateY(-1px); }
+.qbtn-whatsapp { background: #25D366; color: var(--black); }
+.qbtn-whatsapp:hover { background: #1dba59; color: var(--black); transform: translateY(-1px); }
 
 .qbtn-viber { background: #7360F2; color: var(--white); }
 .qbtn-viber:hover { background: #6350e0; transform: translateY(-1px); }
@@ -1591,7 +1637,11 @@ button { font-family: var(--font-body); cursor: pointer; }
     gap: 16px;
 }
 
-.form-group { display: flex; flex-direction: column; }
+.form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
 
 .form-group label {
     font-size: 12px;
@@ -1616,6 +1666,9 @@ button { font-family: var(--font-body); cursor: pointer; }
 .form-group input,
 .form-group textarea,
 .form-group select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     padding: 13px 16px;
     border: 1.5px solid var(--light-gray);
     border-radius: var(--radius-sm);
@@ -1647,6 +1700,12 @@ button { font-family: var(--font-body); cursor: pointer; }
     box-shadow: 0 0 0 3px rgba(232,145,87,0.1);
 }
 
+.form-group input[aria-invalid="true"],
+.form-group select[aria-invalid="true"],
+.form-group textarea[aria-invalid="true"] {
+    border-color: #dc2626;
+}
+
 .form-field--focused {
     border-color: var(--orange) !important;
     box-shadow: 0 0 0 3px rgba(232,145,87,0.2) !important;
@@ -1669,7 +1728,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     justify-content: center;
     gap: 10px;
     background: var(--orange);
-    color: var(--white);
+    color: var(--black);
     font-family: var(--font-display);
     font-size: 15px;
     font-weight: 600;
@@ -1686,6 +1745,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .form-submit:hover {
     background: var(--orange-dark);
+    color: var(--black);
     transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(232,145,87,0.3);
 }
@@ -1752,7 +1812,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.3);
+    color: var(--dark-secondary-text);
     display: block;
     margin-bottom: 16px;
 }
@@ -1768,7 +1828,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 .footer-brand-text {
     font-size: 13px;
     line-height: 1.8;
-    color: rgba(255,255,255,0.4);
+    color: var(--dark-secondary-text);
     margin-bottom: 24px;
 }
 
@@ -1804,7 +1864,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .footer-col ul li a {
     font-size: 13px;
-    color: rgba(255,255,255,0.45);
+    color: var(--dark-secondary-text);
     transition: color var(--transition), padding-left var(--transition);
     display: inline-block;
 }
@@ -1820,7 +1880,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     align-items: center;
     padding: 20px 0;
     font-size: 12px;
-    color: rgba(255,255,255,0.25);
+    color: var(--dark-secondary-text);
     flex-wrap: wrap;
     gap: 12px;
 }
@@ -1831,7 +1891,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 }
 
 .footer-bottom-links a {
-    color: rgba(255,255,255,0.25);
+    color: var(--dark-secondary-text);
     font-size: 12px;
     transition: color var(--transition);
 }
@@ -1840,7 +1900,7 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .footer-cta-text {
     font-size: var(--fs-sm);
-    color: rgba(255,255,255,0.4);
+    color: var(--dark-secondary-text);
     line-height: 1.7;
     margin-bottom: 16px;
 }
@@ -1872,12 +1932,12 @@ button { font-family: var(--font-body); cursor: pointer; }
 
 .footer-hours span {
     font-size: 12px;
-    color: rgba(255,255,255,0.28);
+    color: var(--dark-secondary-text);
     line-height: 1.6;
 }
 
 .footer-hours-closed {
-    color: rgba(255,255,255,0.15) !important;
+    color: var(--dark-secondary-text) !important;
 }
 
 /* ============================================================
@@ -1930,7 +1990,7 @@ button { font-family: var(--font-body); cursor: pointer; }
     border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.mob-bar-call { background: var(--orange); color: var(--white); }
+.mob-bar-call { background: var(--orange); color: var(--black); }
 .mob-bar-whatsapp { background: #25D366; color: var(--white); }
 .mob-bar-viber { background: #7360F2; color: var(--white); }
 
@@ -2020,6 +2080,10 @@ button { font-family: var(--font-body); cursor: pointer; }
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1100px) {
+    .main-nav,
+    .header-actions { display: none; }
+    .hamburger { display: flex; }
+
     .products-grid { grid-template-columns: repeat(2, 1fr); }
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -2091,9 +2155,7 @@ button { font-family: var(--font-body); cursor: pointer; }
         font-size: 32px;
     }
 
-    .products-grid { grid-template-columns: 1fr; }
     .brands-grid { grid-template-columns: repeat(2, 1fr); }
-    .features-grid { grid-template-columns: 1fr; }
 
     .footer-grid {
         grid-template-columns: 1fr;
@@ -2108,7 +2170,16 @@ button { font-family: var(--font-body); cursor: pointer; }
 @media (max-width: 480px) {
     .stats-inner { grid-template-columns: repeat(2, 1fr); }
     .stats-inner .stat-item:nth-child(2)::after { display: none; }
-    .brands-grid { grid-template-columns: 1fr; max-width: 260px; margin: 0 auto; }
+    .brands-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        max-width: none;
+        margin: 0;
+    }
+    .brand-tile {
+        height: 96px;
+        padding: 16px 12px;
+    }
     .quick-btns { flex-direction: column; }
     .hero-actions { flex-direction: column; align-items: flex-start; }
 
@@ -2117,4 +2188,9 @@ button { font-family: var(--font-body); cursor: pointer; }
         align-items: flex-start;
         gap: 16px;
     }
+}
+
+@media (max-width: 600px) {
+    .products-grid,
+    .features-grid { grid-template-columns: 1fr; }
 }
