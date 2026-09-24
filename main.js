@@ -1,563 +1,133 @@
-/**
- * ATLAS — Full Redesign JavaScript
- * main.js
- *
- * Features:
- *  - Hero carousel with 6 slides (auto-advance + manual controls)
- *  - Animated stat counters (triggers on scroll into view)
- *  - Scroll reveal for sections/cards
- *  - Mobile hamburger menu
- *  - Active nav link tracking
- *  - Contact form with inline feedback + mailto fallback
- *  - Smooth scroll for all anchor links
- */
+/* BALATZIS — small progressive enhancements. Content works without JS. */
 
-document.addEventListener('DOMContentLoaded', () => {
-    initHeroCarousel();
-    initHamburger();
-    initSmoothScroll();
-    initPageObserver();
-    initContactForm();
-    initScrollProgress();
-    initAboutCarousel();
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const onView = (els, cb, options) => {
+    const io = new IntersectionObserver(entries => entries.forEach(e => cb(e, io)), options);
+    els.forEach(el => el && io.observe(el));
+};
+
+/* Header: solid once the page leaves the top */
+onView([$('#top')], e => $('#header').classList.toggle('is-scrolled', !e.isIntersecting));
+
+/* Mobile menu — native <dialog> gives focus trap, Escape and inert page */
+const menu = $('#menu');
+$('#menu-open').addEventListener('click', () => menu.showModal());
+$('#menu-close').addEventListener('click', () => menu.close());
+$$('a', menu).forEach(a => a.addEventListener('click', () => menu.close()));
+matchMedia('(min-width: 1181px)').addEventListener('change', e => e.matches && menu.close());
+
+/* Scroll reveals */
+onView($$('[data-reveal]'), (e, io) => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('is-in');
+    io.unobserve(e.target);
+}, { rootMargin: '0px 0px -12% 0px' });
+
+/* Count-up for company figures (final values are already in the HTML) */
+if (!reducedMotion) {
+    $$('[data-count]').forEach(el => {
+        const end = +el.dataset.count;
+        const start = performance.now() + 900; // after the hero entrance
+        el.style.minWidth = `${String(end).length}ch`;
+        el.textContent = '0';
+        const tick = now => {
+            const t = Math.min(Math.max((now - start) / 1600, 0), 1);
+            el.textContent = Math.round(end * (1 - (1 - t) ** 4));
+            if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    });
+}
+
+/* Active navigation link */
+const navLinks = $$('.nav a');
+onView(navLinks.map(a => $(a.hash)), e => {
+    if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('is-active', a.hash === `#${e.target.id}`));
+}, { rootMargin: '-45% 0px -50% 0px' });
+
+/* Mobile quick bar: hidden over the hero and the contact section */
+const quickbar = $('#quickbar');
+const hidden = new Set();
+onView([$('#home'), $('#contact')], e => {
+    hidden[e.isIntersecting ? 'add' : 'delete'](e.target);
+    quickbar.classList.toggle('is-visible', hidden.size === 0);
 });
 
-/* ============================================================
-   0. HERO CAROUSEL — 6 slides, auto-advancing, with controls
-   ============================================================ */
-function initHeroCarousel() {
-    const textSlides = document.querySelectorAll('.hero-text-slide');
-    const dots       = document.querySelectorAll('.hero-dot');
-    const prevBtn    = document.getElementById('hero-prev');
-    const nextBtn    = document.getElementById('hero-next');
-    const pauseBtn   = document.getElementById('hero-pause');
-    const heroEl     = document.getElementById('home');
-    const video      = heroEl?.querySelector('video');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!textSlides.length) return;
-
-    const TOTAL    = textSlides.length;
-    const INTERVAL = 6000;   // ms between auto-advances
-    let current    = 0;
-    let timer      = null;
-    let isTransitioning = false;
-    let manuallyPaused = reducedMotion;
-    let focusPaused = false;
-
-    function goTo(index, direction) {
-        if (isTransitioning || index === current) return;
-        isTransitioning = true;
-
-        const prev = current;
-        current = ((index % TOTAL) + TOTAL) % TOTAL;
-
-        // Determine slide direction for text animation
-        const dir = direction || (current > prev ? 'next' : 'prev');
-
-        // --- Text slides: slide + fade ---
-        textSlides.forEach((s, i) => {
-            s.classList.remove('active', 'exit-left', 'exit-right', 'enter-left', 'enter-right');
-
-            if (i === prev) {
-                s.classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
-            } else if (i === current) {
-                // Briefly set enter position, then animate to active
-                s.classList.add(dir === 'next' ? 'enter-right' : 'enter-left');
-                // Force reflow so the enter class applies before switching to active
-                void s.offsetWidth;
-                s.classList.remove('enter-right', 'enter-left');
-                s.classList.add('active');
-            }
-        });
-
-        // --- Dots ---
-        dots.forEach((d, i) => {
-            const isActive = i === current;
-            d.classList.toggle('active', isActive);
-            d.setAttribute('aria-selected', isActive);
-        });
-
-        // Allow next transition after animation completes
-        setTimeout(() => {
-            isTransitioning = false;
-        }, 800);
-
-        resetTimer();
-    }
-
-    function next() { goTo(current + 1, 'next'); }
-    function prev() { goTo(current - 1, 'prev'); }
-
-    function resetTimer() {
-        clearInterval(timer);
-        timer = manuallyPaused || focusPaused || reducedMotion ? null : setInterval(next, INTERVAL);
-    }
-
-    function updatePauseButton() {
-        if (!pauseBtn) return;
-        const paused = manuallyPaused;
-        pauseBtn.setAttribute('aria-pressed', String(paused));
-        pauseBtn.setAttribute('aria-label', paused ? 'Έναρξη εναλλαγής slide' : 'Παύση εναλλαγής slide');
-        pauseBtn.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
-    }
-
-    function setVideoPaused(paused) {
-        if (!video) return;
-        if (paused) video.pause();
-        else video.play().catch(() => {});
-    }
-
-    if (pauseBtn) {
-        pauseBtn.addEventListener('click', () => {
-            manuallyPaused = !manuallyPaused;
-            setVideoPaused(manuallyPaused);
-            updatePauseButton();
-            resetTimer();
-        });
-    }
-
-    // Arrow buttons
-    if (nextBtn) nextBtn.addEventListener('click', next);
-    if (prevBtn) prevBtn.addEventListener('click', prev);
-
-    // Dot buttons
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const idx = parseInt(dot.dataset.goto, 10);
-            const dir = idx > current ? 'next' : 'prev';
-            goTo(idx, dir);
-        });
-    });
-
-    // Keyboard navigation when hero is in view
-    document.addEventListener('keydown', e => {
-        const hero = document.getElementById('home');
-        if (!hero) return;
-        const rect = hero.getBoundingClientRect();
-        // Only respond when hero is mostly visible
-        if (rect.bottom < 100) return;
-
-        if (e.key === 'ArrowRight') next();
-        if (e.key === 'ArrowLeft')  prev();
-    });
-
-    // Pause auto-advance on hover (desktop)
-    if (heroEl) {
-        heroEl.addEventListener('mouseenter', () => {
-            if (!manuallyPaused && !focusPaused) clearInterval(timer);
-        });
-        heroEl.addEventListener('mouseleave', () => {
-            if (!manuallyPaused && !focusPaused) resetTimer();
-        });
-        heroEl.addEventListener('focusin', () => {
-            focusPaused = true;
-            clearInterval(timer);
-        });
-        heroEl.addEventListener('focusout', e => {
-            if (!heroEl.contains(e.relatedTarget)) {
-                focusPaused = false;
-                resetTimer();
-            }
-        });
-    }
-
-    // Touch swipe support
-    let touchStartX = 0;
-    let touchEndX   = 0;
-
-    if (heroEl) {
-        heroEl.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        heroEl.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) next();
-                else prev();
-            }
-        }, { passive: true });
-    }
-
-    if (reducedMotion) setVideoPaused(true);
-    updatePauseButton();
-
-    // Start auto-advance
-    resetTimer();
+/* Drone video plays only while on screen */
+const video = $('.base video');
+if (video && !reducedMotion) {
+    onView([video], e => (e.isIntersecting ? video.play().catch(() => {}) : video.pause()), { threshold: .2 });
 }
 
-/* ============================================================
-   1. HAMBURGER MENU
-   ============================================================ */
-function initHamburger() {
-    const btn = document.getElementById('hamburger');
-    const nav = document.getElementById('mobile-nav');
-    if (!btn || !nav) return;
+/* Facilities gallery — native scroll-snap, buttons step one photo */
+const gallery = $('#gallery');
+const slides = $$('li', gallery);
+const count = $('#gallery-count');
+let current = 0;
+const pad = n => String(n).padStart(2, '0');
+onView(slides, e => {
+    if (!e.isIntersecting) return;
+    current = slides.indexOf(e.target);
+    count.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
+}, { root: gallery, threshold: .6 });
+const step = dir => {
+    const i = Math.min(Math.max(current + dir, 0), slides.length - 1);
+    gallery.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: reducedMotion ? 'auto' : 'smooth' });
+};
+$('#gallery-prev').addEventListener('click', () => step(-1));
+$('#gallery-next').addEventListener('click', () => step(1));
 
-    const getFocusable = () => [...nav.querySelectorAll('a, button')]
-        .filter(el => !el.hasAttribute('disabled'));
+/* Map loads only on request */
+$('#load-map').addEventListener('click', e => {
+    const map = $('.map iframe');
+    map.src = map.dataset.src;
+    map.hidden = false;
+    e.currentTarget.hidden = true;
+});
 
-    const setOpen = open => {
-        nav.classList.toggle('open', open);
-        btn.classList.toggle('open', open);
-        btn.setAttribute('aria-expanded', String(open));
-        btn.setAttribute('aria-label', open ? 'Κλείσιμο μενού' : 'Άνοιγμα μενού');
-        document.body.style.overflow = open ? 'hidden' : '';
-    };
+/* Product links preselect the inquiry category */
+const subject = $('#subject');
+$$('[data-subject]').forEach(link => link.addEventListener('click', () => {
+    subject.value = link.dataset.subject;
+    subject.removeAttribute('aria-invalid');
+    subject.classList.remove('is-flash');
+    requestAnimationFrame(() => subject.classList.add('is-flash'));
+}));
 
-    btn.addEventListener('click', () => {
-        const open = !nav.classList.contains('open');
-        setOpen(open);
-        if (open) getFocusable()[0]?.focus();
+/* Contact form — composes an email in the visitor's mail app */
+const form = $('#contact-form');
+const feedback = $('#form-feedback');
+const required = ['name', 'phone', 'subject'].map(id => $(`#${id}`));
+required.forEach(field => {
+    field.setAttribute('aria-describedby', 'form-feedback');
+    field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => {
+        if (field.value.trim()) field.removeAttribute('aria-invalid');
     });
+});
 
-    // Close on link click or outside click
-    const close = (restoreFocus = false) => {
-        const wasOpen = nav.classList.contains('open');
-        setOpen(false);
-        if (restoreFocus && wasOpen) {
-            if (window.innerWidth <= 1100) btn.focus();
-            else document.querySelector('.logo-wrap')?.focus();
-        }
-    };
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const [name, phone, subj] = required.map(f => f.value.trim());
+    const message = $('#message').value.trim();
+    required.forEach(f => (f.value.trim() ? f.removeAttribute('aria-invalid') : f.setAttribute('aria-invalid', 'true')));
 
-    nav.querySelectorAll('a, button').forEach(el => el.addEventListener('click', () => close()));
-
-    document.addEventListener('click', e => {
-        if (!btn.contains(e.target) && !nav.contains(e.target)) close(true);
-    });
-
-    document.addEventListener('keydown', e => {
-        if (!nav.classList.contains('open')) return;
-
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            close(true);
-            return;
-        }
-
-        if (e.key !== 'Tab') return;
-        const focusable = getFocusable();
-        if (!focusable.length) return;
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-        }
-    });
-
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 1100) {
-            close(true);
-            window.setTimeout(() => document.querySelector('.logo-wrap')?.focus(), 0);
-        }
-    });
-}
-
-/* ============================================================
-   2. SMOOTH SCROLL
-   ============================================================ */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            const id = a.getAttribute('href').slice(1);
-            const target = document.getElementById(id);
-            if (target) {
-                e.preventDefault();
-                scrollToElement(target);
-            }
-        });
-    });
-}
-
-function scrollToElement(target, block = 'start') {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block });
-}
-
-/* ============================================================
-   3. PAGE OBSERVER — reveal, counters, nav, mobile bar
-   ============================================================ */
-function initPageObserver() {
-    const targets = document.querySelectorAll('[data-observe]');
-    const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-    const mobileBar = document.getElementById('mob-contact-bar');
-    let countersFired = false;
-
-    if (!targets.length) return;
-
-    if (!('IntersectionObserver' in window)) {
-        targets.forEach(target => {
-            const types = getObserveTypes(target);
-            if (types.includes('reveal')) target.classList.add('visible');
-            if (types.includes('counter') && !countersFired) {
-                countersFired = true;
-                target.querySelectorAll('[data-count]').forEach(animateCount);
-            }
-        });
+    const firstEmpty = required.find(f => !f.value.trim());
+    if (firstEmpty) {
+        show('error', 'Παρακαλώ συμπληρώστε Όνομα, Τηλέφωνο και επιλέξτε κατηγορία.');
+        firstEmpty.focus();
         return;
     }
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            const types = getObserveTypes(entry.target);
+    // TODO: replace with a real form endpoint when one exists.
+    const sub = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subj}`);
+    const body = encodeURIComponent(`Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subj}${message ? `\n\nΜήνυμα:\n${message}` : ''}`);
+    window.location.href = `mailto:info@atlas-equipment.gr?subject=${sub}&body=${body}`;
+    show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο info@atlas-equipment.gr');
+});
 
-            if (types.includes('reveal') && entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                if (types.length === 1) observer.unobserve(entry.target);
-            }
-
-            if (types.includes('counter') && entry.isIntersecting && entry.intersectionRatio >= 0.35 && !countersFired) {
-                countersFired = true;
-                entry.target.querySelectorAll('[data-count]').forEach(animateCount);
-                if (types.length === 1) observer.unobserve(entry.target);
-            }
-
-            if (types.includes('active-nav')) {
-                updateActiveNav(entry, navLinks);
-            }
-
-            if (types.includes('mobile-bar') && mobileBar) {
-                mobileBar.classList.toggle('visible', !entry.isIntersecting);
-            }
-        });
-    }, {
-        threshold: [0, 0.1, 0.35, 0.6, 1],
-        rootMargin: '0px 0px -40px 0px',
-    });
-
-    targets.forEach(target => observer.observe(target));
-
-    const updateNavigation = () => updateActiveNav(null, navLinks);
-    window.addEventListener('scroll', updateNavigation, { passive: true });
-    window.addEventListener('resize', updateNavigation);
-    updateNavigation();
-}
-
-function getObserveTypes(target) {
-    return (target.dataset.observe || '').split(/\s+/).filter(Boolean);
-}
-
-function updateActiveNav(_entry, links) {
-    if (!links.length) return;
-
-    const marker = 84;
-    const sections = [...document.querySelectorAll('[data-observe~="active-nav"][id]')];
-    const current = sections.findLast(section => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= marker && rect.bottom > marker;
-    });
-    const id = current?.id || '';
-    links.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-    });
-}
-
-function animateCount(el) {
-    const target  = parseInt(el.dataset.count, 10);
-    const dur     = 1800;
-    const start   = performance.now();
-
-    const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-
-    function step(now) {
-        const progress = Math.min((now - start) / dur, 1);
-        const eased    = easeOutExpo(progress);
-        const value    = Math.round(eased * target);
-        el.textContent = value.toLocaleString('el-GR');
-
-        if (progress < 1) {
-            requestAnimationFrame(step);
-        } else {
-            el.textContent = target.toLocaleString('el-GR');
-        }
-    }
-
-    requestAnimationFrame(step);
-}
-
-/* ============================================================
-   4. CONTACT FORM — mailto fallback
-   ============================================================ */
-function initContactForm() {
-    const form     = document.getElementById('contact-form');
-    const feedback = document.getElementById('form-feedback');
-    const submitBtn = form?.querySelector('.form-submit');
-    if (!form || !feedback || !submitBtn) return;
-
-    const submitLabel = submitBtn.textContent;
-    const requiredFields = [
-        document.getElementById('name'),
-        document.getElementById('phone'),
-        document.getElementById('subject'),
-    ].filter(Boolean);
-
-    requiredFields.forEach(field => {
-        field.setAttribute('aria-describedby', feedback.id);
-        field.addEventListener(field.tagName === 'SELECT' ? 'change' : 'input', () => {
-            if (field.value.trim()) field.removeAttribute('aria-invalid');
-        });
-    });
-
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        const name    = document.getElementById('name').value.trim();
-        const phone   = document.getElementById('phone').value.trim();
-        const subject = document.getElementById('subject')?.value || '';
-        const message = document.getElementById('message')?.value.trim() || '';
-        const values = [name, phone, subject];
-        requiredFields.forEach((field, index) => {
-            if (values[index]) field.removeAttribute('aria-invalid');
-            else field.setAttribute('aria-invalid', 'true');
-        });
-
-        if (!name || !phone || !subject) {
-            show('error', 'Παρακαλώ συμπληρώστε Όνομα, Τηλέφωνο και επιλέξτε κατηγορία.');
-            requiredFields[values.findIndex(value => !value)]?.focus();
-            return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Αποστολή…';
-
-        // TODO: replace with real Formspree endpoint — https://formspree.io/f/<ID>
-        const sub = encodeURIComponent(`Νέο μήνυμα από ${name} — ${subject}`);
-        const body = encodeURIComponent(
-            `Όνομα: ${name}\nΤηλέφωνο: ${phone}\nΚατηγορία: ${subject}${message ? '\n\nΜήνυμα:\n' + message : ''}`
-        );
-        window.location.href = `mailto:info@atlas-equipment.gr?subject=${sub}&body=${body}`;
-        show('success', 'Άνοιγμα email προγράμματος… Εάν δεν ανοίξει, στείλτε στο info@atlas-equipment.gr');
-        form.reset();
-
-        submitBtn.disabled = false;
-        submitBtn.textContent = submitLabel;
-    });
-
-    function show(type, msg) {
-        feedback.className = `form-feedback ${type}`;
-        feedback.textContent = msg;
-        scrollToElement(feedback, 'nearest');
-        if (type === 'success') {
-            setTimeout(() => { feedback.className = 'form-feedback'; feedback.textContent = ''; }, 8000);
-        }
-    }
-
-    // Pre-fill category select when a product card link is clicked
-    document.querySelectorAll('.product-link[data-subject]').forEach(link => {
-        link.addEventListener('click', () => {
-            const subjectEl = document.getElementById('subject');
-            if (subjectEl) {
-                const val = link.dataset.subject;
-                if (subjectEl.tagName === 'SELECT') {
-                    const opt = [...subjectEl.options].find(o => o.value === val);
-                    if (opt) subjectEl.value = val;
-                } else {
-                    subjectEl.value = val;
-                }
-                subjectEl.classList.add('form-field--focused');
-                setTimeout(() => {
-                    subjectEl.classList.remove('form-field--focused');
-                }, 1800);
-            }
-        });
-    });
-}
-
-/* ============================================================
-   5. SCROLL PROGRESS BAR — rAF throttled
-   ============================================================ */
-function initScrollProgress() {
-    const bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-
-    let ticking = false;
-
-    const update = () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        bar.style.width = `${Math.min(pct, 100)}%`;
-        ticking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-        if (!ticking) {
-            requestAnimationFrame(update);
-            ticking = true;
-        }
-    }, { passive: true });
-
-    update();
-}
-
-/* ============================================================
-   6. ABOUT CAROUSEL
-   ============================================================ */
-let aboutCarouselInterval = null;
-
-function initAboutCarousel() {
-    const imgs = document.querySelectorAll('.about-img-panel .carousel-img');
-    if (imgs.length <= 1) return;
-    const toggle = document.getElementById('about-carousel-toggle');
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    let current = [...imgs].findIndex(img => img.classList.contains('active'));
-    if (current < 0) current = 0;
-
-    let paused = reducedMotion;
-
-    const updateToggle = () => {
-        if (!toggle) return;
-        toggle.setAttribute('aria-pressed', String(paused));
-        toggle.setAttribute('aria-label', paused ? 'Έναρξη εναλλαγής εικόνων' : 'Παύση εικόνων');
-        toggle.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
-    };
-
-    const start = () => {
-        clearInterval(aboutCarouselInterval);
-        if (paused) return;
-        aboutCarouselInterval = setInterval(() => {
-            imgs[current].style.opacity = '0';
-            imgs[current].classList.remove('active');
-            current = (current + 1) % imgs.length;
-            imgs[current].style.opacity = '1';
-            imgs[current].classList.add('active');
-        }, 4000);
-    };
-
-    toggle?.addEventListener('click', () => {
-        paused = !paused;
-        updateToggle();
-        start();
-    });
-
-    updateToggle();
-    start();
-
-    window.addEventListener('pagehide', () => clearInterval(aboutCarouselInterval), { once: true });
-}
-
-/* ============================================================
-   7. EXPOSED SCROLL HELPERS (called from HTML buttons)
-   ============================================================ */
-function scrollToProducts() {
-    const target = document.getElementById('products');
-    if (target) scrollToElement(target);
-}
-
-function scrollToContact() {
-    const target = document.getElementById('contact');
-    if (target) scrollToElement(target);
-}
-
-function scrollToInquiry() {
-    const target = document.getElementById('contact-inquiry');
-    if (target) scrollToElement(target, 'center');
+function show(type, msg) {
+    feedback.className = `form-feedback field--full ${type}`;
+    feedback.textContent = msg;
 }
