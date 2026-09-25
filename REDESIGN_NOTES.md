@@ -20,4 +20,4 @@ Hero (split: headline panel + excavator row, company figures strip) → Products
 ## Open items for the business owner
 - Form still opens the visitor's mail app and sends to `info@atlas-equipment.gr` (differs from the displayed emails). Confirm, or add a form endpoint.
 - Metadata says ATLAS / `atlas-equipment.gr` while the visible brand is BALATZIS; `og:image` is a relative path. Confirm the domain, then make it absolute.
-- Figures (30+, 750+, 10, 100%) and all product claims are carried over unchanged from the original site.
+- Figures (45+, 750+, 10, 100%) and all product claims are carried over unchanged from the original site.
