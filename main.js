@@ -72,12 +72,46 @@ onView(slides, e => {
     current = slides.indexOf(e.target);
     count.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
 }, { root: gallery, threshold: .6 });
-const step = dir => {
-    const i = Math.min(Math.max(current + dir, 0), slides.length - 1);
+const atEnd = () => gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 2;
+const step = (dir, loop = false) => {
+    let i = Math.min(Math.max(current + dir, 0), slides.length - 1);
+    if (loop && (atEnd() || current === slides.length - 1)) i = 0;
     gallery.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: reducedMotion ? 'auto' : 'smooth' });
 };
 $('#gallery-prev').addEventListener('click', () => step(-1));
 $('#gallery-next').addEventListener('click', () => step(1));
+
+/* Carousel autoplay — pauses on hover, focus, touch, off-screen and hidden tab;
+   the play/pause button stops it for good. Off for reduced-motion users. */
+const playBtn = $('#gallery-play');
+if (!reducedMotion && slides.length > 1) {
+    const holds = new Set(['offscreen']);
+    let stopped = false;
+    let timer;
+    const sync = () => {
+        clearInterval(timer);
+        const running = !stopped && holds.size === 0;
+        if (running) timer = setInterval(() => step(1, true), 4500);
+        count.setAttribute('aria-live', running ? 'off' : 'polite');
+    };
+    const hold = (key, on) => { holds[on ? 'add' : 'delete'](key); sync(); };
+    gallery.addEventListener('pointerenter', e => e.pointerType === 'mouse' && hold('hover', true));
+    gallery.addEventListener('pointerleave', () => hold('hover', false));
+    gallery.addEventListener('focus', () => hold('focus', true));
+    gallery.addEventListener('blur', () => hold('focus', false));
+    gallery.addEventListener('pointerdown', () => hold('touch', true));
+    gallery.addEventListener('pointerup', () => setTimeout(() => hold('touch', false), 4000));
+    gallery.addEventListener('pointercancel', () => setTimeout(() => hold('touch', false), 4000));
+    document.addEventListener('visibilitychange', () => hold('hidden', document.hidden));
+    onView([gallery], e => hold('offscreen', !e.isIntersecting), { threshold: .3 });
+    playBtn.hidden = false;
+    playBtn.addEventListener('click', () => {
+        stopped = !stopped;
+        playBtn.setAttribute('aria-label', stopped ? 'Έναρξη αυτόματης εναλλαγής' : 'Παύση αυτόματης εναλλαγής');
+        $('use', playBtn).setAttribute('href', stopped ? '#i-play' : '#i-pause');
+        sync();
+    });
+}
 
 /* Map loads only on request */
 $('#load-map').addEventListener('click', e => {
