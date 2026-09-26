@@ -32,6 +32,8 @@
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12M15 6v12" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13L18.5 12z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
     <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.59-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35zM12 0C5.37 0 0 5.37 0 12c0 2.14.56 4.14 1.54 5.87L.06 24l6.3-1.65A11.95 11.95 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0zm0 22c-1.89 0-3.67-.51-5.19-1.41l-.37-.22-3.86 1.01 1.03-3.77-.24-.39A9.95 9.95 0 0 1 2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z"/></symbol>
@@ -321,6 +323,7 @@
         </div>
         <div class="gallery-nav">
             <span class="label" id="gallery-count" aria-live="polite">01 / 08</span>
+            <button class="icon-btn icon-btn--line" id="gallery-play" type="button" aria-label="Παύση αυτόματης εναλλαγής" hidden><svg aria-hidden="true"><use href="#i-pause"/></svg></button>
             <button class="icon-btn icon-btn--line" id="gallery-prev" type="button" aria-label="Προηγούμενη φωτογραφία"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button>
             <button class="icon-btn icon-btn--line" id="gallery-next" type="button" aria-label="Επόμενη φωτογραφία"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
